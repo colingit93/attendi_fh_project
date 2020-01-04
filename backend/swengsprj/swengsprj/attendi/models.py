@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
-class User(models.Model):
-
+class Profile(models.Model):
     ROLE = (
         ('S', 'Student'),
         ('L', 'Lecturer')
@@ -13,20 +15,36 @@ class User(models.Model):
         ('G2', 'Group 2'),
         ('G3', 'Group 3')
     )
-
-    personnumber = models.IntegerField()
-    first_name = models.TextField()
-    last_name = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    '''
+    User fields:
+        username
+        first_name
+        last_name
+        email
+        password
+        groups
+        user_permissions
+        is_staff (boolean: access to admin site)
+        is_active (recommended to use instead of user deletion)
+        is_superuser
+        last_login
+        date_joined
+    '''
     date_of_birth = models.DateField()
     role = models.CharField(max_length=1, choices=ROLE, null=True)
-    group = models.CharField(max_length=2, choices=GROUP, null=True)
-    #statistics = models.(Statistic, blank=True)
-    image = models.ManyToManyField('Media', blank=True)
+    student_group = models.CharField(max_length=2, choices=GROUP, null=True)
+    statistics = models.ManyToManyField('Statistic', blank=True, null=True)
+    image = models.ManyToManyField('Media', blank=True, null=True)
 
-    def __str__(self):
-        return '%s %s (%s)' % (self.first_name, self.last_name, self.date_of_birth)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
 
-
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
 
 class AttendanceItem(models.Model):
@@ -34,13 +52,11 @@ class AttendanceItem(models.Model):
     status = models.BooleanField()
     absence_note = models.ManyToManyField('Media', blank=True)
 
-
     def __str__(self):
         return self.student
 
 
 class CourseSession(models.Model):
-
     ROOMS = (
         ('V1', 'Vorlesungssaal 1'),
         ('V2', 'Vorlesungssaal 2'),
@@ -66,26 +82,23 @@ class CourseSession(models.Model):
         return self.location
 
 
-
 class Course(models.Model):
     name = models.TextField()
     description = models.TextField(blank=True)
     session = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True)
-    students = models.ManyToManyField('User', blank=True, related_name='student')
-    lecturer = models.ManyToManyField('User', blank=True, related_name='lecturer')
-
+    students = models.ManyToManyField(User, blank=True, related_name='student')
+    lecturer = models.ManyToManyField(User, blank=True, related_name='lecturer')
 
     def __str__(self):
         return self.name
 
 
-
 class Statistic(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     attendance_percentage = models.FloatField()
     courses_missed = models.PositiveIntegerField()
     time_in_courses = models.TimeField()
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.course
@@ -95,4 +108,3 @@ class Media(models.Model):
     original_file_name = models.TextField()
     content_type = models.TextField()
     size = models.PositiveIntegerField()
-
