@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Course, CourseSession, User, AttendanceItem, Statistic, Media
+from .models import Course, CourseSession, User, AttendanceItem, Statistic, Media, Profile
 
 
 class StatisticSerializer(serializers.ModelSerializer):
@@ -20,7 +20,6 @@ class CourseListSerializer(serializers.ModelSerializer):
 
 
 class CourseFormSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Course
         fields = '__all__'
@@ -38,7 +37,6 @@ class CourseSessionListSerializer(serializers.ModelSerializer):
 
 
 class CourseSessionFormSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = CourseSession
         fields = '__all__'
@@ -49,16 +47,21 @@ class UserListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'user_name']
+        fields = ['id', 'username']
 
     def get_user_name(self, obj):
         return ' '.join(filter(None, (obj.first_name, obj.last_name)))
 
 
 class UserFormSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
+        fields = '__all__'
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
         fields = '__all__'
 
 
@@ -66,7 +69,6 @@ class AttendanceItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceItem
         fields = ['id', 'student']
-
 
 
 class MediaSerializer(serializers.ModelSerializer):

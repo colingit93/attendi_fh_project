@@ -9,7 +9,9 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
 from .models import Course, CourseSession, User, Statistic, AttendanceItem, Media
-from .serializers import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, UserListSerializer
+from .serializers import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
+    CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
+    UserListSerializer, ProfileSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
@@ -89,7 +91,8 @@ def course_sessions_list(request):
     return Response(serializer.data)
 
 
-@swagger_auto_schema(method='POST', request_body=CourseSessionFormSerializer, responses={200: CourseSessionFormSerializer()})
+@swagger_auto_schema(method='POST', request_body=CourseSessionFormSerializer,
+                     responses={200: CourseSessionFormSerializer()})
 @api_view(['POST'])
 @permission_required('.add_course_session', raise_exception=True)
 def course_session_form_create(request):
@@ -100,7 +103,8 @@ def course_session_form_create(request):
     return Response(serializer.errors, status=400)
 
 
-@swagger_auto_schema(method='PUT', request_body=CourseSessionFormSerializer, responses={200: CourseSessionFormSerializer()})
+@swagger_auto_schema(method='PUT', request_body=CourseSessionFormSerializer,
+                     responses={200: CourseSessionFormSerializer()})
 @api_view(['PUT'])
 @permission_required('.change_course_session', raise_exception=True)
 def course_session_form_update(request, pk):
@@ -149,15 +153,19 @@ def users_list(request):
     return Response(serializer.data)
 
 
+# ???
 @swagger_auto_schema(method='POST', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['POST'])
 @permission_required('.add_user', raise_exception=True)
 def user_form_create(request):
-    serializer = UserFormSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=201)
-    return Response(serializer.errors, status=400)
+    user_serializer = UserFormSerializer(data=request.user_data)
+    profile_serializer = ProfileSerializer(data=request.profile_data)
+
+    if user_serializer.is_valid() and profile_serializer.is_valid():
+        user_serializer.save()
+        profile_serializer.save()
+        return Response(user_serializer.data, status=201)
+    return Response(user_serializer.errors, status=400)
 
 
 @swagger_auto_schema(method='PUT', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
@@ -231,7 +239,7 @@ def media_download(request, pk):
     data = default_storage.open('media/' + str(pk)).read()
     content_type = media.content_type
     response = HttpResponse(data, content_type=content_type)
-    original_file_name =media.original_file_name
+    original_file_name = media.original_file_name
     response['Content-Disposition'] = 'inline; filename=' + original_file_name
     return response
 
