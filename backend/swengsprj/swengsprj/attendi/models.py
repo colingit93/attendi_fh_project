@@ -34,8 +34,8 @@ class Profile(models.Model):
     date_of_birth = models.DateField()
     role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True)
-    statistics = models.ManyToManyField('Statistic', blank=True, null=True)
-    image = models.ManyToManyField('Media', blank=True, null=True)
+    statistics = models.ManyToManyField('Statistic', blank=True)
+    image = models.ManyToManyField('Media', blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -49,7 +49,7 @@ class Profile(models.Model):
 
 class AttendanceItem(models.Model):
     student = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    status = models.BooleanField()
+    present = models.BooleanField(default=False)
     absence_note = models.ManyToManyField('Media', blank=True)
 
     def __str__(self):
