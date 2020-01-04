@@ -71,8 +71,8 @@ class Course(models.Model):
     name = models.TextField()
     description = models.TextField(blank=True)
     session = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True)
-    students = models.ManyToManyField('User', blank=True)
-    lecturer = models.ManyToManyField('User', blank=True)
+    students = models.ManyToManyField('User', blank=True, related_name='student')
+    lecturer = models.ManyToManyField('User', blank=True, related_name='lecturer')
 
 
     def __str__(self):
