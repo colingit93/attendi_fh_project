@@ -153,19 +153,26 @@ def users_list(request):
     return Response(serializer.data)
 
 
-# ???
 @swagger_auto_schema(method='POST', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['POST'])
 @permission_required('.add_user', raise_exception=True)
 def user_form_create(request):
-    user_serializer = UserFormSerializer(data=request.user_data)
-    profile_serializer = ProfileSerializer(data=request.profile_data)
+    serializer = UserFormSerializer(data=request.user_data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
-    if user_serializer.is_valid() and profile_serializer.is_valid():
-        user_serializer.save()
-        profile_serializer.save()
-        return Response(user_serializer.data, status=201)
-    return Response(user_serializer.errors, status=400)
+
+@swagger_auto_schema(method='POST', request_body=ProfileSerializer, responses={200: ProfileSerializer()})
+@api_view(['POST'])
+@permission_required('.add_user', raise_exception=True)
+def profile_form_create(request):
+    serializer = ProfileSerializer(data=request.profile_data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
 
 @swagger_auto_schema(method='PUT', request_body=UserFormSerializer, responses={200: UserFormSerializer()})

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="db" uuid="c2b674d1-2c40-482d-a63b-c6b32ef5582d">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Toml\Documents\SWENGS-Projects\attendi_fh_project\backend\swengsprj\db.sqlite3</jdbc-url>
+    </data-source>
+  </component>
+</project>
