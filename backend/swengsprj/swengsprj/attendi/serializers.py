@@ -43,13 +43,13 @@ class CourseSessionFormSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
-    user_name = serializers.SerializerMethodField()
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'username', 'full_name']
 
-    def get_user_name(self, obj):
+    def get_full_name(self, obj):
         return ' '.join(filter(None, (obj.first_name, obj.last_name)))
 
 

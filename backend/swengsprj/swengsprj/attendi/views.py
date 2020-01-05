@@ -157,7 +157,7 @@ def users_list(request):
 @api_view(['POST'])
 @permission_required('.add_user', raise_exception=True)
 def user_form_create(request):
-    serializer = UserFormSerializer(data=request.user_data)
+    serializer = UserFormSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
