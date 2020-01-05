@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {RoleService} from '../service/role.service';
+import {StudentGroupService} from '../service/student-group.service';
 
 @Component({
   selector: 'app-user-form',
@@ -15,7 +17,8 @@ export class UserFormComponent implements OnInit {
   profileFormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,
-              private router: Router, private snackBar: MatSnackBar) {
+              private router: Router, private snackBar: MatSnackBar, public roleService: RoleService,
+              public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {
@@ -23,7 +26,11 @@ export class UserFormComponent implements OnInit {
 
     this.userFormGroup = this.fb.group(
       {
-
+        username: ['', [Validators.required]],
+        first_name: ['', [Validators.required]],
+        last_name: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]],
       });
 
     if (data.user) {
@@ -32,11 +39,13 @@ export class UserFormComponent implements OnInit {
 
     this.profileFormGroup = this.fb.group(
       {
-
+        role: [''],
+        student_group: [''],
+        image: [null],
       });
 
-    if (data.user) {
-      this.profileFormGroup.patchValue(data.user);
+    if (data.profile) {
+      this.profileFormGroup.patchValue(data.profile);
     }
   }
 

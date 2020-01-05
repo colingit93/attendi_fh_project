@@ -1,1 +1,72 @@
-<p>user-form works!</p>
+<mat-vertical-stepper #stepper>
+  <mat-step [stepControl]="userFormGroup">
+    <form [formGroup]="userFormGroup" class="form">
+
+      <ng-template matStepLabel>User Information</ng-template>
+
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="First name" formControlName="first_name" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="last_name" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="email" placeholder="E-mail address" formControlName="email" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="profileFormGroup">
+    <form [formGroup]="profileFormGroup" class="form">
+
+      <ng-template matStepLabel>Profile Information</ng-template>
+
+      <mat-form-field>
+        <mat-select placeholder="Role" formControlName="role" required>
+        <mat-option [value]="null">Unknown</mat-option>
+          <mat-option [value]="role.key"
+                      *ngFor="let role of roleService.roles | keyvalue">{{role.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Group" formControlName="group" required>
+        <mat-option [value]="null">Unknown</mat-option>
+        <mat-option [value]="group.key"
+                    *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Profile Image" formControlName="image" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <div>
+      <button mat-raised-button matStepperPrevious (click)="createUser()">Save</button>
+      <button mat-raised-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

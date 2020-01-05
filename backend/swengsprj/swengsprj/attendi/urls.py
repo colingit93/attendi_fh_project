@@ -33,6 +33,7 @@ urlpatterns = [
     path('user/<int:pk>/get', views.user_form_get),
     path('user/<int:pk>/update', views.user_form_update),
     path('user/<int:pk>/delete', views.user_delete),
+    path('profile/create', views.profile_form_create),
     path('attendance_item/list', views.attendance_item_list),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^media$', FileUploadView.as_view()),

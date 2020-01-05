@@ -31,7 +31,7 @@ class Profile(models.Model):
         last_login
         date_joined
     '''
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True)
     role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True)
     statistics = models.ManyToManyField('Statistic', blank=True)

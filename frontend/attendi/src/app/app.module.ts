@@ -12,7 +12,7 @@ import {
   MatInputModule,
   MatMenuModule, MatNativeDateModule,
   MatSelectModule,
-  MatSnackBarModule, MatTableModule,
+  MatSnackBarModule, MatStepperModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -39,6 +39,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

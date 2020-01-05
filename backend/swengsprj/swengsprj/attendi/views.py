@@ -168,7 +168,7 @@ def user_form_create(request):
 @api_view(['POST'])
 @permission_required('.add_user', raise_exception=True)
 def profile_form_create(request):
-    serializer = ProfileSerializer(data=request.profile_data)
+    serializer = ProfileSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
