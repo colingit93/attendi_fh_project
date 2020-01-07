@@ -1,3 +1,29 @@
 <app-user-form></app-user-form>
 
+<mat-toolbar>
+  <button mat-button [matMenuTriggerFor]="attendanceMenu">Attendance</button>
+  <mat-menu #attendanceMenu="matMenu">
+    <button mat-menu-item routerLink="attendance-list">Attendance</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="userMenu">User</button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="user-list">List Users</button>
+    <button mat-menu-item routerLink="user-form">Create User</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="courseMenu">Course</button>
+  <mat-menu #courseMenu="matMenu">
+    <button mat-menu-item routerLink="course-list">List Courses</button>
+    <button mat-menu-item routerLink="course-form">Create Course</button>
+  </mat-menu>
+  <!--<button mat-button [matMenuTriggerFor]="coursesessionMenu">CourseSession</button>
+  <mat-menu #coursesessionMenu="matMenu">
+    <button mat-menu-item routerLink="coursesession-list">List Course Sessions</button>
+    <button mat-menu-item routerLink="coursesession-form">Create Course Session</button>
+  </mat-menu>-->
+  <!--<button mat-button [matMenuTriggerFor]="statisticMenu">Statistic</button>
+  <mat-menu #statisticMenu="matMenu">
+    <button mat-menu-item routerLink="statistic-list">Statistic</button>
+  </mat-menu>-->
+</mat-toolbar>
+
 <router-outlet></router-outlet>
