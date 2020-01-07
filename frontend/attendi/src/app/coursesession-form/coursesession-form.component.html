@@ -1,0 +1,43 @@
+<form [formGroup]="coursesessionFormGroup" class="coursesession-form">
+
+  <mat-form-field>
+    <mat-select placeholder="Location" formControlName="location" required>
+      <mat-option [value]="null">Unknown</mat-option>
+      <mat-option [value]="location.key" *ngFor="let location of locationService.locations | keyvalue">{{location.value}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The Location of the Coursesession</mat-hint>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="mandatory">Mandatory</mat-checkbox>
+
+  <app-date placeholder="Date of the Coursesession" formControlName="date" hint="The Date of the Coursesession" [required]="true"></app-date>
+
+  <mat-form-field>
+    <input class="col-md-5 end" matInput name="end" placeholder="hh:mm" formControlName="start_time" type="time" required>
+    <mat-hint align="end">The Starttime of the Coursesession</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.start_time.hasError('required')">Starttime is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input class="col-md-5 end" matInput name="end" placeholder="hh:mm" formControlName="end_time" type="time" required>
+    <mat-hint align="end">The Endtime of the Coursesession</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.end_time.hasError('required')">Endtime is required</mat-error>
+  </mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Attendance List" formControlName="attendance_list" multiple>
+    <mat-option [value]="attendanceitemOption.id" *ngFor="let attendanceitemOption of attendanceitemOptions">{{attendanceitemOption.student}}</mat-option>
+  </mat-select>
+  <mat-hint align="end">The Attendancelist of the Coursesession</mat-hint>
+</mat-form-field>
+
+
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!coursesessionFormGroup.valid" (click)="createCourseSession()">
+      <span *ngIf="!coursesessionFormGroup.controls.id.value">Create</span>
+      <span *ngIf="coursesessionFormGroup.controls.id.value">Update</span>
+    </button>
+  </mat-card-actions>
+
+</form>
+
