@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="courses">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let course">{{course.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripton">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let course">{{course.description}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sessions">
+    <th mat-header-cell *matHeaderCellDef>Sessions</th>
+    <td mat-cell *matCellDef="let course">{{course.coursesession_date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="students">
+    <th mat-header-cell *matHeaderCellDef>Students</th>
+    <td mat-cell *matCellDef="let course">{{course.user_first_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lecturer">
+    <th mat-header-cell *matHeaderCellDef>Lecturer</th>
+    <td mat-cell *matCellDef="let course">{{course.user_first_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let course">
+      <button mat-button [routerLink]="'/course-form/' + course.id">Edit</button>
+      <button mat-button (click)="deleteCourse(course)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

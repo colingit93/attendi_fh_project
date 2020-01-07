@@ -20,4 +20,16 @@ export class UserService {
   updateUser(user) {
     return this.http.put('/api/user/' + user.id + 'update', user);
   }
+
+  getUser(id) {
+    return this.http.get('/api/user/' + id + '/get');
+  }
+
+  deleteUser(user) {
+    return this.http.delete('/api/user/' + user.id + '/delete');
+  }
+
+  getUserOptions() {
+    return this.http.get <any[]> ('/api/user/options');
+  }
 }
