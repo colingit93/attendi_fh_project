@@ -11,7 +11,8 @@ from rest_framework.response import Response
 from .models import Course, CourseSession, User, Statistic, AttendanceItem, Media
 from .serializers import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
-    UserListSerializer, ProfileSerializer
+    UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
+    CourseSessionOptionSerializer, CourseOptionSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
@@ -82,6 +83,14 @@ def course_delete(request, pk):
     return Response(status=204)
 
 
+@swagger_auto_schema(method='GET', responses={200: CourseOptionSerializer(many=True)})
+@api_view(['GET'])
+def course_option_list(request):
+    course = Course.objects.all()
+    serializer = CourseOptionSerializer(course, many=True)
+    return Response(serializer.data)
+
+
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('.view_course_session', raise_exception=True)
@@ -142,6 +151,14 @@ def course_session_delete(request, pk):
         return Response({'error': 'Coursesession does not exist.'}, status=404)
     course_session.delete()
     return Response(status=204)
+
+
+@swagger_auto_schema(method='GET', responses={200: CourseSessionOptionSerializer(many=True)})
+@api_view(['GET'])
+def course_session_option_list(request):
+    course_session = CourseSession.objects.all()
+    serializer = CourseSessionOptionSerializer(course_session, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='GET', responses={200: UserListSerializer(many=True)})
@@ -215,12 +232,29 @@ def user_delete(request, pk):
     return Response(status=204)
 
 
+@swagger_auto_schema(method='GET', responses={200: UserOptionSerializer(many=True)})
+@api_view(['GET'])
+def user_option_list(request):
+    user = User.objects.all()
+    serializer = UserOptionSerializer(user, many=True)
+    return Response(serializer.data)
+
+
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
 def attendance_item_list(request):
     student = AttendanceItem.objects.all()
     serializer = AttendanceItemSerializer(student, many=True)
     return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: AttendanceOptionSerializer(many=True)})
+@api_view(['GET'])
+def attendance_item_option_list(request):
+    attendance_list = AttendanceItem.objects.all()
+    serializer = AttendanceOptionSerializer(attendance_list, many=True)
+    return Response(serializer.data)
+
 
 
 class FileUploadView(views.APIView):

@@ -8,6 +8,12 @@ class StatisticSerializer(serializers.ModelSerializer):
         fields = ['id', 'course']
 
 
+class CourseOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['id', 'name']
+
+
 class CourseListSerializer(serializers.ModelSerializer):
     course_name = serializers.SerializerMethodField()
 
@@ -25,6 +31,12 @@ class CourseFormSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CourseSessionOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseSession
+        fields = ['id', 'location']
+
+
 class CourseSessionListSerializer(serializers.ModelSerializer):
     coursesession_location = serializers.SerializerMethodField()
 
@@ -40,6 +52,12 @@ class CourseSessionFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseSession
         fields = '__all__'
+
+
+class UserOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name']
 
 
 class UserListSerializer(serializers.ModelSerializer):
@@ -65,10 +83,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AttendanceItemSerializer(serializers.ModelSerializer):
+class AttendanceOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceItem
         fields = ['id', 'student']
+
+
+class AttendanceItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendanceItem
+        fields = ['id', 'student', 'present', 'absence_note']
 
 
 class MediaSerializer(serializers.ModelSerializer):

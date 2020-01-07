@@ -52,7 +52,7 @@ class AttendanceItem(models.Model):
     present = models.BooleanField(default=False)
     absence_note = models.ManyToManyField('Media', blank=True)
 
-    def __str__(self):
+    def __int__(self):
         return self.student
 
 
@@ -100,7 +100,7 @@ class Statistic(models.Model):
     time_in_courses = models.TimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
+    def __int__(self):
         return self.course
 
 
