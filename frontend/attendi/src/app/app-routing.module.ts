@@ -7,6 +7,7 @@ import {CourseResolver} from './resolver/course.resolver';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserFormComponent} from './user-form/user-form.component';
 import {UserResolver} from './resolver/user.resolver';
+import {StatisticListComponent} from "./statistic-list/statistic-list.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'user-list', component: UserListComponent},
   {path: 'user-form', component: UserFormComponent},
   {path: 'user-form/:id', component: UserFormComponent, resolve: {user: UserResolver}},
+  { path: 'statistic-list', component: StatisticListComponent }
 ];
 
 @NgModule({
