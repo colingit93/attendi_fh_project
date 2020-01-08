@@ -23,7 +23,6 @@ const routes: Routes = [
   {path: 'user-list', component: UserListComponent},
   {path: 'user-form', component: UserFormComponent},
   {path: 'user-form/:id', component: UserFormComponent, resolve: {user: UserResolver}},
-  { path: 'statistic-list', component: StatisticListComponent }
 ];
 
 @NgModule({
