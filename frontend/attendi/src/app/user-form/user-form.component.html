@@ -33,7 +33,7 @@
 
     </form>
   </mat-step>
-  <mat-step [stepControl]="profileFormGroup">
+  <mat-step [stepControl]="profileFormGroup" *ngIf="userFormGroup.controls.id.value">
     <form [formGroup]="profileFormGroup" class="form">
 
       <ng-template matStepLabel>Add Profile Information</ng-template>

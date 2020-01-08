@@ -113,4 +113,4 @@ class MediaSerializer(serializers.ModelSerializer):
 class UserIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = 'id'
+        fields = ['id', 'username']

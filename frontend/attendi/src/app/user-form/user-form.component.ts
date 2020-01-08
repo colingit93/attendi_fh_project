@@ -41,24 +41,10 @@ export class UserFormComponent implements OnInit {
     if (data.user) {
       this.userFormGroup.patchValue(data.user);
     }
-
-    this.profileFormGroup = this.fb.group(
-      {
-        id: [data.user.id],
-        user: [data.user.id],
-        date_of_birth: [null],
-        role: [''],
-        student_group: [''],
-        statistics: [[]],
-        image: [[]],
-      });
-
-    if (data.profile) {
-      this.profileFormGroup.patchValue(data.profile);
-    }
   }
 
   createUser() {
+    const data = this.route.snapshot.data;
     const user = this.userFormGroup.value;
     if (user.id) {
       this.userService.updateUser(user)
@@ -71,23 +57,31 @@ export class UserFormComponent implements OnInit {
     } else {
       this.userService.createUser(user)
         .subscribe((response: any) => {
-          const userId = this.userService.findByName(user.username);
-          alert(userId[0])
-          this.router.navigate(['/user-form/' + userId[0]]);
+          this.router.navigate(['/user-form/' + response.id]);
           this.snackBar.open('User entry created!', 'Dismiss',
             {
               duration: 3000
             });
+          this.profileFormGroup = this.fb.group(
+            {
+              id: [data.user.id],
+              user: [data.user.id],
+              date_of_birth: [null],
+              role: [''],
+              student_group: [''],
+              statistics: [[]],
+              image: [[]],
+            });
+
+          if (data.profile) {
+            this.profileFormGroup.patchValue(data.profile);
+          }
         });
     }
   }
 
   updateProfile() {
-    const profileId = this.route.snapshot.data.user.id
     const profile = this.profileFormGroup.value;
-    profile.id = profileId
-
-    alert(profile)
     this.userService.updateProfile(profile)
       .subscribe((response: any) => {
         this.snackBar.open('User Profile updated', 'Dismiss', {

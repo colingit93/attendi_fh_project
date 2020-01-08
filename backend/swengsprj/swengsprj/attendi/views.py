@@ -187,7 +187,7 @@ def profile_form_get(request, pk):
 
 @swagger_auto_schema(method='PUT', request_body=ProfileSerializer, responses={200: ProfileSerializer()})
 @api_view(['PUT'])
-#@permission_required('.change_user', raise_exception=True)
+# @permission_required('.change_user', raise_exception=True)
 def profile_form_update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -333,4 +333,5 @@ def user_find_by_username(request, username):
     except User.DoesNotExist:
         return Response({'error': 'User does not exist.'}, status=404)
 
-    return Response(user.id)
+    serializer = UserIdSerializer(user)
+    return Response(serializer.data)
