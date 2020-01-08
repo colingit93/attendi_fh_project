@@ -34,7 +34,7 @@ def courses_list(request):
 
 @swagger_auto_schema(method='POST', request_body=CourseFormSerializer, responses={200: CourseFormSerializer()})
 @api_view(['POST'])
-@permission_required('.add_course', raise_exception=True)
+#@permission_required('.add_course', raise_exception=True)
 def course_form_create(request):
     serializer = CourseFormSerializer(data=request.data)
     if serializer.is_valid():
@@ -45,7 +45,7 @@ def course_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=CourseFormSerializer, responses={200: CourseFormSerializer()})
 @api_view(['PUT'])
-@permission_required('.change_course', raise_exception=True)
+#@permission_required('.change_course', raise_exception=True)
 def course_form_update(request, pk):
     try:
         course = Course.objects.get(pk=pk)
@@ -61,7 +61,7 @@ def course_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CourseListSerializer()})
 @api_view(['GET'])
-@permission_required('.view_course', raise_exception=True)
+#@permission_required('.view_course', raise_exception=True)
 def course_form_get(request, pk):
     try:
         course = Course.objects.get(pk=pk)
@@ -73,7 +73,7 @@ def course_form_get(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('.delete_course', raise_exception=True)
+#@permission_required('.delete_course', raise_exception=True)
 def course_delete(request, pk):
     try:
         course = Course.objects.get(pk=pk)
@@ -93,7 +93,7 @@ def course_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('.view_course_session', raise_exception=True)
+#@permission_required('.view_course_session', raise_exception=True)
 def course_sessions_list(request):
     course_sessions = CourseSession.objects.all()
     serializer = CourseSessionListSerializer(course_sessions, many=True)
@@ -103,7 +103,7 @@ def course_sessions_list(request):
 @swagger_auto_schema(method='POST', request_body=CourseSessionFormSerializer,
                      responses={200: CourseSessionFormSerializer()})
 @api_view(['POST'])
-@permission_required('.add_course_session', raise_exception=True)
+#@permission_required('.add_course_session', raise_exception=True)
 def course_session_form_create(request):
     serializer = CourseSessionFormSerializer(data=request.data)
     if serializer.is_valid():
@@ -115,7 +115,7 @@ def course_session_form_create(request):
 @swagger_auto_schema(method='PUT', request_body=CourseSessionFormSerializer,
                      responses={200: CourseSessionFormSerializer()})
 @api_view(['PUT'])
-@permission_required('.change_course_session', raise_exception=True)
+#@permission_required('.change_course_session', raise_exception=True)
 def course_session_form_update(request, pk):
     try:
         course_session = CourseSession.objects.get(pk=pk)
@@ -131,7 +131,7 @@ def course_session_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer()})
 @api_view(['GET'])
-@permission_required('.view_course_session', raise_exception=True)
+#@permission_required('.view_course_session', raise_exception=True)
 def course_session_form_get(request, pk):
     try:
         course_session = CourseSession.objects.get(pk=pk)
@@ -143,7 +143,7 @@ def course_session_form_get(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('.delete_course_session', raise_exception=True)
+#@permission_required('.delete_course_session', raise_exception=True)
 def course_session_delete(request, pk):
     try:
         course_session = CourseSession.objects.get(pk=pk)
@@ -163,7 +163,7 @@ def course_session_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: UserListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('.view_user', raise_exception=True)
+#@permission_required('.view_user', raise_exception=True)
 def users_list(request):
     users = User.objects.all()
     serializer = UserListSerializer(users, many=True)
@@ -172,7 +172,7 @@ def users_list(request):
 
 @swagger_auto_schema(method='POST', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['POST'])
-@permission_required('.add_user', raise_exception=True)
+#@permission_required('.add_user', raise_exception=True)
 def user_form_create(request):
     serializer = UserFormSerializer(data=request.data)
     if serializer.is_valid():
@@ -183,7 +183,7 @@ def user_form_create(request):
 
 @swagger_auto_schema(method='POST', request_body=ProfileSerializer, responses={200: ProfileSerializer()})
 @api_view(['POST'])
-@permission_required('.add_user', raise_exception=True)
+#@permission_required('.add_user', raise_exception=True)
 def profile_form_create(request):
     serializer = ProfileSerializer(data=request.data)
     if serializer.is_valid():
@@ -194,7 +194,7 @@ def profile_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['PUT'])
-@permission_required('.change_user', raise_exception=True)
+#@permission_required('.change_user', raise_exception=True)
 def user_form_update(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -210,7 +210,7 @@ def user_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: UserListSerializer()})
 @api_view(['GET'])
-@permission_required('.view_user', raise_exception=True)
+#@permission_required('.view_user', raise_exception=True)
 def user_form_get(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -222,7 +222,7 @@ def user_form_get(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('.delete_user', raise_exception=True)
+#@permission_required('.delete_user', raise_exception=True)
 def user_delete(request, pk):
     try:
         user = User.objects.get(pk=pk)
