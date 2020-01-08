@@ -36,8 +36,8 @@ export class CourseFormComponent implements OnInit {
     this.courseFormGroup = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
-      description: [null],
-      session: [[]],
+      description: [],
+      session: [null],
       students: [[]],
       lecturer: [[]],
     });

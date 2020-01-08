@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CourseService} from '../service/course.service';
 
-
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -11,7 +10,7 @@ import {CourseService} from '../service/course.service';
 export class CourseListComponent implements OnInit {
 
   courses: any[];
-  displayedColumns = ['name', 'description', 'session', 'students', 'lecturer'];
+  displayedColumns = ['id', 'name', 'description', 'session_location', 'students', 'lecturer'];
 
   constructor(private http: HttpClient, private courseService: CourseService) { }
 
