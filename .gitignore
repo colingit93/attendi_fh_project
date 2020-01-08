@@ -10,6 +10,7 @@
 # dependencies
 node_modules
 __pycache__
+db.sqlite3
 
 # profiling files
 chrome-profiler-events*.json
