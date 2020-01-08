@@ -26,6 +26,7 @@ export class UserFormComponent implements OnInit {
 
     this.userFormGroup = this.fb.group(
       {
+        id: [null],
         username: ['', [Validators.required]],
         first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
@@ -70,6 +71,16 @@ export class UserFormComponent implements OnInit {
             });
         });
     }
+  }
+
+  updateProfile() {
+    const profile = this.profileFormGroup.value;
+    this.userService.updateProfile(profile)
+      .subscribe((response: any) => {
+        this.snackBar.open('User Profile updated', 'Dismiss', {
+          duration: 3000
+        });
+      });
   }
 
 }

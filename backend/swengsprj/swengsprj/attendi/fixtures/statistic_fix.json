@@ -1,0 +1,11 @@
+[
+  {
+    "model": "attendi.statistic",
+    "pk": 100,
+    "fields": {
+      "attendance_percentage": 10,
+      "courses_missed": 2,
+      "time_in_courses": "2013-03-16T17:41:28+00:00",
+    }
+  }
+]

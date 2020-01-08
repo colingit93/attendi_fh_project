@@ -5,7 +5,7 @@ from .models import Course, CourseSession, User, AttendanceItem, Statistic, Medi
 class StatisticSerializer(serializers.ModelSerializer):
     class Meta:
         model = Statistic
-        fields = ['id', 'course']
+        fields = ['id', 'course', 'attendance_percentage', 'courses_missed', 'time_in_courses', 'user']
 
 
 class CourseOptionSerializer(serializers.ModelSerializer):

@@ -32,4 +32,8 @@ export class UserService {
   getUserOptions() {
     return this.http.get <any[]> ('/api/user/options');
   }
+
+  updateProfile(profile) {
+    return this.http.put('/api/profile/' + profile.id + 'update', profile);
+  }
 }
