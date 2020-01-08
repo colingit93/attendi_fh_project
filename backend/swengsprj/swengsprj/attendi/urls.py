@@ -37,6 +37,7 @@ urlpatterns = [
     path('user/<int:pk>/delete', views.user_delete),
     path('user/options', views.user_option_list),
     path('profile/create', views.profile_form_create),
+
     path('profile/<int:pk>/update', views.profile_form_update),
     path('attendance_item/list', views.attendance_item_list),
     path('attendance_item/options', views.attendance_item_option_list),
