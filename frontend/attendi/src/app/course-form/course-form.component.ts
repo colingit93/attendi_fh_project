@@ -20,7 +20,7 @@ import {CourseService} from '../service/course.service';
 export class CourseFormComponent implements OnInit {
 
   courseFormGroup;
-  coursesessionOptions;
+  sessionOptions;
   userOptions;
 
   constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute,
@@ -30,7 +30,7 @@ export class CourseFormComponent implements OnInit {
   ngOnInit() {
 
     const data = this.route.snapshot.data;
-    this.coursesessionOptions = data.coursesessionOptions;
+    this.sessionOptions = data.sessionOptions;
     this.userOptions = data.userOptions;
 
     this.courseFormGroup = this.fb.group({
