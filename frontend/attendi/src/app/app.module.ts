@@ -22,6 +22,7 @@ import { CoursesessionListComponent } from './coursesession-list/coursesession-l
 import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
+import { StatisticListComponent } from './statistic-list/statistic-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {DateComponent} from './date/date.component';
     UserListComponent,
     AttendanceListComponent,
     DateComponent,
+    StatisticListComponent,
   ],
   imports: [
     BrowserModule,
