@@ -38,6 +38,7 @@ urlpatterns = [
     path('user/options', views.user_option_list),
     path('userId/<str:username>/get', views.user_find_by_username),
     path('profile/create', views.profile_form_create),
+
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/get', views.profile_form_get),
     path('attendance_item/list', views.attendance_item_list),

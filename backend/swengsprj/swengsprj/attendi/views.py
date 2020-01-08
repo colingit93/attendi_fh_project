@@ -27,8 +27,8 @@ def statistic_list(request):
 @api_view(['GET'])
 # @permission_required('.view_course', raise_exception=True)
 def courses_list(request):
-    courses = Course.objects.all()
-    serializer = CourseListSerializer(courses, many=True)
+    course = Course.objects.all()
+    serializer = CourseListSerializer(course, many=True)
     return Response(serializer.data)
 
 

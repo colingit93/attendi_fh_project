@@ -11,20 +11,21 @@
     <td mat-cell *matCellDef="let course">{{course.description}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="session">
+  <ng-container matColumnDef="session_location">
     <th mat-header-cell *matHeaderCellDef>Sessions</th>
-    <td mat-cell *matCellDef="let course">{{course.coursesession_session}}</td>
+    <td mat-cell *matCellDef="let course">{{course.session_location}}</td>
   </ng-container>
 
   <ng-container matColumnDef="students">
     <th mat-header-cell *matHeaderCellDef>Students</th>
-    <td mat-cell *matCellDef="let course">{{course.user_first_name}}</td>
+    <td mat-cell *matCellDef="let course">{{course.students}}</td>
   </ng-container>
 
   <ng-container matColumnDef="lecturer">
     <th mat-header-cell *matHeaderCellDef>Lecturer</th>
-    <td mat-cell *matCellDef="let course">{{course.user_first_name}}</td>
+    <td mat-cell *matCellDef="let course">{{course.lecturer}}</td>
   </ng-container>
+
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Actions</th>

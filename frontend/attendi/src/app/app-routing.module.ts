@@ -9,6 +9,7 @@ import {UserFormComponent} from './user-form/user-form.component';
 import {UserResolver} from './resolver/user.resolver';
 import {CourseListComponent} from './course-list/course-list.component';
 import {ProfileResolver} from './resolver/profile.resolver';
+import {StatisticListComponent} from './statistic-list/statistic-list.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
       profile: ProfileResolver
     }
   },
+  {path: 'show-statistic', component: StatisticListComponent},
 ];
 
 @NgModule({
