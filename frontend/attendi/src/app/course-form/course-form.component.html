@@ -15,10 +15,10 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select placeholder="Sessions" formControlName="sessions" multiple>
+    <mat-select placeholder="Sessions" formControlName="session" multiple>
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="sessionOption.id"
-                  *ngFor="let sessionOption of sessionOptions">{{sessionOption.sessions}}</mat-option>
+                  *ngFor="let sessionOption of sessionOptions">{{sessionOption.session}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Sessions of the Course</mat-hint>
   </mat-form-field>

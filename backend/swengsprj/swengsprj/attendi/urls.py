@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
@@ -39,12 +39,14 @@ urlpatterns = [
     path('profile/create', views.profile_form_create),
     path('attendance_item/list', views.attendance_item_list),
     path('attendance_item/options', views.attendance_item_option_list),
-    url(r'^api-token-auth/', obtain_jwt_token),
+    #url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^media$', FileUploadView.as_view()),
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
 
+
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    url(r'^api-auth/', include('rest_framework.urls'))
 ]

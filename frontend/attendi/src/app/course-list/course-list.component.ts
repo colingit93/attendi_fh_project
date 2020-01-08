@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CourseService} from '../service/course.service';
 
@@ -11,7 +11,7 @@ import {CourseService} from '../service/course.service';
 export class CourseListComponent implements OnInit {
 
   courses: any[];
-  displayedColumns = ['name', 'country_name', 'description', 'session', 'students', 'lecturer', 'id'];
+  displayedColumns = ['name', 'description', 'session', 'students', 'lecturer'];
 
   constructor(private http: HttpClient, private courseService: CourseService) { }
 

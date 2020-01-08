@@ -7,11 +7,12 @@ import {CourseResolver} from './resolver/course.resolver';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserFormComponent} from './user-form/user-form.component';
 import {UserResolver} from './resolver/user.resolver';
+import {CourseListComponent} from './course-list/course-list.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
-  {path: 'course-list', component: CourseFormComponent},
+  {path: 'course-list', component: CourseListComponent},
   { path: 'course-form', component: CourseFormComponent, resolve: {
       coursesessionOptions: CoursesessionOptionsResolver,
       userOptions: UserOptionsResolver}},

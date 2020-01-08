@@ -19,7 +19,7 @@ class CourseListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'country_name', 'description', 'session', 'students', 'lecturer']
+        fields = ['id', 'name', 'course_name', 'description', 'session', 'students', 'lecturer']
 
     def get_course_name(self, obj):
         return obj.course.name if obj.course else ''

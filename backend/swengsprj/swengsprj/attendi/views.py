@@ -25,7 +25,7 @@ def statistic_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: CourseListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('.view_course', raise_exception=True)
+#@permission_required('.view_course', raise_exception=True)
 def courses_list(request):
     courses = Course.objects.all()
     serializer = CourseListSerializer(courses, many=True)
