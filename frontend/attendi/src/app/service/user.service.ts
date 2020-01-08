@@ -18,7 +18,7 @@ export class UserService {
   }
 
   updateUser(user) {
-    return this.http.put('/api/user/' + user.id + 'update', user);
+    return this.http.put('/api/user/' + user.id + '/update', user);
   }
 
   getUser(id) {
@@ -30,10 +30,18 @@ export class UserService {
   }
 
   getUserOptions() {
-    return this.http.get <any[]> ('/api/user/options');
+    return this.http.get <any[]>('/api/user/options');
   }
 
   updateProfile(profile) {
-    return this.http.put('/api/profile/' + profile.id + 'update', profile);
+    return this.http.put('/api/profile/' + profile.id + '/update', profile);
+  }
+
+  getProfile(id) {
+    return this.http.get('/api/profile/' + id + '/get');
+  }
+
+  findByName(username) {
+    return this.http.get('/api/userId/' + username + '/get', username);
   }
 }

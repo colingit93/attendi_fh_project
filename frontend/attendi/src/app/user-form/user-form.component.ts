@@ -5,11 +5,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {RoleService} from '../service/role.service';
 import {StudentGroupService} from '../service/student-group.service';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  }]
 })
 export class UserFormComponent implements OnInit {
 
@@ -40,9 +44,13 @@ export class UserFormComponent implements OnInit {
 
     this.profileFormGroup = this.fb.group(
       {
+        id: [data.user.id],
+        user: [data.user.id],
+        date_of_birth: [null],
         role: [''],
         student_group: [''],
-        image: [null],
+        statistics: [[]],
+        image: [[]],
       });
 
     if (data.profile) {
@@ -55,7 +63,6 @@ export class UserFormComponent implements OnInit {
     if (user.id) {
       this.userService.updateUser(user)
         .subscribe(() => {
-          this.router.navigate(['/user-list']);
           this.snackBar.open('User entry updated!', 'Dismiss',
             {
               duration: 3000
@@ -64,7 +71,9 @@ export class UserFormComponent implements OnInit {
     } else {
       this.userService.createUser(user)
         .subscribe((response: any) => {
-          this.router.navigate(['/user-list/']);
+          const userId = this.userService.findByName(user.username);
+          alert(userId[0])
+          this.router.navigate(['/user-form/' + userId[0]]);
           this.snackBar.open('User entry created!', 'Dismiss',
             {
               duration: 3000
@@ -74,7 +83,11 @@ export class UserFormComponent implements OnInit {
   }
 
   updateProfile() {
+    const profileId = this.route.snapshot.data.user.id
     const profile = this.profileFormGroup.value;
+    profile.id = profileId
+
+    alert(profile)
     this.userService.updateProfile(profile)
       .subscribe((response: any) => {
         this.snackBar.open('User Profile updated', 'Dismiss', {

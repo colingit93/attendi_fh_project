@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import Course, CourseSession, User, AttendanceItem, Statistic, Media, Profile
 
 
@@ -99,3 +100,9 @@ class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media
         fields = '__all__'
+
+
+class UserIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = 'id'

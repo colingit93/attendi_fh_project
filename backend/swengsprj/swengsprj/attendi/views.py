@@ -12,7 +12,7 @@ from .models import Course, CourseSession, User, Statistic, AttendanceItem, Medi
 from .serializers import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
     UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
-    CourseSessionOptionSerializer, CourseOptionSerializer
+    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
@@ -172,9 +172,22 @@ def profile_form_create(request):
     return Response(serializer.errors, status=400)
 
 
+@swagger_auto_schema(method='GET', responses={200: ProfileSerializer()})
+@api_view(['GET'])
+# @permission_required('.view_user', raise_exception=True)
+def profile_form_get(request, pk):
+    try:
+        profile = Profile.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response({'error': 'Profile does not exist.'}, status=404)
+
+    serializer = ProfileSerializer(profile)
+    return Response(serializer.data)
+
+
 @swagger_auto_schema(method='PUT', request_body=ProfileSerializer, responses={200: ProfileSerializer()})
 @api_view(['PUT'])
-@permission_required('.change_user', raise_exception=True)
+#@permission_required('.change_user', raise_exception=True)
 def profile_form_update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -233,7 +246,7 @@ def user_form_get(request, pk):
     except User.DoesNotExist:
         return Response({'error': 'User does not exist.'}, status=404)
 
-    serializer = CourseFormSerializer(user)
+    serializer = UserFormSerializer(user)
     return Response(serializer.data)
 
 
@@ -310,3 +323,14 @@ def media_get(request, pk):
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
+@api_view(['GET'])
+def user_find_by_username(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'User does not exist.'}, status=404)
+
+    return Response(user.id)
