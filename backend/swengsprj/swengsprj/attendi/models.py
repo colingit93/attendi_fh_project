@@ -74,8 +74,8 @@ class CourseSession(models.Model):
     location = models.CharField(max_length=2, choices=ROOMS, null=True)
     mandatory = models.BooleanField()
     date = models.DateField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField(auto_now=False, auto_now_add=False)
+    end_time = models.TimeField(auto_now=False, auto_now_add=False)
     attendance_list = models.OneToOneField(AttendanceItem, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
