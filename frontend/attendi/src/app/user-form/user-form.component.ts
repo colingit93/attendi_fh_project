@@ -41,6 +41,20 @@ export class UserFormComponent implements OnInit {
     if (data.user) {
       this.userFormGroup.patchValue(data.user);
     }
+
+    if (data.profile) {
+      this.profileFormGroup = this.fb.group(
+        {
+          id: [data.user.id],
+          user: [data.user.id],
+          date_of_birth: [null],
+          role: [''],
+          student_group: [''],
+          statistics: [[]],
+          image: [[]],
+        });
+      this.profileFormGroup.patchValue(data.profile);
+    }
   }
 
   createUser() {
@@ -62,20 +76,6 @@ export class UserFormComponent implements OnInit {
             {
               duration: 3000
             });
-          this.profileFormGroup = this.fb.group(
-            {
-              id: [data.user.id],
-              user: [data.user.id],
-              date_of_birth: [null],
-              role: [''],
-              student_group: [''],
-              statistics: [[]],
-              image: [[]],
-            });
-
-          if (data.profile) {
-            this.profileFormGroup.patchValue(data.profile);
-          }
         });
     }
   }
