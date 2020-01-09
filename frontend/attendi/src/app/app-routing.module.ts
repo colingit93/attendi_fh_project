@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {CourseFormComponent} from './course-form/course-form.component';
 import {CoursesessionOptionsResolver} from './resolver/coursesession-options.resolver';
 import {UserOptionsResolver} from './resolver/user-options.resolver';
@@ -8,6 +8,7 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserFormComponent} from './user-form/user-form.component';
 import {UserResolver} from './resolver/user.resolver';
 import {CourseListComponent} from './course-list/course-list.component';
+import {ProfileResolver} from './resolver/profile.resolver';
 import {StatisticListComponent} from './statistic-list/statistic-list.component';
 import {CoursesessionListComponent} from './coursesession-list/coursesession-list.component';
 import {CoursesessionFormComponent} from './coursesession-form/coursesession-form.component';
@@ -33,7 +34,12 @@ const routes: Routes = [
       sessionOptions: CoursesessionOptionsResolver}},
   {path: 'user-list', component: UserListComponent},
   {path: 'user-form', component: UserFormComponent},
-  {path: 'user-form/:id', component: UserFormComponent, resolve: {user: UserResolver}},
+  {
+    path: 'user-form/:id', component: UserFormComponent, resolve: {
+      user: UserResolver,
+      profile: ProfileResolver
+    }
+  },
   {path: 'show-statistic', component: StatisticListComponent},
 ];
 
@@ -41,4 +47,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

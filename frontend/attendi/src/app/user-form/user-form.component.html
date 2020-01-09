@@ -1,5 +1,5 @@
 <mat-vertical-stepper #stepper>
-  <mat-step [stepControl]="userFormGroup">
+  <mat-step [stepControl]="userFormGroup" errorMessage="User needs to be created!">
     <form [formGroup]="userFormGroup" class="form">
 
       <ng-template matStepLabel>Create User</ng-template>
@@ -33,7 +33,7 @@
 
     </form>
   </mat-step>
-  <mat-step [stepControl]="profileFormGroup">
+  <mat-step [stepControl]="profileFormGroup" *ngIf="userFormGroup.controls.id.value">
     <form [formGroup]="profileFormGroup" class="form">
 
       <ng-template matStepLabel>Add Profile Information</ng-template>
@@ -59,7 +59,7 @@
       </mat-form-field>
 
       <div>
-        <button mat-raised-button matStepperPrevious>Update Profile</button>
+        <button mat-raised-button (click)="updateProfile()">Update Profile</button>
       </div>
 
     </form>

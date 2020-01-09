@@ -36,9 +36,11 @@ urlpatterns = [
     path('user/<int:pk>/update', views.user_form_update),
     path('user/<int:pk>/delete', views.user_delete),
     path('user/options', views.user_option_list),
+    path('userId/<str:username>/get', views.user_find_by_username),
     path('profile/create', views.profile_form_create),
 
     path('profile/<int:pk>/update', views.profile_form_update),
+    path('profile/<int:pk>/get', views.profile_form_get),
     path('attendance_item/list', views.attendance_item_list),
     path('attendance_item/options', views.attendance_item_option_list),
     #url(r'^api-token-auth/', obtain_jwt_token),

@@ -5,11 +5,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {RoleService} from '../service/role.service';
 import {StudentGroupService} from '../service/student-group.service';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  }]
 })
 export class UserFormComponent implements OnInit {
 
@@ -37,25 +41,14 @@ export class UserFormComponent implements OnInit {
     if (data.user) {
       this.userFormGroup.patchValue(data.user);
     }
-
-    this.profileFormGroup = this.fb.group(
-      {
-        role: [''],
-        student_group: [''],
-        image: [null],
-      });
-
-    if (data.profile) {
-      this.profileFormGroup.patchValue(data.profile);
-    }
   }
 
   createUser() {
+    const data = this.route.snapshot.data;
     const user = this.userFormGroup.value;
     if (user.id) {
       this.userService.updateUser(user)
         .subscribe(() => {
-          this.router.navigate(['/user-list']);
           this.snackBar.open('User entry updated!', 'Dismiss',
             {
               duration: 3000
@@ -64,11 +57,25 @@ export class UserFormComponent implements OnInit {
     } else {
       this.userService.createUser(user)
         .subscribe((response: any) => {
-          this.router.navigate(['/user-list/']);
+          this.router.navigate(['/user-form/' + response.id]);
           this.snackBar.open('User entry created!', 'Dismiss',
             {
               duration: 3000
             });
+          this.profileFormGroup = this.fb.group(
+            {
+              id: [data.user.id],
+              user: [data.user.id],
+              date_of_birth: [null],
+              role: [''],
+              student_group: [''],
+              statistics: [[]],
+              image: [[]],
+            });
+
+          if (data.profile) {
+            this.profileFormGroup.patchValue(data.profile);
+          }
         });
     }
   }
