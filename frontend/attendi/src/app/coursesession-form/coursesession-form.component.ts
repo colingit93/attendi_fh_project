@@ -43,7 +43,6 @@ export class CoursesessionFormComponent implements OnInit {
       end_time: [],
       course: [],
     });
-
     if (data.coursesession) {
       this.coursesessionFormGroup.patchValue(data.coursesession);
     }
