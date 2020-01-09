@@ -1,35 +1,44 @@
 <form [formGroup]="coursesessionFormGroup" class="coursesession-form">
 
   <mat-form-field>
-    <mat-select placeholder="Location" formControlName="location" required>
+    <mat-select placeholder="Location" formControlName="location">
       <mat-option [value]="null">Unknown</mat-option>
-      <mat-option [value]="location.key" *ngFor="let location of locationService.locations | keyvalue">{{location.value}}</mat-option>
+      <mat-option [value]="location.key"
+                  *ngFor="let location of locationService.locations | keyvalue">{{location.value}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Location of the Coursesession</mat-hint>
   </mat-form-field>
 
   <mat-checkbox formControlName="mandatory">Mandatory</mat-checkbox>
 
-  <app-date placeholder="Date of the Coursesession" formControlName="date" hint="The Date of the Coursesession" [required]="true"></app-date>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Mandatory" formControlName="location" required>
+    <mat-hint align="end">The location of the coursesession</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.location.hasError('required')">Location is required</mat-error>
+    <mat-error *ngIf="coursesessionFormGroup.controls.location.hasError('locationAlreadyExists')">Location already exists</mat-error>
+  </mat-form-field>
+
+  <app-date placeholder="Date" formControlName="date" hint="The date of the coursesession"
+            [required]="true"></app-date>
 
   <mat-form-field>
-    <input class="col-md-5 end" matInput name="end" placeholder="hh:mm" formControlName="start_time" type="time" required>
-    <mat-hint align="end">The Starttime of the Coursesession</mat-hint>
-    <mat-error *ngIf="coursesessionFormGroup.controls.start_time.hasError('required')">Starttime is required</mat-error>
+    <input matInput type="text" placeholder="Start Time" formControlName="start_time">
+    <mat-hint align="end">The Start Time of the Coursesession</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
-    <input class="col-md-5 end" matInput name="end" placeholder="hh:mm" formControlName="end_time" type="time" required>
-    <mat-hint align="end">The Endtime of the Coursesession</mat-hint>
-    <mat-error *ngIf="coursesessionFormGroup.controls.end_time.hasError('required')">Endtime is required</mat-error>
+    <input matInput type="text" placeholder="End Time" formControlName="end_time">
+    <mat-hint align="end">The End Time of the Coursesession</mat-hint>
   </mat-form-field>
 
-<mat-form-field>
-  <mat-select placeholder="Attendance List" formControlName="attendance_list" multiple>
-    <mat-option [value]="attendanceitemOption.id" *ngFor="let attendanceitemOption of attendanceitemOptions">{{attendanceitemOption.student}}</mat-option>
-  </mat-select>
-  <mat-hint align="end">The Attendancelist of the Coursesession</mat-hint>
-</mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Course" formControlName="course">
+      <mat-option [value]="null">Unknown</mat-option>
+      <mat-option [value]="courseOption.id"
+                  *ngFor="let courseOption of courseOptions">{{courseOption.course_name}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The Course of the Coursesession</mat-hint>
+  </mat-form-field>
 
 
   <mat-card-actions align="center">
@@ -38,6 +47,4 @@
       <span *ngIf="coursesessionFormGroup.controls.id.value">Update</span>
     </button>
   </mat-card-actions>
-
 </form>
-

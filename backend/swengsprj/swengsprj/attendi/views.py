@@ -94,9 +94,9 @@ def course_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
 # @permission_required('.view_course_session', raise_exception=True)
-def course_sessions_list(request):
-    course_sessions = CourseSession.objects.all()
-    serializer = CourseSessionListSerializer(course_sessions, many=True)
+def coursesessions_list(request):
+    coursesessions = CourseSession.objects.all()
+    serializer = CourseSessionListSerializer(coursesessions, many=True)
     return Response(serializer.data)
 
 
@@ -104,7 +104,7 @@ def course_sessions_list(request):
                      responses={200: CourseSessionFormSerializer()})
 @api_view(['POST'])
 # @permission_required('.add_course_session', raise_exception=True)
-def course_session_form_create(request):
+def coursesession_form_create(request):
     serializer = CourseSessionFormSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -116,13 +116,13 @@ def course_session_form_create(request):
                      responses={200: CourseSessionFormSerializer()})
 @api_view(['PUT'])
 # @permission_required('.change_course_session', raise_exception=True)
-def course_session_form_update(request, pk):
+def coursesession_form_update(request, pk):
     try:
-        course_session = CourseSession.objects.get(pk=pk)
+        coursesession = CourseSession.objects.get(pk=pk)
     except CourseSession.DoesNotExist:
         return Response({'error': 'Coursesession does not exist.'}, status=404)
 
-    serializer = CourseSessionFormSerializer(course_session, data=request.data)
+    serializer = CourseSessionFormSerializer(coursesession, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
@@ -132,32 +132,32 @@ def course_session_form_update(request, pk):
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer()})
 @api_view(['GET'])
 # @permission_required('.view_course_session', raise_exception=True)
-def course_session_form_get(request, pk):
+def coursesession_form_get(request, pk):
     try:
-        course_session = CourseSession.objects.get(pk=pk)
+        coursesession = CourseSession.objects.get(pk=pk)
     except CourseSession.DoesNotExist:
         return Response({'error': 'Coursesession does not exist.'}, status=404)
 
-    serializer = CourseSessionFormSerializer(course_session)
+    serializer = CourseSessionFormSerializer(coursesession)
     return Response(serializer.data)
 
 
 @api_view(['DELETE'])
 # @permission_required('.delete_course_session', raise_exception=True)
-def course_session_delete(request, pk):
+def coursesession_delete(request, pk):
     try:
-        course_session = CourseSession.objects.get(pk=pk)
+        coursesession = CourseSession.objects.get(pk=pk)
     except CourseSession.DoesNotExist:
         return Response({'error': 'Coursesession does not exist.'}, status=404)
-    course_session.delete()
+    coursesession.delete()
     return Response(status=204)
 
 
 @swagger_auto_schema(method='GET', responses={200: CourseSessionOptionSerializer(many=True)})
 @api_view(['GET'])
-def course_session_option_list(request):
-    course_session = CourseSession.objects.all()
-    serializer = CourseSessionOptionSerializer(course_session, many=True)
+def coursesession_option_list(request):
+    coursesession = CourseSession.objects.all()
+    serializer = CourseSessionOptionSerializer(coursesession, many=True)
     return Response(serializer.data)
 
 

@@ -12,8 +12,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
 
+
 @Component({
-  selector: 'app-movie-form',
+  selector: 'app-course-form',
   templateUrl: './course-form.component.html',
   styleUrls: ['./course-form.component.scss']
 })
@@ -37,7 +38,6 @@ export class CourseFormComponent implements OnInit {
       id: [null],
       name: ['', [Validators.required]],
       description: [],
-      session: [null],
       students: [[]],
       lecturer: [[]],
     });

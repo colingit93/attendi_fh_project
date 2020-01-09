@@ -15,16 +15,16 @@ class CourseOptionSerializer(serializers.ModelSerializer):
 
 
 class CourseListSerializer(serializers.ModelSerializer):
-    session_location = serializers.SerializerMethodField()
+    #session_location = serializers.SerializerMethodField()
     #students_username = serializers.SerializerMethodField()
     #lecturer_username = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'description', 'session_location', 'students', 'lecturer']
+        fields = ['id', 'name', 'description', 'students', 'lecturer']
 
-    def get_session_location(self, obj):
-        return obj.session.location if obj.session else ''
+    #def get_session_location(self, obj):
+        #return obj.session.location if obj.session else ''
 
    # def get_students_username(self, obj):
         #return obj.students.username if obj.students else ''
@@ -46,14 +46,14 @@ class CourseSessionOptionSerializer(serializers.ModelSerializer):
 
 
 class CourseSessionListSerializer(serializers.ModelSerializer):
-    coursesession_location = serializers.SerializerMethodField()
+    course_name = serializers.SerializerMethodField()
 
     class Meta:
         model = CourseSession
-        fields = ['id', 'coursesession_location', 'location', 'mandatory', 'start_time', 'end_time', 'attendance_list']
+        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name']
 
-    def get_coursesession_location(self, obj):
-        return obj.coursesession.location if obj.course else ''
+    def get_course_name(self, obj):
+        return obj.course.name if obj.course else ''
 
 
 class CourseSessionFormSerializer(serializers.ModelSerializer):

@@ -10,8 +10,10 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {CourseSessionService} from '../service/course-session.service';
+import {CourseService} from '../service/course.service';
+import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
+
 
 @Component({
   selector: 'app-coursesession-form',
@@ -21,7 +23,7 @@ import {LocationService} from '../service/location.service';
 export class CoursesessionFormComponent implements OnInit {
 
   coursesessionFormGroup;
-  attendanceitemOptions;
+  courseOptions;
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService, private route: ActivatedRoute,
               private router: Router) {
@@ -30,20 +32,20 @@ export class CoursesessionFormComponent implements OnInit {
   ngOnInit() {
 
     const data = this.route.snapshot.data;
-    this.attendanceitemOptions = data.attendanceitemOptions;
+    this.courseOptions = data.courseOptions;
 
     this.coursesessionFormGroup = this.fb.group({
       id: [null],
       location: ['', [Validators.required]],
-      mandatory: [null],
-      date: [null],
-      start_time: [null],
-      end_time: [null],
-      attendance_list: [[]]
+      mandatory: [true],
+      date: [],
+      start_time: [],
+      end_time: [],
+      course: [],
     });
 
-    if (data.couressession) {
-      this.coursesessionFormGroup.patchValue(data.couressession);
+    if (data.coursesession) {
+      this.coursesessionFormGroup.patchValue(data.coursesession);
     }
   }
 
