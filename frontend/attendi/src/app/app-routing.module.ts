@@ -15,24 +15,22 @@ import {StatisticListComponent} from './statistic-list/statistic-list.component'
 import {CoursesessionListComponent} from './coursesession-list/coursesession-list.component';
 import {AttendanceListComponent} from './attendance-list/attendance-list.component';
 import {AttendanceitemResolver} from './resolver/attendanceitem.resolver';
+import {CourseOptionsResolver} from './resolver/course-options.resolver';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
   {path: 'course-list', component: CourseListComponent},
   { path: 'course-form', component: CourseFormComponent, resolve: {
-      sessionOptions: CoursesessionOptionsResolver,
       userOptions: UserOptionsResolver}},
   {path: 'course-form/:id', component: CourseFormComponent, resolve: {
-      sessionOptions: CoursesessionOptionsResolver,
       userOptions: UserOptionsResolver,
       course: CourseResolver}},
   {path: 'coursesession-list', component: CoursesessionListComponent},
   { path: 'coursesession-form', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CoursesessionOptionsResolver}},
+      courseOptions: CourseOptionsResolver}},
   {path: 'coursesession-form/:id', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CourseResolver,
-      sessionOptions: CoursesessionOptionsResolver,
+      courseOptions: CourseOptionsResolver,
       coursesession: CoursesessionResolver}},
   {path: 'user-list', component: UserListComponent},
   {path: 'user-form', component: UserFormComponent},

@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {UserFormComponent} from './user-form/user-form.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
@@ -23,6 +23,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
 import { StatisticListComponent } from './statistic-list/statistic-list.component';
+import { TimeComponent } from './time/time.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { StatisticListComponent } from './statistic-list/statistic-list.componen
     AttendanceListComponent,
     DateComponent,
     StatisticListComponent,
+    TimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,8 @@ import { StatisticListComponent } from './statistic-list/statistic-list.componen
     MatNativeDateModule,
     MatCheckboxModule,
     MatStepperModule,
+    FormsModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
