@@ -64,9 +64,15 @@ class CourseSessionFormSerializer(serializers.ModelSerializer):
 
 
 class UserOptionSerializer(serializers.ModelSerializer):
+   # user_username = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name']
+        fields = ['id', 'username']
+
+    #def get_user_username(self, obj):
+     #   return obj.user.username if obj.user else ''
+
 
 
 class UserListSerializer(serializers.ModelSerializer):
