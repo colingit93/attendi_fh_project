@@ -16,9 +16,11 @@ import {CoursesessionListComponent} from './coursesession-list/coursesession-lis
 import {AttendanceListComponent} from './attendance-list/attendance-list.component';
 import {AttendanceitemResolver} from './resolver/attendanceitem.resolver';
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [
+  {path: 'login' , component: LoginComponent},
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
   {path: 'course-list', component: CourseListComponent},
   { path: 'course-form', component: CourseFormComponent, resolve: {

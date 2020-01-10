@@ -1,0 +1,52 @@
+[
+{
+    "model": "attendiApp.profile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "date_of_birth": null,
+        "role": null,
+        "student_group": null,
+        "image": []
+    }
+},
+{
+    "model": "attendiApp.profile",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "date_of_birth": "2000-10-01",
+        "role": "S",
+        "student_group": "G1",
+        "image": [
+            2
+        ]
+    }
+},
+{
+    "model": "attendiApp.profile",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "date_of_birth": "1999-01-01",
+        "role": "S",
+        "student_group": "G2",
+        "image": [
+            2
+        ]
+    }
+},
+{
+    "model": "attendiApp.profile",
+    "pk": 4,
+    "fields": {
+        "user": 4,
+        "date_of_birth": "1940-01-01",
+        "role": "L",
+        "student_group": null,
+        "image": [
+            1
+        ]
+    }
+}
+]

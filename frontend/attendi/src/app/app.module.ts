@@ -25,6 +25,14 @@ import {DateComponent} from './date/date.component';
 import { StatisticListComponent } from './statistic-list/statistic-list.component';
 import { TimeComponent } from './time/time.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {JwtModule} from '@auth0/angular-jwt';
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -39,6 +47,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     DateComponent,
     StatisticListComponent,
     TimeComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +70,13 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatCheckboxModule,
     MatStepperModule,
     FormsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:4200']
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

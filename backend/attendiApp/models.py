@@ -4,6 +4,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
+class Media(models.Model):
+    file_title = models.CharField(max_length=500)
+    file = models.FileField()
+
+    def __str__(self):
+        return self.file_title
+
 class Profile(models.Model):
     ROLE = (
         ('S', 'Student'),
@@ -34,8 +42,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True)
     role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True, blank=True)
-    statistics = models.ManyToManyField('Statistic', blank=True)
-    image = models.ManyToManyField('Media', blank=True)
+    image = models.ManyToManyField(Media, blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -87,13 +94,13 @@ class CourseSession(models.Model):
 
 
 class AttendanceItem(models.Model):
-    student = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null = False)
+    course_session = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True)
     present = models.BooleanField(default=False)
     absence_note = models.ManyToManyField('Media', blank=True)
-    course_session = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        attendanceitemstring = self.student.username + 'present:' + str(self.present)
+        attendanceitemstring = self.student.username + 'present:' + str(self.present) + str(self.course_session)
         return attendanceitemstring
 
 
@@ -102,14 +109,9 @@ class Statistic(models.Model):
     attendance_percentage = models.FloatField()
     courses_missed = models.PositiveIntegerField()
     time_in_courses = models.IntegerField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.course.name
 
 
-class Media(models.Model):
-    file_title = models.CharField(max_length=500)
-    file = models.FileField()
-
-    def __str__(self):
-        return self.file_title
