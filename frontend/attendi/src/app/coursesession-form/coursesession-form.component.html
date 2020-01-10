@@ -35,7 +35,7 @@
     <mat-select placeholder="Course" formControlName="course">
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="courseOption.id"
-                  *ngFor="let courseOption of courseOptions">{{courseOption.course_name}}</mat-option>
+                  *ngFor="let courseOption of courseOptions">{{courseOption.name}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Course of the Coursesession</mat-hint>
   </mat-form-field>

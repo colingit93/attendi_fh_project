@@ -35,7 +35,7 @@
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let coursesession">
         <button mat-button [routerLink]="'/coursesession-form/' + coursesession.id">Edit</button>
-        <button mat-button (click)="deleteCourse(coursesession)">Delete</button>
+        <button mat-button (click)="deleteCourseSession(coursesession)">Delete</button>
       </td>
     </ng-container>
 

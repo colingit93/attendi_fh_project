@@ -19,7 +19,7 @@ class ProfileAdmin(admin.ModelAdmin): pass
 class MediaAdmin(admin.ModelAdmin): pass
 
 
-admin.site.register(Course, CourseSessionAdmin)
+admin.site.register(Course, CourseAdmin)
 admin.site.register(CourseSession, CourseSessionAdmin)
 admin.site.register(AttendanceItem, AttendanceItemAdmin)
 admin.site.register(Statistic, StatisticAdmin)

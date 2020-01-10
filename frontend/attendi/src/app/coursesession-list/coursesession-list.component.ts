@@ -23,7 +23,7 @@ export class CoursesessionListComponent implements OnInit {
       });
   }
 
-  deleteCourse(coursesessions: any) {
+  deleteCourseSession(coursesessions: any) {
     this.courseSessionService.deleteCourseSession(coursesessions)
       .subscribe(() => {
         this.ngOnInit();

@@ -58,6 +58,7 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+
 class CourseSession(models.Model):
     ROOMS = (
         ('V1', 'Vorlesungssaal 1'),
@@ -81,7 +82,7 @@ class CourseSession(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return str(self.course.name) + '-' + str(self.pk)
+        return self.location #str(self.course.name) + '-' + str(self.pk)
 
 
 class AttendanceItem(models.Model):
