@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.hashers import make_password
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
@@ -217,7 +216,6 @@ def users_list(request):
 def user_form_create(request):
     serializer = UserFormSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)

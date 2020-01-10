@@ -38,10 +38,12 @@ urlpatterns = [
     path('user/options', views.user_option_list),
     path('userId/<str:username>/get', views.user_find_by_username),
     path('profile/create', views.profile_form_create),
+
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/get', views.profile_form_get),
     path('attendance_item/list', views.attendance_item_list),
     path('attendance_item/options', views.attendance_item_option_list),
+    #url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^media$', FileUploadView.as_view()),
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
@@ -51,6 +53,4 @@ urlpatterns = [
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     url(r'^api-auth/', include('rest_framework.urls'))
-
-    #url(r'^api-token-auth/', obtain_jwt_token),
 ]
