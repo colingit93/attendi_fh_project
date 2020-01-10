@@ -23,6 +23,14 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
 import { StatisticListComponent } from './statistic-list/statistic-list.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -36,6 +44,8 @@ import { StatisticListComponent } from './statistic-list/statistic-list.componen
     AttendanceListComponent,
     DateComponent,
     StatisticListComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +66,12 @@ import { StatisticListComponent } from './statistic-list/statistic-list.componen
     MatNativeDateModule,
     MatCheckboxModule,
     MatStepperModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:4200']
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

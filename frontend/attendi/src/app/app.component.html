@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="isLoggedIn">
   <button mat-button [matMenuTriggerFor]="attendanceMenu">Attendance</button>
   <mat-menu #attendanceMenu="matMenu">
     <button mat-menu-item routerLink="attendance-list">Attendance</button>
@@ -22,6 +22,7 @@
   <mat-menu #statisticMenu="matMenu">
     <button mat-menu-item routerLink="statistic-list">Statistic</button>
   </mat-menu>-->
+  <app-logout></app-logout>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
