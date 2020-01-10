@@ -1,0 +1,32 @@
+[
+  {
+    "model": "attendiApp.course",
+    "pk": 1,
+    "fields": {
+        "name": "Mathematik",
+        "description": "You will learn a lot about numeric Algebra in this Course and it won't be easy let me tell you that!",
+        "students": [
+            2,
+            3
+        ],
+        "lecturer": [
+            4
+        ]
+    }
+},
+{
+    "model": "attendiApp.course",
+    "pk": 2,
+    "fields": {
+        "name": "Database Modelling",
+        "description": "You will learn how to work with SQL Databases.",
+        "students": [
+            2,
+            3
+        ],
+        "lecturer": [
+            4
+        ]
+    }
+}
+]
