@@ -34,7 +34,6 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True)
     role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True, blank=True)
-    statistics = models.ManyToManyField('Statistic', blank=True)
     image = models.ManyToManyField('Media', blank=True)
 
     @receiver(post_save, sender=User)
@@ -102,6 +101,7 @@ class Statistic(models.Model):
     attendance_percentage = models.FloatField()
     courses_missed = models.PositiveIntegerField()
     time_in_courses = models.IntegerField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.course.name
