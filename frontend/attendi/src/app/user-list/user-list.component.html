@@ -10,6 +10,11 @@
     <td mat-cell *matCellDef="let user">{{user.username}}</td>
   </ng-container>
 
+  <ng-container matColumnDef="profile">
+    <th mat-header-cell *matHeaderCellDef>Group</th>
+    <td mat-cell *matCellDef="let user">{{studentGroupService.studentGroups[user.profile.student_group]}}</td>
+  </ng-container>
+
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let user">

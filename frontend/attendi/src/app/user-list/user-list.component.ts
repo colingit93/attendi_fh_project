@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../service/user.service';
 import {MatSnackBar} from '@angular/material';
+import {StudentGroupService} from '../service/student-group.service';
+import {RoleService} from '../service/role.service';
 
 @Component({
   selector: 'app-user-list',
@@ -11,9 +13,10 @@ import {MatSnackBar} from '@angular/material';
 export class UserListComponent implements OnInit {
 
   users: any[];
-  displayedColumns = ['full_name', 'username', 'id'];
+  displayedColumns = ['full_name', 'username', 'profile', 'id'];
 
-  constructor(private http: HttpClient, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private userService: UserService, private snackBar: MatSnackBar,
+              public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {

@@ -84,6 +84,7 @@ export class UserFormComponent implements OnInit {
     const profile = this.profileFormGroup.value;
     this.userService.updateProfile(profile)
       .subscribe((response: any) => {
+        this.router.navigate(['/user-list/']);
         this.snackBar.open('User Profile updated', 'Dismiss', {
           duration: 3000
         });
