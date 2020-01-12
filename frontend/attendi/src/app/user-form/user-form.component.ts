@@ -50,7 +50,6 @@ export class UserFormComponent implements OnInit {
           date_of_birth: [null],
           role: [''],
           student_group: [''],
-          statistics: [[]],
           image: [[]],
         });
       this.profileFormGroup.patchValue(data.profile);
