@@ -17,32 +17,45 @@ import {AttendanceListComponent} from './attendance-list/attendance-list.compone
 import {AttendanceitemResolver} from './resolver/attendanceitem.resolver';
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
 import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './auth.guard';
 
 
 const routes: Routes = [
-  {path: 'login' , component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
-  {path: 'course-list', component: CourseListComponent},
-  { path: 'course-form', component: CourseFormComponent, resolve: {
-      userOptions: UserOptionsResolver}},
-  {path: 'course-form/:id', component: CourseFormComponent, resolve: {
-      userOptions: UserOptionsResolver,
-      course: CourseResolver}},
-  {path: 'coursesession-list', component: CoursesessionListComponent},
-  { path: 'coursesession-form', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CourseOptionsResolver}},
-  {path: 'coursesession-form/:id', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CourseOptionsResolver,
-      coursesession: CoursesessionResolver}},
-  {path: 'user-list', component: UserListComponent},
-  {path: 'user-form', component: UserFormComponent},
+  {path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]},
   {
-    path: 'user-form/:id', component: UserFormComponent, resolve: {
+    path: 'course-form', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
+      userOptions: UserOptionsResolver
+    }
+  },
+  {
+    path: 'course-form/:id', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
+      userOptions: UserOptionsResolver,
+      course: CourseResolver
+    }
+  },
+  {path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+      courseOptions: CourseOptionsResolver
+    }
+  },
+  {
+    path: 'coursesession-form/:id', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+      courseOptions: CourseOptionsResolver,
+      coursesession: CoursesessionResolver
+    }
+  },
+  {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user-form', component: UserFormComponent, canActivate: [AuthGuard]},
+  {
+    path: 'user-form/:id', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
       user: UserResolver,
       profile: ProfileResolver
     }
   },
-  {path: 'show-statistic', component: StatisticListComponent},
+  {path: 'show-statistic', component: StatisticListComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
