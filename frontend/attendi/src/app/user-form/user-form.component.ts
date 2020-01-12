@@ -19,6 +19,8 @@ export class UserFormComponent implements OnInit {
 
   userFormGroup;
   profileFormGroup;
+  maxDate = new Date();
+  startDate = new Date(1990, 0, 1)
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,
               private router: Router, private snackBar: MatSnackBar, public roleService: RoleService,
@@ -57,7 +59,6 @@ export class UserFormComponent implements OnInit {
   }
 
   createUser() {
-    const data = this.route.snapshot.data;
     const user = this.userFormGroup.value;
     if (user.id) {
       this.userService.updateUser(user)

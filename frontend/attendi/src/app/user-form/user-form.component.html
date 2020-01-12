@@ -38,6 +38,8 @@
 
       <ng-template matStepLabel>Add Profile Information</ng-template>
 
+      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate" [maxDate]="maxDate"></app-date>
+
       <mat-form-field>
         <mat-select placeholder="Role" formControlName="role" required>
           <mat-option [value]="null">Unknown</mat-option>

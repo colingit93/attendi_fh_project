@@ -25,8 +25,8 @@ export class CoursesessionFormComponent implements OnInit {
   coursesessionFormGroup;
   courseOptions;
 
-  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService, private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {

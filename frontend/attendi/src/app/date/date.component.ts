@@ -24,6 +24,10 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   hint: any;
   @Input()
   required = false;
+  @Input()
+  startDate: any;
+  @Input()
+  maxDate: any;
 
   constructor(private fb: FormBuilder) {
   }
