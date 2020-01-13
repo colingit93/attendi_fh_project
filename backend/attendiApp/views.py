@@ -293,8 +293,10 @@ class FileUploadView(views.APIView):
 
     def post(self, request, format=None):
         file = request.FILES['file']
+        content_type = request.data['content_type']
         file_input = {
-            'file_name': file.name
+            'file_name': file.name,
+            'content_type': content_type
         }
         serializer = MediaSerializer(data=file_input)
         if serializer.is_valid():
@@ -309,8 +311,8 @@ def media_download(request, pk):
     data = default_storage.open('media/' + str(pk)).read()
     content_type = media.content_type
     response = HttpResponse(data, content_type=content_type)
-    original_file_name = media.original_file_name
-    response['Content-Disposition'] = 'inline; filename=' + original_file_name
+    file_name = media.file_name
+    response['Content-Disposition'] = 'inline; filename=' + file_name
     return response
 
 

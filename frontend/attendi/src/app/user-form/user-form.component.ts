@@ -100,6 +100,7 @@ export class UserFormComponent implements OnInit {
   onUpload() {
     const fd = new FormData();
     fd.append('file', this.selectedImage, this.selectedImage.name);
+    fd.append('content_type', this.selectedImage.type)
     this.http.post('/api/media', fd)
       .subscribe((response: any) => {
         this.profileFormGroup.controls.image.setValue(response.id);

@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 class Media(models.Model):
     file_name = models.TextField()
+    content_type = models.TextField()
 
     def __str__(self):
         return self.file_name
