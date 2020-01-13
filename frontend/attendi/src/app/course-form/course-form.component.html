@@ -18,7 +18,7 @@
     <mat-select placeholder="Students" formControlName="students" multiple>
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="userOption.id"
-                  *ngFor="let userOption of userOptions">{{userOption.username}}</mat-option>
+                  *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Students of the Course</mat-hint>
   </mat-form-field>
@@ -27,7 +27,7 @@
     <mat-select placeholder="Lecturer" formControlName="lecturer" multiple>
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="userOption.id"
-                  *ngFor="let userOption of userOptions">{{userOption.username}}</mat-option>
+                  *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Lecturer of the Course</mat-hint>
   </mat-form-field>

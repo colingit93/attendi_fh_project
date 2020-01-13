@@ -23,7 +23,8 @@ import {AuthGuard} from './auth.guard';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
-  {path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]},
+  {path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]
+    },
   {
     path: 'course-form', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
       userOptions: UserOptionsResolver

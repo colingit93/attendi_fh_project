@@ -12,7 +12,7 @@ import {LocationService} from '../service/location.service';
 export class CoursesessionListComponent implements OnInit {
 
   coursesessions: any[];
-  displayedColumns = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService) { }
 

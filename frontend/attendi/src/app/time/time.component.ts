@@ -1,7 +1,5 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {TimeUnit} from "ngx-material-timepicker/src/app/material-timepicker/models/time-unit.enum";
-import {TimeFormat} from "ngx-material-timepicker/src/app/material-timepicker/models/time-format.enum";
 
 
 @Component({
