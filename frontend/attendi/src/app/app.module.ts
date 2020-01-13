@@ -28,7 +28,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import {MediaComponent} from './media/media.component';
 import {FileUploadModule} from 'ng2-file-upload';
 
 
@@ -51,7 +50,6 @@ export function tokenGetter() {
     TimeComponent,
     LoginComponent,
     LogoutComponent,
-    MediaComponent
   ],
   imports: [
     BrowserModule,
