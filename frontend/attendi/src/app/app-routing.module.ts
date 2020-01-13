@@ -57,6 +57,7 @@ const routes: Routes = [
     }
   },
   {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
+  {path: 'attendance-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

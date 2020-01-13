@@ -30,7 +30,10 @@ import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttperrorInterceptor} from "./httperror.interceptor";
+import {HttperrorInterceptor} from './httperror.interceptor';
+import {QRCodeModule} from 'angularx-qrcode';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+
 
 
 export function tokenGetter() {
@@ -52,6 +55,7 @@ export function tokenGetter() {
     TimeComponent,
     LoginComponent,
     LogoutComponent,
+    QrcodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ export function tokenGetter() {
       }
     }),
     FileUploadModule,
+    QRCodeModule
   ],
   providers: [
     {
