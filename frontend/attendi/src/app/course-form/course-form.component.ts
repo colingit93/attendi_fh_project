@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
+import {UserService} from '../service/user.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CourseFormComponent implements OnInit {
   courseFormGroup;
   userOptions;
 
-  constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute,
+  constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute, private userService: UserService,
               private router: Router) {
   }
 

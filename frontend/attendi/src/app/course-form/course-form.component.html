@@ -34,7 +34,7 @@
 
 
   <mat-card-actions align="center">
-    <button mat-raised-button color="primary" [disabled]="!courseFormGroup.valid" (click)="createCourse()">
+    <button mat-raised-button color="primary" [disabled]="!courseFormGroup.valid" (click)="createCourse()" *ngIf="userService.hasPermission('attendiApp.add_course' && 'attendiApp.change_course')">
       <span *ngIf="!courseFormGroup.controls.id.value">Create</span>
       <span *ngIf="courseFormGroup.controls.id.value">Update</span>
     </button>

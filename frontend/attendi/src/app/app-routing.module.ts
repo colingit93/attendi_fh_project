@@ -56,7 +56,7 @@ const routes: Routes = [
       profile: ProfileResolver
     }
   },
-  {path: 'show-statistic', component: StatisticListComponent, canActivate: [AuthGuard]},
+  {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

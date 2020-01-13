@@ -3,7 +3,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {UserFormComponent} from './user-form/user-form.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -29,6 +29,8 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttperrorInterceptor} from "./httperror.interceptor";
 
 
 export function tokenGetter() {
@@ -80,7 +82,17 @@ export function tokenGetter() {
     }),
     FileUploadModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttperrorInterceptor,
+      multi: true,
+      deps: [MatSnackBar]
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+}
+
