@@ -38,7 +38,8 @@
 
       <ng-template matStepLabel>Add Profile Information</ng-template>
 
-      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate" [maxDate]="maxDate"></app-date>
+      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate"
+                [maxDate]="maxDate"></app-date>
 
       <mat-form-field>
         <mat-select placeholder="Role" formControlName="role" required>
@@ -56,9 +57,11 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Profile Image" formControlName="image">
-      </mat-form-field>
+
+      <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+      <button mat-button (click)="fileUpload.click()">Pick File</button>
+      <button mat-button (click)="onUpload()">Upload</button>
+
 
       <div>
         <button mat-raised-button (click)="updateProfile()">Update Profile</button>

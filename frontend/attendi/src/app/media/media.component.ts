@@ -1,4 +1,4 @@
-/*import {Component, ElementRef, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FileItem, FileUploader, ParsedResponseHeaders} from 'ng2-file-upload';
 import {HttpClient} from '@angular/common/http';
@@ -31,19 +31,20 @@ export class MediaComponent implements OnInit, ControlValueAccessor {
   initializing = true;
   medias: IMedia[];
   uploader: FileUploader;
+  currentImg = null;
   onChange = (medias: number[]) => {
     // empty default
-  }
+  };
 
   constructor(private userService: UserService, private http: HttpClient, elm: ElementRef) {
   }
 
   ngOnInit() {
-    /*this.uploader = new FileUploader({
+    this.uploader = new FileUploader({
       url: this.resourceUrl,
       authToken: 'Bearer ' + localStorage.getItem(this.userService.accessTokenLocalStorageKey),
       autoUpload: true,
-    });*/ /*
+    });
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
       if (!this.medias) {
         this.medias = [];
@@ -63,6 +64,10 @@ export class MediaComponent implements OnInit, ControlValueAccessor {
         return m.id;
       }));
     };
+    if (this.medias) {
+      console.log(this.medias);
+      this.currentImg = this.medias.slice(-1)[0];
+    }
   }
 
   deleteMedia(index: number): void {
@@ -109,4 +114,4 @@ export class MediaComponent implements OnInit, ControlValueAccessor {
       this.initializing = false;
     });
   }
-}*/
+}

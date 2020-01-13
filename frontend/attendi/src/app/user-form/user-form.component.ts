@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material';
 import {RoleService} from '../service/role.service';
 import {StudentGroupService} from '../service/student-group.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-user-form',
@@ -21,10 +22,11 @@ export class UserFormComponent implements OnInit {
   profileFormGroup;
   maxDate = new Date();
   startDate = new Date(1990, 0, 1)
+  selectedImage: File = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,
               private router: Router, private snackBar: MatSnackBar, public roleService: RoleService,
-              public studentGroupService: StudentGroupService) {
+              public studentGroupService: StudentGroupService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -88,6 +90,19 @@ export class UserFormComponent implements OnInit {
         this.snackBar.open('User Profile updated', 'Dismiss', {
           duration: 3000
         });
+      });
+  }
+
+  onFileSelected(event) {
+    this.selectedImage = event.target.files[0];
+  }
+
+  onUpload() {
+    const fd = new FormData();
+    fd.append('file', this.selectedImage, this.selectedImage.name);
+    this.http.post('/api/media', fd)
+      .subscribe((response: any) => {
+        this.profileFormGroup.controls.image.setValue(response.id);
       });
   }
 

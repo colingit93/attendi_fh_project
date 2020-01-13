@@ -294,9 +294,7 @@ class FileUploadView(views.APIView):
     def post(self, request, format=None):
         file = request.FILES['file']
         file_input = {
-            'original_file_name': file.name,
-            'content_type': file.content_type,
-            'size': file.size,
+            'file_name': file.name
         }
         serializer = MediaSerializer(data=file_input)
         if serializer.is_valid():

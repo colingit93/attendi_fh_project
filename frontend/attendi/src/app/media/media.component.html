@@ -31,3 +31,8 @@
   </table>
   <input type="file" [accept]="accept" ng2FileSelect [uploader]="uploader" [multiple]="true"/>
 </div> -->
+<input style="display: none" type="file" ng2FileSelect [uploader]="uploader" (change)="registerOnChange($event)" #fileUpload/>
+<button mat-button (click)="fileUpload.click()">Pick File</button>
+<div *ngIf="medias">
+  {{currentImg}}
+</div>

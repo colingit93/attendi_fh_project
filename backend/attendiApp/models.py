@@ -6,11 +6,10 @@ from django.dispatch import receiver
 
 
 class Media(models.Model):
-    file_title = models.CharField(max_length=500)
-    file = models.FileField()
+    file_name = models.TextField()
 
     def __str__(self):
-        return self.file_title
+        return self.file_name
 
 class Profile(models.Model):
     ROLE = (
@@ -42,7 +41,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True)
     role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True, blank=True)
-    image = models.ManyToManyField(Media, blank=True)
+    image = models.ForeignKey(Media, null=True, blank=True, on_delete=models.CASCADE)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
