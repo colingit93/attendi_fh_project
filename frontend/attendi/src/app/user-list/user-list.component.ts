@@ -13,7 +13,7 @@ import {RoleService} from '../service/role.service';
 export class UserListComponent implements OnInit {
 
   users: any[];
-  displayedColumns = ['full_name', 'username', 'profile', 'id'];
+  displayedColumns = ['image', 'full_name', 'username', 'student_group', 'id'];
 
   constructor(private http: HttpClient, private userService: UserService, private snackBar: MatSnackBar,
               public studentGroupService: StudentGroupService) {
