@@ -19,9 +19,10 @@ export class UserFormComponent implements OnInit {
   userFormGroup;
   profileFormGroup;
   maxDate = new Date();
-  startDate = new Date(1990, 0, 1)
+  startDate = new Date(1990, 0, 1);
   selectedImage: File = null;
   groupOptions;
+  currentImage = 'No Image';
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,
               private router: Router, private snackBar: MatSnackBar, public groupService: GroupService,
@@ -31,6 +32,11 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     const data = this.route.snapshot.data;
     this.groupOptions = data.groupOptions;
+    if (data.profile.image) {
+      this.userService.getProfileImage(data.profile.image).subscribe( (res: any) => {
+        this.currentImage = res.file_name;
+      });
+    }
 
     this.userFormGroup = this.fb.group(
       {
@@ -39,7 +45,7 @@ export class UserFormComponent implements OnInit {
         first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
         email: ['', [Validators.required]],
-        groups: [[] , [Validators.required]],
+        groups: [[], [Validators.required]],
         password: ['', [Validators.required]]
       });
 
@@ -100,7 +106,7 @@ export class UserFormComponent implements OnInit {
   onUpload() {
     const fd = new FormData();
     fd.append('file', this.selectedImage, this.selectedImage.name);
-    fd.append('content_type', this.selectedImage.type)
+    fd.append('content_type', this.selectedImage.type);
     this.http.post('/api/media', fd)
       .subscribe((response: any) => {
         this.profileFormGroup.controls.image.setValue(response.id);

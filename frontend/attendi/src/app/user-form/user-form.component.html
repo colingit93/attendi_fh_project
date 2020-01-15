@@ -61,7 +61,9 @@
 
       <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
       <button mat-button (click)="fileUpload.click()">Pick File</button>
-      <button mat-button (click)="onUpload()">Upload</button>
+      <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
+      <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">
+      <button mat-button [disabled]="!selectedImage" (click)="onUpload()">Upload</button>
 
 
       <div>
