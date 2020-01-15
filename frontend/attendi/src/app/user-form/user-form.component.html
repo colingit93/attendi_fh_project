@@ -21,6 +21,15 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-select placeholder="Group" formControlName="groups" required>
+          <mat-option [value]="null">Unknown</mat-option>
+          <mat-option [value]="[groupOption.id]"
+                      *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
       </mat-form-field>
 
@@ -40,14 +49,6 @@
 
       <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate"
                 [maxDate]="maxDate"></app-date>
-
-      <mat-form-field>
-        <mat-select placeholder="Role" formControlName="role" required>
-          <mat-option [value]="null">Unknown</mat-option>
-          <mat-option [value]="role.key"
-                      *ngFor="let role of roleService.roles | keyvalue">{{role.value}}</mat-option>
-        </mat-select>
-      </mat-form-field>
 
       <mat-form-field>
         <mat-select placeholder="Group" formControlName="student_group" required>

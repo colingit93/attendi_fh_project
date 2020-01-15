@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Group
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
@@ -13,7 +14,7 @@ from .models import Course, CourseSession, User, Statistic, AttendanceItem, Medi
 from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
     UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
-    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer
+    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer, GroupSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
@@ -341,4 +342,13 @@ def user_find_by_username(request, username):
         return Response({'error': 'User does not exist.'}, status=404)
 
     serializer = UserIdSerializer(user)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
+@api_view(['GET'])
+@permission_required('attendi.view_groups')
+def group_option_list(request):
+    group = Group.objects.all()
+    serializer = GroupSerializer(group, many=True)
     return Response(serializer.data)

@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^media$', FileUploadView.as_view()),
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
+    path('group/options', views.group_option_list),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

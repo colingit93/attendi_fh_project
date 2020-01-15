@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 from .models import Course, CourseSession, User, AttendanceItem, Statistic, Media, Profile
@@ -33,7 +34,6 @@ class CourseListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ['id', 'name', 'description', 'students', 'lecturer']
-
 
 
 class CourseFormSerializer(serializers.ModelSerializer):
@@ -111,3 +111,9 @@ class UserIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username']
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['id', 'name']

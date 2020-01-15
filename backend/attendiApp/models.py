@@ -13,10 +13,6 @@ class Media(models.Model):
         return self.file_name
 
 class Profile(models.Model):
-    ROLE = (
-        ('S', 'Student'),
-        ('L', 'Lecturer')
-    )
 
     GROUP = (
         ('G1', 'Group 1'),
@@ -40,7 +36,6 @@ class Profile(models.Model):
         date_joined
     '''
     date_of_birth = models.DateField(null=True)
-    role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True, blank=True)
     image = models.ForeignKey(Media, null=True, blank=True, on_delete=models.CASCADE)
 
