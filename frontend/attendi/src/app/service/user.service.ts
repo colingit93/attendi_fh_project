@@ -45,6 +45,12 @@ export class UserService {
     return permission in permissions;
   }
 
+  getCurrentUserId() {
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    const decodedToken = this.jwtHelperService.decodeToken(token);
+    return decodedToken.user_id;
+  }
+
   getUserList() {
     return this.http.get('/api/user/list');
   }

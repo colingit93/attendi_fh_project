@@ -15,7 +15,7 @@ import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confi
 })
 export class CoursesessionListComponent implements OnInit {
 
-
+  sessionId: number;
   sessionPassword: string;
   currentUserId: any;
   userProfile: any;
@@ -29,16 +29,14 @@ export class CoursesessionListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUserId = this.userService.getCurrentUserId();
     if (this.router.url === '/coursesession-list/myCourses') {
-      this.userService.findByName(localStorage.getItem('username')).subscribe((user: any) => {
-        this.currentUserId = user.id;
-        this.userService.getProfile(this.currentUserId).subscribe((profile) => {
-          this.userProfile = profile;
-          this.courseSessionService.getMyCourseSessions(this.userProfile.student_group)
-            .subscribe((response: any[]) => {
-              this.courseSessions = response;
-            });
-        });
+      this.userService.getProfile(this.currentUserId).subscribe((profile) => {
+        this.userProfile = profile;
+        this.courseSessionService.getMyCourseSessions(this.userProfile.student_group)
+          .subscribe((response: any[]) => {
+            this.courseSessions = response;
+          });
       });
     } else {
       this.courseSessionService.getAllCourseSessions().subscribe((response: any) => {
@@ -57,8 +55,10 @@ export class CoursesessionListComponent implements OnInit {
 
 
   openConfirmDialog(courseSessionId: number) {
+    this.currentUserId = this.userService.getCurrentUserId();
     this.courseSessionService.getCourseSession(courseSessionId).subscribe((session: any) => {
       this.sessionPassword = session.password;
+      this.sessionId = session.id;
 
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -66,16 +66,16 @@ export class CoursesessionListComponent implements OnInit {
       dialogConfig.id = 'attendance-confirm-component';
       dialogConfig.height = '350px';
       dialogConfig.width = '600px';
-      alert(this.sessionPassword);
       dialogConfig.data = {
         title: 'Presence Confirmation',
-        password: this.sessionPassword
+        password: this.sessionPassword,
+        sessionId: this.sessionId,
+        userId: this.currentUserId
       };
       const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(
         (res) => {
-          alert(JSON.stringify(res));
         });
     });
   }

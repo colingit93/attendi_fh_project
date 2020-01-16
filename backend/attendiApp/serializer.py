@@ -106,7 +106,6 @@ class AttendanceOptionSerializer(serializers.ModelSerializer):
 class AttendanceItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceItem
-        # fields = ['id', 'student', 'present', 'absence_note']
         fields = '__all__'
 
 

@@ -1,3 +1,4 @@
+import logging
 from datetime import date
 
 from django.contrib.auth.decorators import permission_required
@@ -11,7 +12,7 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
-import logging
+
 logger = logging.getLogger(__name__)
 
 from .models import Course, CourseSession, User, Statistic, AttendanceItem, Media, Profile
@@ -22,7 +23,7 @@ from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessio
 
 
 def create_statistic(primarykey):
-    #create a statistic for each user which attends the course
+    # create a statistic for each user which attends the course
     course_item = Course.objects.get(pk=primarykey)
     course_student_values = course_item.students.values()
 
@@ -39,32 +40,34 @@ def create_statistic(primarykey):
         newstat.attendance_percentage = 0
         newstat.courses_missed = 0
         newstat.time_in_courses = 0
-        newstat.profile = Profile.objects.get(pk = student_pk)
+        newstat.profile = Profile.objects.get(pk=student_pk)
         newstat.save()
     logging.warning('Statistic Created with Student IDs: %s' % student_id_list)
     return True
 
+
 def create_attendance_item(student_group, course_session_id):
-    #attendance_item = AttendanceItem.objects.create()
+    # attendance_item = AttendanceItem.objects.create()
     students = Profile.objects.filter(student_group=student_group)
-    #logging.warning('Students of: %s' % student_group + ' are %s' % students)
-    #logging.warning('########## %s' % students[0].pk)
+    # logging.warning('Students of: %s' % student_group + ' are %s' % students)
+    # logging.warning('########## %s' % students[0].pk)
     for student in students:
         attendance_item = AttendanceItem.objects.create()
-        attendance_item.student = User.objects.get(pk = student.pk)
-        attendance_item.course_session = CourseSession.objects.get(pk = course_session_id)
+        attendance_item.student = User.objects.get(pk=student.pk)
+        attendance_item.course_session = CourseSession.objects.get(pk=course_session_id)
         attendance_item.present = False
         attendance_item.absence_note = None
         attendance_item.save()
     return True
 
+
 def update_statistic(pk):
     logging.warning('Updating/Calculating Statistic...')
 
-    #SECTION: UPDATE/CALC FIELD: TOTAL COURSE SESSIONS , TOTAL MANDATORY COURSE SESSIONS
-    #Get and save Course ID's for the individual user (pk) from the statistic page
+    # SECTION: UPDATE/CALC FIELD: TOTAL COURSE SESSIONS , TOTAL MANDATORY COURSE SESSIONS
+    # Get and save Course ID's for the individual user (pk) from the statistic page
     courses_foreign_keys = []
-    statistic_items = Statistic.objects.filter(profile = pk)
+    statistic_items = Statistic.objects.filter(profile=pk)
     statistic_fields = statistic_items.values()
 
     for i in range(len(statistic_fields)):
@@ -72,41 +75,56 @@ def update_statistic(pk):
         courses_foreign_keys.append(statistic_fields[i].get('course_id'))
     logging.warning('-----Courses Foreign Keys: %s' % courses_foreign_keys)
 
-    #get the ammount of course sessions for each course ID from the statistic (using the foreign key list)
-    #Iterate through the course foreign keys
+    # get the ammount of course sessions for each course ID from the statistic (using the foreign key list)
+    # Iterate through the course foreign keys
     for k in range(len(courses_foreign_keys)):
         student = Profile.objects.get(pk=pk)
         student_group = student.student_group
-        #logging.warning('STUDENT GROUP::::::::: %s' % student_group)
-        mandatory_coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k], mandatory=True, student_group=student_group).values()
-        #only course sessions with the foreign key from the list
-        coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k], student_group=student_group).values()
-        #length gives us the ammount of course sessions
+        # logging.warning('STUDENT GROUP::::::::: %s' % student_group)
+        mandatory_coursesessions_for_this_course = CourseSession.objects.filter(course=courses_foreign_keys[k],
+                                                                                mandatory=True,
+                                                                                student_group=student_group).values()
+        # only course sessions with the foreign key from the list
+        coursesessions_for_this_course = CourseSession.objects.filter(course=courses_foreign_keys[k],
+                                                                      student_group=student_group).values()
+        # length gives us the ammount of course sessions
         total_course_sessions_ammount = len(coursesessions_for_this_course)
         mandatory_course_sessions_ammount = len(mandatory_coursesessions_for_this_course)
-        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % total_course_sessions_ammount + ' total course sessions')
-        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % mandatory_course_sessions_ammount + ' mandatory course sessions')
+        logging.warning('Course with ID:%s' % courses_foreign_keys[
+            k] + ' has %s' % total_course_sessions_ammount + ' total course sessions')
+        logging.warning('Course with ID:%s' % courses_foreign_keys[
+            k] + ' has %s' % mandatory_course_sessions_ammount + ' mandatory course sessions')
         # Update the field in statistics database model (for the specific user and course_id)
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_course_sessions=total_course_sessions_ammount)
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_mandatory_course_sessions=mandatory_course_sessions_ammount)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+            total_course_sessions=total_course_sessions_ammount)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+            total_mandatory_course_sessions=mandatory_course_sessions_ammount)
 
-        #SECTION UPDATE/CALC FIELD: VISISTED COURSE SESSION
-        visited_course_sessions = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[k]))
-        logging.warning('Amount of attended course sessions:%s' % visited_course_sessions + 'for course:%s' % courses_foreign_keys[k])
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(visited_course_sessions=visited_course_sessions)
+        # SECTION UPDATE/CALC FIELD: VISISTED COURSE SESSION
+        visited_course_sessions = len(AttendanceItem.objects.filter(student=pk, present=True,
+                                                                    course_session__course_id__exact=
+                                                                    courses_foreign_keys[k]))
+        logging.warning(
+            'Amount of attended course sessions:%s' % visited_course_sessions + 'for course:%s' % courses_foreign_keys[
+                k])
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+            visited_course_sessions=visited_course_sessions)
 
-        #UPDATE/CALC FIELD: ATTENDANCE PERCENTAGE
-        attendance_percentage = (visited_course_sessions / total_course_sessions_ammount)*100
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(attendance_percentage=attendance_percentage)
+        # UPDATE/CALC FIELD: ATTENDANCE PERCENTAGE
+        attendance_percentage = (visited_course_sessions / total_course_sessions_ammount) * 100
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+            attendance_percentage=attendance_percentage)
 
-        #UPDATE/CALC FIELD: COURSE SESSIONS MISSED
-        course_sessions_missed = (total_course_sessions_ammount-visited_course_sessions)
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(course_sessions_missed=course_sessions_missed)
+        # UPDATE/CALC FIELD: COURSE SESSIONS MISSED
+        course_sessions_missed = (total_course_sessions_ammount - visited_course_sessions)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+            course_sessions_missed=course_sessions_missed)
 
-        #UPDATE/CALC FIELD: TIME IN COURSES
-        #start_time = CourseSession.objects.filter(course= courses_foreign_keys[k]).values()
-        #logging.warning('CourseSessionTime:%s' % start_time)
+        # UPDATE/CALC FIELD: TIME IN COURSES
+        # start_time = CourseSession.objects.filter(course= courses_foreign_keys[k]).values()
+        # logging.warning('CourseSessionTime:%s' % start_time)
     return True
+
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
 @api_view(['GET'])
@@ -116,6 +134,7 @@ def statistic_list(request, pk):
     statistics = Statistic.objects.filter(profile=pk)
     serializer = StatisticSerializer(statistics, many=True)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: StatisticListSerializer()})
 @api_view(['GET'])
@@ -207,7 +226,8 @@ def course_sessions_list(request, group=''):
     if group == '':
         course_sessions = CourseSession.objects.all().order_by('date', 'start_time').exclude(date__lt=current_date)
     else:
-        course_sessions = CourseSession.objects.filter(student_group=group).order_by('date', 'start_time').exclude(date__lt=current_date)
+        course_sessions = CourseSession.objects.filter(student_group=group).order_by('date', 'start_time').exclude(
+            date__lt=current_date)
     serializer = CourseSessionListSerializer(course_sessions, many=True)
     return Response(serializer.data)
 
@@ -220,11 +240,11 @@ def coursesession_form_create(request):
     serializer = CourseSessionFormSerializer(data=request.data)
     if serializer.is_valid():
         serializer_data = serializer.save()
-        #Get Student Group and create Attendance item
-        student_group  = serializer_data.student_group
+        # Get Student Group and create Attendance item
+        student_group = serializer_data.student_group
         course_session_id = serializer_data.pk
-        #logging.warning('studentgroupDEBUG: %s' % student_group)
-        #logging.warning('sessionId courseDEBUG: %s' % course_session_id)
+        # logging.warning('studentgroupDEBUG: %s' % student_group)
+        # logging.warning('sessionId courseDEBUG: %s' % course_session_id)
         create_attendance_item(student_group, course_session_id)
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
@@ -468,3 +488,28 @@ def group_option_list(request):
     serializer = GroupSerializer(group, many=True)
     return Response(serializer.data)
 
+
+@swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer()})
+@api_view(['GET'])
+def attendance_item_get(request, session, user):
+    session = CourseSession.objects.get(pk=session)
+    user = User.objects.get(pk=user)
+    attendance_item = AttendanceItem.objects.get(course_session=session, student=user)
+    serializer = AttendanceItemSerializer(attendance_item)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='PUT', request_body=AttendanceItemSerializer, responses={200: AttendanceItemSerializer()})
+@api_view(['PUT'])
+@permission_required('attendiApp.change_coursesession', raise_exception=True)
+def attendance_item_update(request, pk):
+    try:
+        attendance_item = AttendanceItem.objects.get(pk=pk)
+    except Course.DoesNotExist:
+        return Response({'error': 'AttendanceItem does not exist.'}, status=404)
+
+    serializer = AttendanceItemSerializer(attendance_item, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
