@@ -15,7 +15,8 @@
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="coursesessionMenu">CourseSession</button>
   <mat-menu #coursesessionMenu="matMenu">
-    <button mat-menu-item routerLink="coursesession-list">List Course Sessions</button>
+    <button mat-menu-item routerLink="coursesession-list/myCourses">My Course Sessions</button>
+    <button mat-menu-item routerLink="coursesession-list">All Course Sessions</button>
     <button mat-menu-item routerLink="coursesession-form" *ngIf="userService.hasPermission('attendiApp.add_coursesession')">Create Course Session</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="statisticMenu">Statistic</button>

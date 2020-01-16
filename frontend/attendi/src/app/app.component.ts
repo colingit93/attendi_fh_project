@@ -13,9 +13,11 @@ export class AppComponent implements OnInit {
   techiediaries = 'https://www.npmjs.com/~techiediaries';
   letsboot = 'https://www.letsboot.com/';
 
-
   constructor(private userService: UserService) {
   }
+  currentUserId: any;
+  studentGroup: any;
+
 
   ngOnInit() {
     this.userService.isLoggedIn.subscribe((isLoggedIn) => {

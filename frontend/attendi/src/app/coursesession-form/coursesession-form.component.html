@@ -31,7 +31,15 @@
       <mat-option [value]="courseOption.id"
                   *ngFor="let courseOption of courseOptions">{{courseOption.name}}</mat-option>
     </mat-select>
-    <mat-hint align="end">The Course of the Coursesession</mat-hint>
+    <mat-hint align="end">The Course of this Session</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Group" formControlName="student_group" required>
+      <mat-option [value]="null">Unknown</mat-option>
+      <mat-option [value]="group.key"
+                  *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
+    </mat-select>
   </mat-form-field>
 
 

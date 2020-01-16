@@ -14,6 +14,7 @@ import {CourseService} from '../service/course.service';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
+import {StudentGroupService} from '../service/student-group.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class CoursesessionFormComponent implements OnInit {
   courseOptions;
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
-              private route: ActivatedRoute, private router: Router, private userService: UserService) {
+              private route: ActivatedRoute, private router: Router, private userService: UserService, public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {
@@ -43,6 +44,7 @@ export class CoursesessionFormComponent implements OnInit {
       start_time: [],
       end_time: [],
       course: [],
+      student_group: ['', [Validators.required]],
     });
     if (data.coursesession) {
       this.coursesessionFormGroup.patchValue(data.coursesession);

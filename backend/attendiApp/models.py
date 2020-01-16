@@ -3,7 +3,11 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
+GROUP = (
+    ('G1', 'Group 1'),
+    ('G2', 'Group 2'),
+    ('G3', 'Group 3')
+)
 
 class Media(models.Model):
     file_name = models.TextField()
@@ -14,11 +18,7 @@ class Media(models.Model):
 
 class Profile(models.Model):
 
-    GROUP = (
-        ('G1', 'Group 1'),
-        ('G2', 'Group 2'),
-        ('G3', 'Group 3')
-    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     '''
     User fields:
@@ -83,6 +83,7 @@ class CourseSession(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    student_group = models.CharField(max_length=2, choices=GROUP, null=True)
 
     def __str__(self):
         return str(self.course.name) + '-' + str(self.pk)
