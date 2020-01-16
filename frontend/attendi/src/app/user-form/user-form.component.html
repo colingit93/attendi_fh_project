@@ -21,6 +21,15 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-select placeholder="Group" formControlName="groups" required>
+          <mat-option [value]="null">Unknown</mat-option>
+          <mat-option [value]="[groupOption.id]"
+                      *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
       </mat-form-field>
 
@@ -42,14 +51,6 @@
                 [maxDate]="maxDate"></app-date>
 
       <mat-form-field>
-        <mat-select placeholder="Role" formControlName="role" required>
-          <mat-option [value]="null">Unknown</mat-option>
-          <mat-option [value]="role.key"
-                      *ngFor="let role of roleService.roles | keyvalue">{{role.value}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
         <mat-select placeholder="Group" formControlName="student_group" required>
           <mat-option [value]="null">Unknown</mat-option>
           <mat-option [value]="group.key"
@@ -60,7 +61,9 @@
 
       <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
       <button mat-button (click)="fileUpload.click()">Pick File</button>
-      <button mat-button (click)="onUpload()">Upload</button>
+      <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
+      <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">
+      <button mat-button [disabled]="!selectedImage" (click)="onUpload()">Upload</button>
 
 
       <div>

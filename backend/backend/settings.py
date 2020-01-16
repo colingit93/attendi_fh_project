@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import datetime
 import os
 
+import logging, logging.config
+import sys
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -115,6 +119,53 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
+#Logging
+#LOGGING = {
+#    'version': 1,
+#    'handlers': {
+#        'console': {
+#            'class': 'logging.StreamHandler',
+#            'stream': sys.stdout,
+#        }
+#    },
+#    'root': {
+#        'handlers': ['console'],
+#        'level': 'INFO'
+#    }
+#}
+#logging.config.dictConfig(LOGGING)
+#logging.info('Hello')
+
+# DataFlair #Logging Information
+LOGGING = {
+    'version': 1,
+    # Version of logging
+    'disable_existing_loggers': False,
+    #disable logging
+    # Handlers #############################################################
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'dataflair-debug.log',
+        },
+########################################################################
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    # Loggers ####################################################################
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO')
+        },
+    },
+}
+=======
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -139,3 +190,4 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
     'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
 }
+>>>>>>> f2f77a8c83fb88add7550ded5eb488987175bbdb

@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Group
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
@@ -8,20 +9,96 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
+import logging
+logger = logging.getLogger(__name__)
 
 from .models import Course, CourseSession, User, Statistic, AttendanceItem, Media, Profile
 from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
     UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
-    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer
+    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer, StatisticListSerializer, GroupSerializer
 
+
+def create_statistic(primarykey):
+    #create a statistic for each user which attends the course
+    course_item = Course.objects.get(pk=primarykey)
+    course_student_values = course_item.students.values()
+
+    student_id_list = []
+    for i in range(len(course_student_values)):
+        student_id_list.append(course_student_values[i].get('id'))
+
+    for student_pk in student_id_list:
+        newstat = Statistic.objects.create()
+        newstat.course = Course.objects.get(pk=primarykey)
+        newstat.total_course_sessions = 0
+        newstat.total_mandatory_course_sessions = 0
+        newstat.visited_course_sessions = 0
+        newstat.attendance_percentage = 0
+        newstat.courses_missed = 0
+        newstat.time_in_courses = 0
+        newstat.profile = Profile.objects.get(pk = student_pk)
+        newstat.save()
+    logging.warning('Statistic Created with Student IDs: %s' % student_id_list)
+    return True
+
+def update_statistic(pk):
+    logging.warning('Updating/Calculating Statistic...')
+
+    #SECTION: UPDATE/CALC TOTAL COURSE SESSIONS , TOTAL MANDATORY COURSE SESSIONS
+    #Get Course ID's for the users (pk) statistic
+    courses_foreign_keys = []
+    statistic_items = Statistic.objects.filter(profile = pk)
+    statistic_fields = statistic_items.values()
+
+    for i in range(len(statistic_fields)):
+        # Save Foreign Keys of course the user is subscribed to from statistic into list
+        courses_foreign_keys.append(statistic_fields[i].get('course_id'))
+    logging.warning('-----Courses Foreign Keys: %s' % courses_foreign_keys)
+
+    #get the ammount of course sessions for each course ID from the statistic (using the foreign key list)
+    for k in range(len(courses_foreign_keys)):
+        #only course sessions with the foreign key from the list
+        coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k]).values()
+        mandatory_coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k], mandatory=True).values()
+        #length gives us the ammount of course sessions
+        course_sessions_ammount = len(coursesessions_for_this_course)
+        mandatory_course_sessions_ammount = len(mandatory_coursesessions_for_this_course)
+        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % course_sessions_ammount + ' total course sessions')
+        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % mandatory_course_sessions_ammount + ' mandatory course sessions')
+        # Update the field in statistics database model (for the specific user and course_id)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_course_sessions=course_sessions_ammount)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_mandatory_course_sessions=mandatory_course_sessions_ammount)
+
+    #SECTION UPDATE/CALC VISISTED COURSE SESSION
+    attended_sessions = AttendanceItem.objects.filter(student=pk, present=True)
+    for u in range(len(courses_foreign_keys)):
+        amount = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[u]))
+        logging.warning('Amount of attended course sessions:%s' % amount + 'for course:%s' % courses_foreign_keys[u])
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[u]).update(visited_course_sessions=amount)
+
+
+    return True
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_statistic', raise_exception=True)
-def statistic_list(request):
-    statistics = Statistic.objects.all()
+def statistic_list(request, pk):
+    update_statistic(pk)
+    logger.warning("Get List Called")
+    statistics = Statistic.objects.filter(profile=pk)
     serializer = StatisticSerializer(statistics, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: StatisticListSerializer()})
+@api_view(['GET'])
+# @permission_required('.view_course', raise_exception=True)
+def statistic_form_get(request, pk):
+    try:
+        statistic = Statistic.objects.get(pk=pk)
+    except Statistic.DoesNotExist:
+        return Response({'error': 'Statistic does not exist.'}, status=404)
+
+    serializer = StatisticListSerializer(statistic)
     return Response(serializer.data)
 
 
@@ -40,7 +117,8 @@ def courses_list(request):
 def course_form_create(request):
     serializer = CourseFormSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        savedobject = serializer.save()
+        create_statistic(savedobject.pk)
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
 
@@ -341,5 +419,14 @@ def user_find_by_username(request, username):
         return Response({'error': 'User does not exist.'}, status=404)
 
     serializer = UserIdSerializer(user)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
+@api_view(['GET'])
+@permission_required('attendi.view_groups')
+def group_option_list(request):
+    group = Group.objects.all()
+    serializer = GroupSerializer(group, many=True)
     return Response(serializer.data)
 

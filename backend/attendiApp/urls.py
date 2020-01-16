@@ -17,7 +17,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('statistic/list', views.statistic_list),
+    path('statistic/list/<int:pk>', views.statistic_list),
+    path('statistic/<int:pk>/get', views.statistic_form_get),
     path('course/list', views.courses_list),
     path('course/create', views.course_form_create),
     path('course/<int:pk>/get', views.course_form_get),
@@ -45,6 +46,7 @@ urlpatterns = [
     url(r'^media$', FileUploadView.as_view()),
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
+    path('group/options', views.group_option_list),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

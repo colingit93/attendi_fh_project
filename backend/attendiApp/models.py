@@ -3,8 +3,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
-
 class Media(models.Model):
     file_name = models.TextField()
     content_type = models.TextField()
@@ -13,10 +11,6 @@ class Media(models.Model):
         return self.file_name
 
 class Profile(models.Model):
-    ROLE = (
-        ('S', 'Student'),
-        ('L', 'Lecturer')
-    )
 
     GROUP = (
         ('G1', 'Group 1'),
@@ -40,7 +34,6 @@ class Profile(models.Model):
         date_joined
     '''
     date_of_birth = models.DateField(null=True)
-    role = models.CharField(max_length=1, choices=ROLE, null=True)
     student_group = models.CharField(max_length=2, choices=GROUP, null=True, blank=True)
     image = models.ForeignKey(Media, null=True, blank=True, on_delete=models.CASCADE)
 
@@ -113,13 +106,13 @@ class AttendanceItem(models.Model):
 
 
 class Statistic(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    attendance_percentage = models.FloatField()
-    courses_missed = models.PositiveIntegerField()
-    time_in_courses = models.IntegerField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+    total_course_sessions = models.IntegerField(null=True, default=None)
+    total_mandatory_course_sessions = models.IntegerField(null=True, default=None)
+    visited_course_sessions = models.IntegerField(null=True, default=None)
+    attendance_percentage = models.FloatField(null=True, default=None)
+    course_sessions_missed = models.PositiveIntegerField(null=True, default=None)
+    time_in_courses = models.IntegerField(null=True, default=None)
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.course.name
-
-
+    def __str__(self): return 'course:' + self.course.name + '_username:' + self.profile.user.username + '_student:' + self.profile.user.first_name

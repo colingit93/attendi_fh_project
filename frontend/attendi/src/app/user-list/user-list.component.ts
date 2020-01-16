@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {UserService} from '../service/user.service';
 import {MatSnackBar} from '@angular/material';
 import {StudentGroupService} from '../service/student-group.service';
-import {RoleService} from '../service/role.service';
 
 @Component({
   selector: 'app-user-list',
