@@ -6,8 +6,12 @@ from .models import Course, CourseSession, User, AttendanceItem, Statistic, Medi
 class StatisticSerializer(serializers.ModelSerializer):
     class Meta:
         model = Statistic
-        fields = ['id', 'course', 'attendance_percentage', 'courses_missed', 'time_in_courses', 'user']
+        fields = '__all__'
 
+class StatisticListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Statistic
+        fields = '__all__'
 
 class CourseOptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,7 +55,8 @@ class CourseSessionListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CourseSession
-        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name']
+        #fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name']
+        fields = '__all__'
 
     def get_course_name(self, obj):
         return obj.course.name if obj.course else ''
@@ -101,7 +106,8 @@ class AttendanceOptionSerializer(serializers.ModelSerializer):
 class AttendanceItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceItem
-        fields = ['id', 'student', 'present', 'absence_note']
+        #fields = ['id', 'student', 'present', 'absence_note']
+        fields = '__all__'
 
 
 class MediaSerializer(serializers.ModelSerializer):

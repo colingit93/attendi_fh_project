@@ -17,7 +17,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('statistic/list', views.statistic_list),
+    path('statistic/list/<int:pk>', views.statistic_list),
+    path('statistic/<int:pk>/get', views.statistic_form_get),
     path('course/list', views.courses_list),
     path('course/create', views.course_form_create),
     path('course/<int:pk>/get', views.course_form_get),
