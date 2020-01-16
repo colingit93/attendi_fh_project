@@ -57,7 +57,7 @@ export class CoursesessionListComponent implements OnInit {
 
 
 
-  openConfirmDialog(coursesessions: any) {
+  openConfirmDialog() {
     // const userId = 'user01';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

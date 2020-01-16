@@ -46,12 +46,12 @@
       <th mat-header-cell *matHeaderCellDef>Actions</th>
 
       <td mat-cell *matCellDef="let courseSession">
-        <button mat-button [routerLink]="'/coursesession-form/' + courseSession.id" *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit</button>
-        <button mat-button (click)="deleteCourseSession(courseSession)" *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete</button>
-
-      <td mat-cell *matCellDef="let coursesession">
-        <button mat-button [routerLink]="'/coursesession-form/' + coursesession.id" *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit</button>
-        <button mat-button (click)="deleteCourseSession(coursesession)" *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete</button>
+        <button mat-button [routerLink]="'/coursesession-form/' + courseSession.id"
+                *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit
+        </button>
+        <button mat-button (click)="deleteCourseSession(courseSession)"
+                *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete
+        </button>
         <button mat-button id="confirm-button" (click)="openConfirmDialog()">Confirm Presence</button>
       </td>
     </ng-container>
