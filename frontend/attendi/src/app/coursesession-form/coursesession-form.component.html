@@ -9,6 +9,15 @@
     <mat-hint align="end">The Location of the Coursesession</mat-hint>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-select placeholder="Group" formControlName="studentgroup" required>
+      <mat-option [value]="null">Unknown</mat-option>
+      <mat-option [value]="studentgroup.key"
+                  *ngFor="let studentgroup of groupService.studentGroups | keyvalue">{{studentgroup.value}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The Studentgroup of the Coursesession</mat-hint>
+  </mat-form-field>
+
   <br>
   <mat-checkbox formControlName="mandatory">Mandatory</mat-checkbox>
   <br>
@@ -32,6 +41,12 @@
                   *ngFor="let courseOption of courseOptions">{{courseOption.name}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Course of the Coursesession</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Password" formControlName="password" required>
+    <mat-hint align="end">The Password of the Coursesession</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.password.hasError('required')">Password is required</mat-error>
   </mat-form-field>
 
 

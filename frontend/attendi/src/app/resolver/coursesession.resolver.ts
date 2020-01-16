@@ -13,4 +13,6 @@ export class CoursesessionResolver implements Resolve<Observable<any>> {
   resolve(route: ActivatedRouteSnapshot) {
     return this.courseSessionService.getCourseSession(route.paramMap.get('id'));
   }
+
+
 }

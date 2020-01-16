@@ -342,3 +342,4 @@ def user_find_by_username(request, username):
 
     serializer = UserIdSerializer(user)
     return Response(serializer.data)
+

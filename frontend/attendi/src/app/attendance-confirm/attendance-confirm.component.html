@@ -1,0 +1,36 @@
+<!--<div id="dialog-content-wrapper">
+  <header id="dialog-header">
+    <h1 id="dialog-title">{{dialogData.title }}</h1>
+  </header>
+  <section id="dialog-body">
+    <p>{{ dialogData.description }}</p>
+  </section>
+  <footer id="dialog-footer">
+    <button mat-raised-button id="dialog-action-button" (click)="actionFunction()">
+      {{ dialogData.actionButtonText }}
+    </button>
+    <button mat-raised-button id="dialog-cancel-button" (click)="closeDialog()">
+      Go back
+    </button>
+  </footer>
+</div> -->
+<div id="dialog-content-wrapper">
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Coursesession Code"
+           formControlName="code">
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary"[mat-dialog-close]="true" (click)="actionFunction()">Save</button>
+  <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
+</mat-dialog-actions>
+</div>
+
+
