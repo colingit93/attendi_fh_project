@@ -1,8 +1,4 @@
 <mat-toolbar *ngIf="isLoggedIn">
-  <button mat-button [matMenuTriggerFor]="attendanceMenu">Attendance</button>
-  <mat-menu #attendanceMenu="matMenu">
-    <button mat-menu-item routerLink="attendance-list">Attendance</button>
-  </mat-menu>
   <button mat-button [matMenuTriggerFor]="userMenu">User</button>
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item routerLink="user-list">List Users</button>

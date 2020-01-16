@@ -18,6 +18,7 @@ import {AttendanceitemResolver} from './resolver/attendanceitem.resolver';
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth.guard';
+import {PresentComponent} from './present/present.component';
 import {GroupOptionsResolver} from './resolver/group-options.resolver';
 
 
@@ -64,6 +65,7 @@ const routes: Routes = [
   },
   {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
   {path: 'attendance-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
+  {path: 'present', component: PresentComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

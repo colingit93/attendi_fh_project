@@ -15,6 +15,8 @@ import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
 import {StudentGroupService} from '../service/student-group.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
 
 
 @Component({
@@ -27,8 +29,10 @@ export class CoursesessionFormComponent implements OnInit {
   coursesessionFormGroup;
   courseOptions;
 
+
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
-              private route: ActivatedRoute, private router: Router, private userService: UserService, public studentGroupService: StudentGroupService) {
+              private route: ActivatedRoute, private router: Router, private userService: UserService,
+              public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {
@@ -45,6 +49,7 @@ export class CoursesessionFormComponent implements OnInit {
       end_time: [],
       course: [],
       student_group: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
     if (data.coursesession) {
       this.coursesessionFormGroup.patchValue(data.coursesession);
@@ -66,5 +71,6 @@ export class CoursesessionFormComponent implements OnInit {
         });
     }
   }
+
 
 }
