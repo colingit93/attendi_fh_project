@@ -82,7 +82,7 @@ export class UserService {
   }
 
   getProfileImage(id) {
-    return this.http.get('api/media/' + id + '/get' );
+    return this.http.get('api/media/' + id + '/get');
   }
 
 }

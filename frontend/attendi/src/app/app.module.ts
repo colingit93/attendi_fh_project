@@ -34,7 +34,7 @@ import {HttperrorInterceptor} from './httperror.interceptor';
 import {QRCodeModule} from 'angularx-qrcode';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 

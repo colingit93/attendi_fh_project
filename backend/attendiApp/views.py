@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
@@ -184,9 +186,13 @@ def course_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_coursesession', raise_exception=True)
-def coursesessions_list(request):
-    coursesessions = CourseSession.objects.all()
-    serializer = CourseSessionListSerializer(coursesessions, many=True)
+def course_sessions_list(request, group=''):
+    current_date = date.today()
+    if group == '':
+        course_sessions = CourseSession.objects.all().order_by('date', 'start_time').exclude(date__lt=current_date)
+    else:
+        course_sessions = CourseSession.objects.filter(student_group=group).order_by('date', 'start_time').exclude(date__lt=current_date)
+    serializer = CourseSessionListSerializer(course_sessions, many=True)
     return Response(serializer.data)
 
 

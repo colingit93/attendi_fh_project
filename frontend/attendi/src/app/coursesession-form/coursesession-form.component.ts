@@ -29,8 +29,10 @@ export class CoursesessionFormComponent implements OnInit {
   coursesessionFormGroup;
   courseOptions;
 
-  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService, public groupService: StudentGroupService,
-              private route: ActivatedRoute, private router: Router, private userService: UserService) {
+
+  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
+              private route: ActivatedRoute, private router: Router, private userService: UserService,
+              public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {
@@ -41,12 +43,12 @@ export class CoursesessionFormComponent implements OnInit {
     this.coursesessionFormGroup = this.fb.group({
       id: [null],
       location: ['', [Validators.required]],
-      studentgroup: ['', [Validators.required]],
       mandatory: [true],
       date: [],
       start_time: [],
       end_time: [],
       course: [],
+      student_group: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
     if (data.coursesession) {

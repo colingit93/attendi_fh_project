@@ -3,6 +3,13 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+GROUP = (
+    ('G1', 'Group 1'),
+    ('G2', 'Group 2'),
+    ('G3', 'Group 3')
+)
+
+
 class Media(models.Model):
     file_name = models.TextField()
     content_type = models.TextField()
@@ -10,13 +17,8 @@ class Media(models.Model):
     def __str__(self):
         return self.file_name
 
-class Profile(models.Model):
 
-    GROUP = (
-        ('G1', 'Group 1'),
-        ('G2', 'Group 2'),
-        ('G3', 'Group 3')
-    )
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     '''
     User fields:
@@ -75,19 +77,13 @@ class CourseSession(models.Model):
         ('L4', 'EDV-Labor 45'),
     )
 
-    GROUP = (
-        ('G1', 'Group 1'),
-        ('G2', 'Group 2'),
-        ('G3', 'Group 3')
-    )
-
     location = models.CharField(max_length=2, choices=ROOMS, null=True)
-    studentgroup = models.CharField(max_length=2, choices=GROUP, null=True)
     mandatory = models.BooleanField()
     date = models.DateField()
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    student_group = models.CharField(max_length=2, choices=GROUP, null=True)
     password = models.TextField()
 
     def __str__(self):
@@ -115,4 +111,5 @@ class Statistic(models.Model):
     time_in_courses = models.IntegerField(null=True, default=None)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
 
-    def __str__(self): return 'course:' + self.course.name + '_username:' + self.profile.user.username + '_student:' + self.profile.user.first_name
+    def __str__(
+            self): return 'course:' + self.course.name + '_username:' + self.profile.user.username + '_student:' + self.profile.user.first_name

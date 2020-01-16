@@ -39,6 +39,7 @@ const routes: Routes = [
     }
   },
   {path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard]},
+  {path: 'coursesession-list/:group', component: CoursesessionListComponent, canActivate: [AuthGuard]},
   {
     path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver
