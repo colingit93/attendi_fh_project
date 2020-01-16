@@ -91,10 +91,10 @@ class CourseSession(models.Model):
 
 
 class AttendanceItem(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     course_session = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True)
     present = models.BooleanField(default=False)
-    absence_note = models.ManyToManyField('Media', blank=True)
+    absence_note = models.ForeignKey('Media', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         attendanceitemstring = self.student.username + 'present:' + str(self.present) + str(self.course_session)
