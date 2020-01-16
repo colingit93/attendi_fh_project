@@ -15,34 +15,54 @@ import {StatisticListComponent} from './statistic-list/statistic-list.component'
 import {CoursesessionListComponent} from './coursesession-list/coursesession-list.component';
 import {AttendanceListComponent} from './attendance-list/attendance-list.component';
 import {AttendanceitemResolver} from './resolver/attendanceitem.resolver';
+import {CourseOptionsResolver} from './resolver/course-options.resolver';
+import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './auth.guard';
+import {GroupOptionsResolver} from './resolver/group-options.resolver';
 
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
-  {path: 'course-list', component: CourseListComponent},
-  { path: 'course-form', component: CourseFormComponent, resolve: {
-      sessionOptions: CoursesessionOptionsResolver,
-      userOptions: UserOptionsResolver}},
-  {path: 'course-form/:id', component: CourseFormComponent, resolve: {
-      sessionOptions: CoursesessionOptionsResolver,
-      userOptions: UserOptionsResolver,
-      course: CourseResolver}},
-  {path: 'coursesession-list', component: CoursesessionListComponent},
-  { path: 'coursesession-form', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CoursesessionOptionsResolver}},
-  {path: 'coursesession-form/:id', component: CoursesessionFormComponent, resolve: {
-      courseOptions: CourseResolver,
-      sessionOptions: CoursesessionOptionsResolver,
-      coursesession: CoursesessionResolver}},
-  {path: 'user-list', component: UserListComponent},
-  {path: 'user-form', component: UserFormComponent},
+  {path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]
+    },
   {
-    path: 'user-form/:id', component: UserFormComponent, resolve: {
-      user: UserResolver,
-      profile: ProfileResolver
+    path: 'course-form', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
+      userOptions: UserOptionsResolver,
     }
   },
-  {path: 'show-statistic', component: StatisticListComponent},
+  {
+    path: 'course-form/:id', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
+      userOptions: UserOptionsResolver,
+      course: CourseResolver,
+    }
+  },
+  {path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+      courseOptions: CourseOptionsResolver
+    }
+  },
+  {
+    path: 'coursesession-form/:id', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+      courseOptions: CourseOptionsResolver,
+      coursesession: CoursesessionResolver
+    }
+  },
+  {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user-form', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
+      groupOptions: GroupOptionsResolver
+    }
+   },
+  {
+    path: 'user-form/:id', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
+      user: UserResolver,
+      profile: ProfileResolver,
+      groupOptions: GroupOptionsResolver
+    }
+  },
+  {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
+  {path: 'attendance-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

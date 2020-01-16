@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="isLoggedIn">
   <button mat-button [matMenuTriggerFor]="attendanceMenu">Attendance</button>
   <mat-menu #attendanceMenu="matMenu">
     <button mat-menu-item routerLink="attendance-list">Attendance</button>
@@ -11,17 +11,17 @@
   <button mat-button [matMenuTriggerFor]="courseMenu">Course</button>
   <mat-menu #courseMenu="matMenu">
     <button mat-menu-item routerLink="course-list">List Courses</button>
-    <button mat-menu-item routerLink="course-form">Create Course</button>
+    <button mat-menu-item routerLink="course-form" *ngIf="userService.hasPermission('attendiApp.add_course')">Create Course</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="coursesessionMenu">CourseSession</button>
   <mat-menu #coursesessionMenu="matMenu">
     <button mat-menu-item routerLink="coursesession-list">List Course Sessions</button>
-    <button mat-menu-item routerLink="coursesession-form">Create Course Session</button>
+    <button mat-menu-item routerLink="coursesession-form" *ngIf="userService.hasPermission('attendiApp.add_coursesession')">Create Course Session</button>
   </mat-menu>
-  <!--<button mat-button [matMenuTriggerFor]="statisticMenu">Statistic</button>
+  <button mat-button [matMenuTriggerFor]="statisticMenu">Statistic</button>
   <mat-menu #statisticMenu="matMenu">
     <button mat-menu-item routerLink="statistic-list">Statistic</button>
-  </mat-menu>-->
+  </mat-menu>
+  <app-logout></app-logout>
 </mat-toolbar>
-
 <router-outlet></router-outlet>

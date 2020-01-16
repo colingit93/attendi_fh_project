@@ -18,7 +18,7 @@
     <mat-select placeholder="Students" formControlName="students" multiple>
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="userOption.id"
-                  *ngFor="let userOption of userOptions">{{userOption.username}}</mat-option>
+                  *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Students of the Course</mat-hint>
   </mat-form-field>
@@ -27,14 +27,14 @@
     <mat-select placeholder="Lecturer" formControlName="lecturer" multiple>
       <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="userOption.id"
-                  *ngFor="let userOption of userOptions">{{userOption.username}}</mat-option>
+                  *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Lecturer of the Course</mat-hint>
   </mat-form-field>
 
 
   <mat-card-actions align="center">
-    <button mat-raised-button color="primary" [disabled]="!courseFormGroup.valid" (click)="createCourse()">
+    <button mat-raised-button color="primary" [disabled]="!courseFormGroup.valid" (click)="createCourse()" *ngIf="userService.hasPermission('attendiApp.add_course' && 'attendiApp.change_course')">
       <span *ngIf="!courseFormGroup.controls.id.value">Create</span>
       <span *ngIf="courseFormGroup.controls.id.value">Update</span>
     </button>

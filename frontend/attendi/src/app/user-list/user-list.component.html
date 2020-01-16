@@ -1,1 +1,35 @@
-<p>user-list works!</p>
+<table mat-table [dataSource]="users">
+
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef>Profile Image</th>
+    <td mat-cell *matCellDef="let user">
+      <img *ngIf="user.profile.image" class="profile-image" src="api/media/{{user.profile.image}}" height="100" alt="Profile Image"></td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="full_name">
+    <th mat-header-cell *matHeaderCellDef>Full Name</th>
+    <td mat-cell *matCellDef="let user">{{user.full_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>Username</th>
+    <td mat-cell *matCellDef="let user">{{user.username}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="student_group">
+    <th mat-header-cell *matHeaderCellDef>Group</th>
+    <td mat-cell *matCellDef="let user">{{studentGroupService.studentGroups[user.profile.student_group]}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let user">
+      <button mat-button [routerLink]="'/user-form/' + user.id">Edit</button>
+      <button mat-button (click)="deleteUser(user)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,5 +1,5 @@
 <mat-vertical-stepper #stepper>
-  <mat-step [stepControl]="userFormGroup" errorMessage="User needs to be created!">
+  <mat-step [stepControl]="userFormGroup">
     <form [formGroup]="userFormGroup" class="form">
 
       <ng-template matStepLabel>Create User</ng-template>
@@ -21,6 +21,15 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-select placeholder="Group" formControlName="groups" required>
+          <mat-option [value]="null">Unknown</mat-option>
+          <mat-option [value]="[groupOption.id]"
+                      *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
       </mat-form-field>
 
@@ -38,13 +47,8 @@
 
       <ng-template matStepLabel>Add Profile Information</ng-template>
 
-      <mat-form-field>
-        <mat-select placeholder="Role" formControlName="role" required>
-          <mat-option [value]="null">Unknown</mat-option>
-          <mat-option [value]="role.key"
-                      *ngFor="let role of roleService.roles | keyvalue">{{role.value}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate"
+                [maxDate]="maxDate"></app-date>
 
       <mat-form-field>
         <mat-select placeholder="Group" formControlName="student_group" required>
@@ -54,9 +58,13 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Profile Image" formControlName="image">
-      </mat-form-field>
+
+      <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+      <button mat-button (click)="fileUpload.click()">Pick File</button>
+      <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
+      <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">
+      <button mat-button [disabled]="!selectedImage" (click)="onUpload()">Upload</button>
+
 
       <div>
         <button mat-raised-button (click)="updateProfile()">Update Profile</button>

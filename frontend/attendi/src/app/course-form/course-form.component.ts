@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
+import {UserService} from '../service/user.service';
 
 
 @Component({
@@ -21,17 +22,15 @@ import {CourseService} from '../service/course.service';
 export class CourseFormComponent implements OnInit {
 
   courseFormGroup;
-  sessionOptions;
   userOptions;
 
-  constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute,
+  constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute, private userService: UserService,
               private router: Router) {
   }
 
   ngOnInit() {
 
     const data = this.route.snapshot.data;
-    this.sessionOptions = data.sessionOptions;
     this.userOptions = data.userOptions;
 
     this.courseFormGroup = this.fb.group({

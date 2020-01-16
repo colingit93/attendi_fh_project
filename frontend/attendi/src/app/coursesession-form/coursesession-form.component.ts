@@ -13,6 +13,7 @@ import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
+import {UserService} from '../service/user.service';
 
 
 @Component({
@@ -25,8 +26,8 @@ export class CoursesessionFormComponent implements OnInit {
   coursesessionFormGroup;
   courseOptions;
 
-  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService, private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
+              private route: ActivatedRoute, private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {

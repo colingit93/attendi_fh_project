@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CourseService} from '../service/course.service';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-coursesession-list',
@@ -12,9 +13,9 @@ import {LocationService} from '../service/location.service';
 export class CoursesessionListComponent implements OnInit {
 
   coursesessions: any[];
-  displayedColumns = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'id'];
 
-  constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService) { }
+  constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService, private userService: UserService) { }
 
   ngOnInit() {
     this.courseSessionService.getCourseSessions()

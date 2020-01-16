@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 from .models import Course, CourseSession, User, AttendanceItem, Statistic, Media, Profile
@@ -19,23 +20,24 @@ class CourseOptionSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
+class UserOptionSerializer(serializers.ModelSerializer):
+    fullname = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'fullname']
+
+    def get_fullname(self, obj):
+        return ' '.join(filter(None, (obj.first_name, obj.last_name)))
+
+
 class CourseListSerializer(serializers.ModelSerializer):
-    #session_location = serializers.SerializerMethodField()
-    #students_username = serializers.SerializerMethodField()
-    #lecturer_username = serializers.SerializerMethodField()
+    lecturer = serializers.StringRelatedField(many=True, read_only=True)
+    students = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Course
         fields = ['id', 'name', 'description', 'students', 'lecturer']
-
-    #def get_session_location(self, obj):
-        #return obj.session.location if obj.session else ''
-
-   # def get_students_username(self, obj):
-        #return obj.students.username if obj.students else ''
-
-   # def get_lecturer_username(self, obj):
-        #return obj.lecturer.username if obj.lecturer else ''
 
 
 class CourseFormSerializer(serializers.ModelSerializer):
@@ -68,18 +70,19 @@ class CourseSessionFormSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserOptionSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'first_name', 'last_name']
+        model = Profile
+        fields = '__all__'
 
 
 class UserListSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
+    profile = ProfileSerializer()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'full_name']
+        fields = ['id', 'username', 'full_name', 'profile']
 
     def get_full_name(self, obj):
         return ' '.join(filter(None, (obj.first_name, obj.last_name)))
@@ -88,12 +91,6 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
         fields = '__all__'
 
 
@@ -120,3 +117,9 @@ class UserIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username']
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['id', 'name']
