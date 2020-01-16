@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentGroupService {
 
-  constructor() { }
+  constructor() {
+  }
 
   studentGroups = {
-  G1: 'Group 1',
-  G2: 'Group 2',
-  G3: 'Group 3'
+    L: 'Lecturers',
+    G1: 'Group 1',
+    G2: 'Group 2',
+    G3: 'Group 3'
   };
 }

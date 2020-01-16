@@ -21,14 +21,14 @@
 
   <mat-form-field>
     <input matInput
-           placeholder="Coursesession Code"
-           formControlName="code">
+           placeholder="Course Session Code"
+           formControlName="Password">
   </mat-form-field>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary"[mat-dialog-close]="true" (click)="actionFunction()">Save</button>
+  <button class="mat-raised-button mat-primary"[mat-dialog-close]="true" (click)="checkCode()">Submit</button>
   <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
 </mat-dialog-actions>
 </div>

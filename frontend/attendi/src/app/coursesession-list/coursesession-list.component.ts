@@ -16,13 +16,13 @@ import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confi
 export class CoursesessionListComponent implements OnInit {
 
 
-
+  sessionPassword: string;
   currentUserId: any;
   userProfile: any;
   courseSessions: any[];
   user: any;
   code: any;
-  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'password', 'id'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private userService: UserService, private router: Router, private matDialog: MatDialog) {
@@ -56,38 +56,28 @@ export class CoursesessionListComponent implements OnInit {
   }
 
 
+  openConfirmDialog(courseSessionId: number) {
+    this.courseSessionService.getCourseSession(courseSessionId).subscribe((session: any) => {
+      this.sessionPassword = session.password;
 
-  openConfirmDialog() {
-    // const userId = 'user01';
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.id = 'attendance-confirm-component';
-    dialogConfig.height = '350px';
-    dialogConfig.width = '600px';
-    dialogConfig.data = {
-      id: 1,
-      name: 'confirm',
-      title: 'Presence Confirmation',
-      // code: 'Please enter passphrase',
-      actionButtonText: 'Confirm',
-      // userId
-    };
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.id = 'attendance-confirm-component';
+      dialogConfig.height = '350px';
+      dialogConfig.width = '600px';
+      alert(this.sessionPassword);
+      dialogConfig.data = {
+        title: 'Presence Confirmation',
+        password: this.sessionPassword
+      };
+      const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
 
-    const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      (data) => {
-        this.code = data;
-        alert(JSON.stringify(this.code));
-        /*if (this.code === passw) {
-          // console.log(this.code);
-          alert(JSON.stringify(passw));
-        } else {
-          alert(JSON.stringify(this.code));
-        }*/
-      }
-    );
+      dialogRef.afterClosed().subscribe(
+        (res) => {
+          alert(JSON.stringify(res));
+        });
+    });
   }
 
 }

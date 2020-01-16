@@ -32,8 +32,8 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     const data = this.route.snapshot.data;
     this.groupOptions = data.groupOptions;
-    if (data.profile.image) {
-      this.userService.getProfileImage(data.profile.image).subscribe( (res: any) => {
+    if (data.profile && data.profile.image) {
+      this.userService.getProfileImage(data.profile.image).subscribe((res: any) => {
         this.currentImage = res.file_name;
       });
     }
@@ -41,10 +41,10 @@ export class UserFormComponent implements OnInit {
     this.userFormGroup = this.fb.group(
       {
         id: [null],
-        username: ['', [Validators.required]],
+        username: ['', [Validators.required]], // TODO: Validate username can only contain letters!
         first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
-        email: ['', [Validators.required]],
+        email: ['', [Validators.required]], // TODO: Valid Email!
         groups: [[], [Validators.required]],
         password: ['', [Validators.required]]
       });

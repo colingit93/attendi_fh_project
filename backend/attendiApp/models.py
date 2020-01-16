@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 GROUP = (
+    ('L', 'Lecturer'),
     ('G1', 'Group 1'),
     ('G2', 'Group 2'),
     ('G3', 'Group 3')

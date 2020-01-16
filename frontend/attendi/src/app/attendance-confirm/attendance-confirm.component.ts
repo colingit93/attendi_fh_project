@@ -12,33 +12,27 @@ export class AttendanceConfirmComponent implements OnInit {
 
   form: FormGroup;
   title: string;
-  code: string;
+  password: string;
 
 
-  constructor(private userService: UserService,
-              private fb: FormBuilder,
-              private dialogRef: MatDialogRef<AttendanceConfirmComponent>,
-              // @Inject(MAT_DIALOG_DATA) private dialogData: any)
-              // console.log(this.dialogData),
+  constructor(private userService: UserService, private fb: FormBuilder, private dialogRef: MatDialogRef<AttendanceConfirmComponent>,
               @Inject(MAT_DIALOG_DATA) data) {
-              this.code = data.code;
-              this.title = data.title;
+    this.title = data.title;
+    this.password = data.password;
   }
 
 
   ngOnInit() {
-
     this.form = this.fb.group({
       title: [this.title, []],
-      code: [this.code, []],
+      input: ['', []],
     });
   }
 
-
-  actionFunction() {
-   // this.userService.logout();
-    this.dialogRef.close(this.form.value);
-  }
+  checkCode() {
+    if (this.form.controls.input.value === this.password) {
+    }
+      }
 
   closeDialog() {
     this.dialogRef.close();
