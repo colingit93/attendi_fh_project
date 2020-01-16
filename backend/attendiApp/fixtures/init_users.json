@@ -3,16 +3,16 @@
     "model": "auth.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$150000$qDqzoe96v4oP$UVqDwRj+VbyOuvZLZboC496iaQ+BadTVjJBO501pR0Q=",
-        "last_login": "2020-01-10T12:53:27Z",
+        "password": "pbkdf2_sha256$150000$ekoI8Gs7UGE7$RPK/gfQTMyTlntZ5KqQeDpsz1wW2Vyij0mXgjq+ZDaE=",
+        "last_login": "2020-01-16T11:13:57.149Z",
         "is_superuser": true,
         "username": "admin",
-        "first_name": "Administrator",
-        "last_name": "Administrator",
-        "email": "admin@edu.fh-joanneum.at",
+        "first_name": "",
+        "last_name": "",
+        "email": "colin.jochum@gmail.com",
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2020-01-08T17:19:11Z",
+        "date_joined": "2020-01-16T11:13:40.921Z",
         "groups": [],
         "user_permissions": []
     }
@@ -21,52 +21,16 @@
     "model": "auth.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$150000$AQ9OIn7ExZZa$MYc+x+0FBWZk8IQ+LNJLz6awqeBbwC71v3sYZ5xAyHI=",
+        "password": "pbkdf2_sha256$150000$urqc2F1ejK9X$pT8mUPHfLUggm1vnMdhe9DncAL1lrpNxLqzsxKMGwvA=",
         "last_login": null,
         "is_superuser": true,
-        "username": "student1",
-        "first_name": "Maximilian",
-        "last_name": "Streicher",
-        "email": "maximilian.streicher@edu.fh-joanneum.at",
+        "username": "greta",
+        "first_name": "Greta",
+        "last_name": "Thunberg",
+        "email": "greta.thunberg@greenweb.com",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2020-01-08T17:26:35Z",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "auth.user",
-    "pk": 3,
-    "fields": {
-        "password": "pbkdf2_sha256$150000$XOhbSaVBACfQ$xegkuyIxm4R3fnjSvFwNpRMEKdmGeCrNz5i5PJyDutY=",
-        "last_login": null,
-        "is_superuser": true,
-        "username": "student2",
-        "first_name": "Laura",
-        "last_name": "Humbold",
-        "email": "laura.humbold@edu.fh-joanneum.at",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2020-01-08T17:26:48Z",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "auth.user",
-    "pk": 4,
-    "fields": {
-        "password": "pbkdf2_sha256$150000$c4XGrkc3MdAC$p4U7MWWfasK1h0KyG2qdY3ZlIQYfrs5hGYQUykQzT0A=",
-        "last_login": null,
-        "is_superuser": true,
-        "username": "lecturer1",
-        "first_name": "Hans",
-        "last_name": "Peter",
-        "email": "hans.peter@edu.fh-joanneum.at",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2020-01-10T12:56:07Z",
+        "date_joined": "2020-01-16T11:14:17Z",
         "groups": [],
         "user_permissions": []
     }

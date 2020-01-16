@@ -3,23 +3,8 @@
     "model": "attendiApp.media",
     "pk": 1,
     "fields": {
-        "file_title": "lecturerimage1",
-        "file": "testlecturer_image.png"
-    }
-},
-{
-    "model": "attendiApp.media",
-    "pk": 2,
-    "fields": {
-        "file_title": "studentimage1",
-        "file": "teststudent_image.PNG"
-    }
-}, {
-    "model": "attendiApp.media",
-    "pk": 3,
-    "fields": {
-        "file_title": "absencenote",
-        "file": "absencenote.png"
+        "file_name": "Student Image",
+        "content_type": "png"
     }
 }
 ]

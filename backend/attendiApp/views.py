@@ -45,8 +45,8 @@ def create_statistic(primarykey):
 def update_statistic(pk):
     logging.warning('Updating/Calculating Statistic...')
 
-    #SECTION: UPDATE/CALC TOTAL COURSE SESSIONS , TOTAL MANDATORY COURSE SESSIONS
-    #Get Course ID's for the users (pk) statistic
+    #SECTION: UPDATE/CALC FIELD: TOTAL COURSE SESSIONS , TOTAL MANDATORY COURSE SESSIONS
+    #Get and save Course ID's for the individual user (pk) from the statistic page
     courses_foreign_keys = []
     statistic_items = Statistic.objects.filter(profile = pk)
     statistic_fields = statistic_items.values()
@@ -57,27 +57,36 @@ def update_statistic(pk):
     logging.warning('-----Courses Foreign Keys: %s' % courses_foreign_keys)
 
     #get the ammount of course sessions for each course ID from the statistic (using the foreign key list)
+    #Iterate through the course foreign keys
     for k in range(len(courses_foreign_keys)):
         #only course sessions with the foreign key from the list
         coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k]).values()
         mandatory_coursesessions_for_this_course = CourseSession.objects.filter(course = courses_foreign_keys[k], mandatory=True).values()
         #length gives us the ammount of course sessions
-        course_sessions_ammount = len(coursesessions_for_this_course)
+        total_course_sessions_ammount = len(coursesessions_for_this_course)
         mandatory_course_sessions_ammount = len(mandatory_coursesessions_for_this_course)
-        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % course_sessions_ammount + ' total course sessions')
+        logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % total_course_sessions_ammount + ' total course sessions')
         logging.warning('Course with ID:%s' % courses_foreign_keys[k] + ' has %s' % mandatory_course_sessions_ammount + ' mandatory course sessions')
         # Update the field in statistics database model (for the specific user and course_id)
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_course_sessions=course_sessions_ammount)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_course_sessions=total_course_sessions_ammount)
         Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_mandatory_course_sessions=mandatory_course_sessions_ammount)
 
-    #SECTION UPDATE/CALC VISISTED COURSE SESSION
-    for u in range(len(courses_foreign_keys)):
-        visited_course_sessions = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[u]))
-        logging.warning('Amount of attended course sessions:%s' % visited_course_sessions + 'for course:%s' % courses_foreign_keys[u])
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[u]).update(visited_course_sessions=visited_course_sessions)
+        #SECTION UPDATE/CALC FIELD: VISISTED COURSE SESSION
+        visited_course_sessions = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[k]))
+        logging.warning('Amount of attended course sessions:%s' % visited_course_sessions + 'for course:%s' % courses_foreign_keys[k])
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(visited_course_sessions=visited_course_sessions)
 
-    #
+        #UPDATE/CALC FIELD: ATTENDANCE PERCENTAGE
+        attendance_percentage = (visited_course_sessions / total_course_sessions_ammount)*100
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(attendance_percentage=attendance_percentage)
 
+        #UPDATE/CALC FIELD: COURSE SESSIONS MISSED
+        course_sessions_missed = (total_course_sessions_ammount-visited_course_sessions)
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(course_sessions_missed=course_sessions_missed)
+
+        #UPDATE/CALC FIELD: TIME IN COURSES
+        #start_time = CourseSession.objects.filter(course= courses_foreign_keys[k]).values()
+        #logging.warning('CourseSessionTime:%s' % start_time)
 
     return True
 
