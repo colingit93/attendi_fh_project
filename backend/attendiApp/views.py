@@ -71,11 +71,12 @@ def update_statistic(pk):
         Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(total_mandatory_course_sessions=mandatory_course_sessions_ammount)
 
     #SECTION UPDATE/CALC VISISTED COURSE SESSION
-    attended_sessions = AttendanceItem.objects.filter(student=pk, present=True)
     for u in range(len(courses_foreign_keys)):
-        amount = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[u]))
-        logging.warning('Amount of attended course sessions:%s' % amount + 'for course:%s' % courses_foreign_keys[u])
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[u]).update(visited_course_sessions=amount)
+        visited_course_sessions = len(AttendanceItem.objects.filter(student=pk, present=True, course_session__course_id__exact=courses_foreign_keys[u]))
+        logging.warning('Amount of attended course sessions:%s' % visited_course_sessions + 'for course:%s' % courses_foreign_keys[u])
+        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[u]).update(visited_course_sessions=visited_course_sessions)
+
+    #
 
 
     return True

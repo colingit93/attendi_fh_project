@@ -119,7 +119,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
 #Logging
 #LOGGING = {
 #    'version': 1,
@@ -165,7 +164,7 @@ LOGGING = {
         },
     },
 }
-=======
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -190,4 +189,3 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
     'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
 }
->>>>>>> f2f77a8c83fb88add7550ded5eb488987175bbdb
