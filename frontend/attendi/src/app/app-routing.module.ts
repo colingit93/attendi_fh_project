@@ -45,7 +45,11 @@ const routes: Routes = [
       currentUser: CurrentUserResolver
     }
   },
-  {path: 'coursesession-list/:group', component: CoursesessionListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'coursesession-list/:group', component: CoursesessionListComponent, canActivate: [AuthGuard], resolve: {
+      currentUser: CurrentUserResolver
+    }
+  },
   {
     path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver
