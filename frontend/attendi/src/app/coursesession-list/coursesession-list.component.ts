@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
 
@@ -15,9 +15,9 @@ import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confi
 })
 export class CoursesessionListComponent implements OnInit {
 
+  currentUser: any;
   sessionId: number;
   sessionPassword: string;
-  currentUserId: any;
   userProfile: any;
   courseSessions: any[];
   user: any;
@@ -25,13 +25,14 @@ export class CoursesessionListComponent implements OnInit {
   displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
-              private userService: UserService, private router: Router, private matDialog: MatDialog) {
+              private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.currentUserId = this.userService.getCurrentUserId();
+    const data = this.route.snapshot.data;
+    this.currentUser = data.currentUser;
     if (this.router.url === '/coursesession-list/myCourses') {
-      this.userService.getProfile(this.currentUserId).subscribe((profile) => {
+      this.userService.getProfile(this.currentUser.id).subscribe((profile) => {
         this.userProfile = profile;
         this.courseSessionService.getMyCourseSessions(this.userProfile.student_group)
           .subscribe((response: any[]) => {
@@ -46,8 +47,8 @@ export class CoursesessionListComponent implements OnInit {
   }
 
 
-  deleteCourseSession(coursesessions: any) {
-    this.courseSessionService.deleteCourseSession(coursesessions)
+  deleteCourseSession(courseSession: any) {
+    this.courseSessionService.deleteCourseSession(courseSession)
       .subscribe(() => {
         this.ngOnInit();
       });
@@ -55,7 +56,6 @@ export class CoursesessionListComponent implements OnInit {
 
 
   openConfirmDialog(courseSessionId: number) {
-    this.currentUserId = this.userService.getCurrentUserId();
     this.courseSessionService.getCourseSession(courseSessionId).subscribe((session: any) => {
       this.sessionPassword = session.password;
       this.sessionId = session.id;
@@ -70,7 +70,7 @@ export class CoursesessionListComponent implements OnInit {
         title: 'Presence Confirmation',
         password: this.sessionPassword,
         sessionId: this.sessionId,
-        userId: this.currentUserId
+        userId: this.currentUser.id
       };
       const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
 

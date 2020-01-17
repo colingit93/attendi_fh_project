@@ -20,13 +20,15 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth.guard';
 import {PresentComponent} from './present/present.component';
 import {GroupOptionsResolver} from './resolver/group-options.resolver';
+import {CurrentUserResolver} from './resolver/currentUser.resolver';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
-  {path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]
-    },
+  {path: '', redirectTo: 'coursesession-list', pathMatch: 'full'},
+  {
+    path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]
+  },
   {
     path: 'course-form', component: CourseFormComponent, canActivate: [AuthGuard], resolve: {
       userOptions: UserOptionsResolver,
@@ -38,7 +40,11 @@ const routes: Routes = [
       course: CourseResolver,
     }
   },
-  {path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard], resolve: {
+      currentUser: CurrentUserResolver
+    }
+  },
   {path: 'coursesession-list/:group', component: CoursesessionListComponent, canActivate: [AuthGuard]},
   {
     path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
@@ -52,10 +58,11 @@ const routes: Routes = [
     }
   },
   {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
-  {path: 'user-form', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
+  {
+    path: 'user-form', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
       groupOptions: GroupOptionsResolver
     }
-   },
+  },
   {
     path: 'user-form/:id', component: UserFormComponent, canActivate: [AuthGuard], resolve: {
       user: UserResolver,

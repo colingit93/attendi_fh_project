@@ -23,7 +23,7 @@
       <mat-form-field>
         <mat-select placeholder="Group" formControlName="groups" required>
           <mat-option [value]="null">Unknown</mat-option>
-          <mat-option [value]="[groupOption.id]"
+          <mat-option [value]="groupOption.id"
                       *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
 
         </mat-select>

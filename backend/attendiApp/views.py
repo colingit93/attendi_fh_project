@@ -371,7 +371,10 @@ def user_form_update(request, pk):
 
     serializer = UserFormSerializer(user, data=request.data)
     if serializer.is_valid():
-        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+        if serializer.validated_data['password'] == "noChange":
+            serializer.validated_data['password'] = user.password
+        else:
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=400)

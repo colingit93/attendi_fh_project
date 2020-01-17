@@ -50,7 +50,10 @@ export class UserFormComponent implements OnInit {
       });
 
     if (data.user) {
-      this.userFormGroup.patchValue(data.user);
+      const user = data.user;
+      user.password = 'noChange';
+      this.userFormGroup.patchValue(user);
+      this.userFormGroup.controls.groups.patchValue(user.groups[0]);
     }
 
     if (data.profile) {
@@ -67,6 +70,7 @@ export class UserFormComponent implements OnInit {
   }
 
   createUser() {
+    this.userFormGroup.controls.groups.patchValue([this.userFormGroup.controls.groups.value])
     const user = this.userFormGroup.value;
     if (user.id) {
       this.userService.updateUser(user)

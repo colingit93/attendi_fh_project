@@ -16,7 +16,6 @@
 
   <mat-form-field>
     <mat-select placeholder="Students" formControlName="students" multiple>
-      <mat-option [value]="null">Unknown</mat-option>
       <mat-option [value]="userOption.id"
                   *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
