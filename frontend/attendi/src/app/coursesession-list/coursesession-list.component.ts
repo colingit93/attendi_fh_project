@@ -6,6 +6,7 @@ import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
+import {AttendanceItemService} from '../service/attendance-item.service';
 
 
 @Component({
@@ -19,31 +20,23 @@ export class CoursesessionListComponent implements OnInit {
   sessionId: number;
   sessionPassword: string;
   userProfile: any;
-  courseSessions: any[];
+  attendanceItems: any[];
   user: any;
   code: any;
-  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'id'];
+  attendanceItemId: number;
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'present', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
-              private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute) {
+              private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute,
+              private attendanceItemService: AttendanceItemService) {
   }
 
   ngOnInit() {
     const data = this.route.snapshot.data;
     this.currentUser = data.currentUser;
-    if (this.router.url === '/coursesession-list/myCourses') {
-      this.userService.getProfile(this.currentUser.id).subscribe((profile) => {
-        this.userProfile = profile;
-        this.courseSessionService.getMyCourseSessions(this.userProfile.student_group)
-          .subscribe((response: any[]) => {
-            this.courseSessions = response;
-          });
-      });
-    } else {
-      this.courseSessionService.getAllCourseSessions().subscribe((response: any) => {
-        this.courseSessions = response;
-      });
-    }
+    this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
+      this.attendanceItems = response;
+    });
   }
 
 
@@ -55,10 +48,9 @@ export class CoursesessionListComponent implements OnInit {
   }
 
 
-  openConfirmDialog(courseSessionId: number) {
-    this.courseSessionService.getCourseSession(courseSessionId).subscribe((session: any) => {
-      this.sessionPassword = session.password;
-      this.sessionId = session.id;
+  openConfirmDialog(attendanceId: number) {
+    this.attendanceItemService.getAttendanceItem(attendanceId).subscribe((item: any) => {
+      this.sessionPassword = item.course_session.password;
 
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -68,16 +60,19 @@ export class CoursesessionListComponent implements OnInit {
       dialogConfig.width = '600px';
       dialogConfig.data = {
         title: 'Presence Confirmation',
-        password: this.sessionPassword,
-        sessionId: this.sessionId,
-        userId: this.currentUser.id
+        attendanceItemId: attendanceId,
+        password: this.sessionPassword
       };
       const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(
         (res) => {
+          this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
+            this.attendanceItems = response;
+          });
         });
     });
+
   }
 
 }

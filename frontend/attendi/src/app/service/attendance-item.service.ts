@@ -9,16 +9,16 @@ export class AttendanceItemService {
   constructor(private http: HttpClient) {
   }
 
-  getAttendanceList() {
-    return this.http.get <any[]>('/api/attendance_item/list');
+  getUserAttendanceList(userId) {
+    return this.http.get <any[]>('/api/attendance_item/' + userId + '/list');
   }
 
   getAttendanceOptions() {
     return this.http.get <any[]>('/api/attendance_item/options');
   }
 
-  getAttendanceItem(session, user) {
-    return this.http.get('/api/attendance_item/' + session + '/' + user + '/get');
+  getAttendanceItem(id) {
+    return this.http.get('/api/attendance_item/' + id + '/get');
   }
 
   updateAttendanceItem(attendanceItem) {

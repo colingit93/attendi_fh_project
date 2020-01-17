@@ -103,10 +103,18 @@ class AttendanceOptionSerializer(serializers.ModelSerializer):
         fields = ['id', 'student']
 
 
+class AttendanceListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendanceItem
+        depth = 1
+        fields = ['id', 'present', 'course_session', 'student', 'absence_note']
+
+
 class AttendanceItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceItem
-        fields = '__all__'
+        depth = 2
+        fields = ['id', 'present', 'course_session', 'absence_note']
 
 
 class MediaSerializer(serializers.ModelSerializer):

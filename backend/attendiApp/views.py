@@ -414,10 +414,15 @@ def user_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_attendance_item', raise_exception=True)
-def attendance_item_list(request):
-    student = AttendanceItem.objects.all()
-    serializer = AttendanceItemSerializer(student, many=True)
+@permission_required('attendiApp.view_attendanceitem', raise_exception=True)
+def attendance_item_list(request, pk):
+    user = User.objects.get(pk=pk)
+    current_date = date.today()
+    if user.groups == [1]:
+        items = AttendanceItem.objects.all().order_by('course_session__date', 'course_session__start_time')
+    else:
+        items = AttendanceItem.objects.filter(student=user).exclude(course_session__date__lt=current_date).order_by('course_session__date', 'course_session__start_time')
+    serializer = AttendanceItemSerializer(items, many=True)
     return Response(serializer.data)
 
 
@@ -494,10 +499,8 @@ def group_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer()})
 @api_view(['GET'])
-def attendance_item_get(request, session, user):
-    session = CourseSession.objects.get(pk=session)
-    user = User.objects.get(pk=user)
-    attendance_item = AttendanceItem.objects.get(course_session=session, student=user)
+def attendance_item_get(request, pk):
+    attendance_item = AttendanceItem.objects.get(pk=pk)
     serializer = AttendanceItemSerializer(attendance_item)
     return Response(serializer.data)
 

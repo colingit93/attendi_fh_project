@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from '../service/user.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AttendanceItemService} from '../service/attendance-item.service';
 
@@ -14,18 +14,16 @@ export class AttendanceConfirmComponent implements OnInit {
   form: FormGroup;
   title: string;
   password: string;
-  userId: number;
-  sessionId: number;
+  attendanceItemId: any;
   attendanceItemForm: FormGroup;
 
 
   constructor(private userService: UserService, private fb: FormBuilder, private dialogRef: MatDialogRef<AttendanceConfirmComponent>,
-              private attendanceItemService: AttendanceItemService,
+              private attendanceItemService: AttendanceItemService, private snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) data) {
     this.title = data.title;
+    this.attendanceItemId = data.attendanceItemId;
     this.password = data.password;
-    this.userId = data.userId;
-    this.sessionId = data.sessionId;
   }
 
 
@@ -38,7 +36,7 @@ export class AttendanceConfirmComponent implements OnInit {
 
   checkCode() {
     if (this.form.controls.input.value === this.password) {
-      this.attendanceItemService.getAttendanceItem(this.sessionId, this.userId).subscribe((res: any) => {
+      this.attendanceItemService.getAttendanceItem(this.attendanceItemId).subscribe((res: any) => {
         this.attendanceItemForm = this.fb.group({
           id: res.id,
           student: res.student,
@@ -49,7 +47,14 @@ export class AttendanceConfirmComponent implements OnInit {
         this.attendanceItemService.updateAttendanceItem(this.attendanceItemForm.value).subscribe((resp: any) => {
         });
       });
+      this.closeDialog();
+    } else {
+      this.snackBar.open('Wrong Password!', 'Dismiss',
+        {
+          duration: 3000
+        });
     }
+
   }
 
   closeDialog() {
