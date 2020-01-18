@@ -43,7 +43,7 @@ export class AttendanceListComponent implements OnInit {
     this.attendanceFormGroup = this.fb.group({
       id: [null],
       student: ['', [Validators.required]],
-      present: [],
+      present: [false],
       absence_note: [],
     });
 

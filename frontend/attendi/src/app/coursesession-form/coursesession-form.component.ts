@@ -44,7 +44,7 @@ export class CoursesessionFormComponent implements OnInit {
       id: [null],
       location: ['', [Validators.required]],
       mandatory: [true],
-      date: [],
+      date: ['', [Validators.required]],
       start_time: [],
       end_time: [],
       course: [],
