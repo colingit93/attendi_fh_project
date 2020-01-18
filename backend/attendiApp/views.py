@@ -341,7 +341,7 @@ def profile_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: UserListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_user', raise_exception=True)
+@permission_required('auth.view_user', raise_exception=True)
 def users_list(request):
     users = User.objects.all()
     serializer = UserListSerializer(users, many=True)
@@ -350,7 +350,7 @@ def users_list(request):
 
 @swagger_auto_schema(method='POST', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['POST'])
-@permission_required('attendiApp.add_user', raise_exception=True)
+@permission_required('auth.add_user', raise_exception=True)
 def user_form_create(request):
     serializer = UserFormSerializer(data=request.data)
     if serializer.is_valid():
@@ -362,7 +362,7 @@ def user_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=UserFormSerializer, responses={200: UserFormSerializer()})
 @api_view(['PUT'])
-@permission_required('attendiApp.change_user', raise_exception=True)
+@permission_required('auth.change_user', raise_exception=True)
 def user_form_update(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -371,7 +371,10 @@ def user_form_update(request, pk):
 
     serializer = UserFormSerializer(user, data=request.data)
     if serializer.is_valid():
-        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+        if serializer.validated_data['password'] == "noChange":
+            serializer.validated_data['password'] = user.password
+        else:
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=400)
@@ -379,7 +382,7 @@ def user_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: UserListSerializer()})
 @api_view(['GET'])
-@permission_required('attendiApp.view_user', raise_exception=True)
+@permission_required('auth.view_user', raise_exception=True)
 def user_form_get(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -411,10 +414,15 @@ def user_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_attendance_item', raise_exception=True)
-def attendance_item_list(request):
-    student = AttendanceItem.objects.all()
-    serializer = AttendanceItemSerializer(student, many=True)
+@permission_required('attendiApp.view_attendanceitem', raise_exception=True)
+def attendance_item_list(request, pk):
+    user = User.objects.get(pk=pk)
+    current_date = date.today()
+    if user.groups == [1]:
+        items = AttendanceItem.objects.all().order_by('course_session__date', 'course_session__start_time')
+    else:
+        items = AttendanceItem.objects.filter(student=user).exclude(course_session__date__lt=current_date).order_by('course_session__date', 'course_session__start_time')
+    serializer = AttendanceItemSerializer(items, many=True)
     return Response(serializer.data)
 
 
@@ -482,7 +490,7 @@ def user_find_by_username(request, username):
 
 @swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
 @api_view(['GET'])
-@permission_required('attendi.view_groups')
+@permission_required('auth.view_group')
 def group_option_list(request):
     group = Group.objects.all()
     serializer = GroupSerializer(group, many=True)
@@ -491,10 +499,8 @@ def group_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer()})
 @api_view(['GET'])
-def attendance_item_get(request, session, user):
-    session = CourseSession.objects.get(pk=session)
-    user = User.objects.get(pk=user)
-    attendance_item = AttendanceItem.objects.get(course_session=session, student=user)
+def attendance_item_get(request, pk):
+    attendance_item = AttendanceItem.objects.get(pk=pk)
     serializer = AttendanceItemSerializer(attendance_item)
     return Response(serializer.data)
 

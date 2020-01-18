@@ -13,4 +13,5 @@ export class UserResolver implements Resolve<Observable<any>> {
   resolve(route: ActivatedRouteSnapshot) {
     return this.userService.getUser(route.paramMap.get('id'));
   }
+
 }

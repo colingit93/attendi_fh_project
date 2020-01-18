@@ -17,6 +17,7 @@ import {UserService} from '../service/user.service';
 import {StudentGroupService} from '../service/student-group.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class CoursesessionFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private route: ActivatedRoute, private router: Router, private userService: UserService,
-              public studentGroupService: StudentGroupService) {
+              public studentGroupService: StudentGroupService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -62,12 +63,20 @@ export class CoursesessionFormComponent implements OnInit {
     if (coursesession.id) {
       this.courseSessionService.updateCourseSession(coursesession)
         .subscribe(() => {
-          alert('updated successfully');
+          this.router.navigate(['/coursesession-list/']);
+          this.snackBar.open('Session entry updated!', 'Dismiss',
+            {
+              duration: 3000
+            });
         });
     } else {
       this.courseSessionService.createCourseSession(coursesession)
         .subscribe((response: any) => {
-          this.router.navigate(['/coursesession-form/' + response.id]);
+          this.router.navigate(['/coursesession-list/']);
+          this.snackBar.open('Session entry created!', 'Dismiss',
+            {
+              duration: 3000
+            });
         });
     }
   }

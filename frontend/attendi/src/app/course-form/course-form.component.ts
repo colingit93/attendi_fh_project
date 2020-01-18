@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
 import {UserService} from '../service/user.service';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class CourseFormComponent implements OnInit {
   userOptions;
 
   constructor(private fb: FormBuilder, private courseService: CourseService, private route: ActivatedRoute, private userService: UserService,
-              private router: Router) {
+              private router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -52,12 +53,20 @@ export class CourseFormComponent implements OnInit {
     if (course.id) {
       this.courseService.updateCourse(course)
         .subscribe(() => {
-          alert('updated successfully');
+          this.router.navigate(['/course-list/']);
+          this.snackBar.open('Course entry updated!', 'Dismiss',
+            {
+              duration: 3000
+            });
         });
     } else {
       this.courseService.createCourse(course)
         .subscribe((response: any) => {
-          this.router.navigate(['/course-form/' + response.id]);
+          this.router.navigate(['/course-list/']);
+          this.snackBar.open('Course entry created!', 'Dismiss',
+            {
+              duration: 3000
+            });
         });
     }
   }
