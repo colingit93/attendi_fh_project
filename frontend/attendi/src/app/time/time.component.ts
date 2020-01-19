@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-
+import {TimeUnit} from "ngx-material-timepicker/src/app/material-timepicker/models/time-unit.enum";
 
 @Component({
   selector: 'app-time',
@@ -16,9 +16,13 @@ import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Valid
 })
 
 export class TimeComponent implements ControlValueAccessor, OnInit {
+
   time: FormControl;
   private propagateChange: any;
-
+  /*@Input()
+  min = '08:00';
+  @Input()
+  max = '18:00';*/
   @Input()
   placeholder: string;
   @Input()
@@ -26,12 +30,9 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
   @Input()
   required = false;
 
-  /*title = 'clock';
-  private exportTime = { hour: 8, minute: 45, meriden: 'PM', format: 24 };*/
-
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     let validator = null;
     if (this.required) {
       validator = Validators.required;
@@ -41,6 +42,7 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
       this.propagateChange(newValue);
     });
   }
+
 
   writeValue(obj: any): void {
     this.time.patchValue(obj, {emitEvent: false});
@@ -54,3 +56,4 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
   }
 
 }
+

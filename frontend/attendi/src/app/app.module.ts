@@ -31,11 +31,9 @@ import {LogoutComponent} from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttperrorInterceptor} from './httperror.interceptor';
-import {QRCodeModule} from 'angularx-qrcode';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
 
 
 export function tokenGetter() {
@@ -88,8 +86,7 @@ export function tokenGetter() {
       }
     }),
     FileUploadModule,
-    QRCodeModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {

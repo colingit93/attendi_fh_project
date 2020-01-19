@@ -41,10 +41,10 @@ export class UserFormComponent implements OnInit {
     this.userFormGroup = this.fb.group(
       {
         id: [null],
-        username: ['', [Validators.required]], // TODO: Validate username can only contain letters!
-        first_name: ['', [Validators.required]],
-        last_name: ['', [Validators.required]],
-        email: ['', [Validators.required]], // TODO: Valid Email!
+        username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern(/^[A-Za-z]+$/)]],
+        first_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
+        last_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
+        email: ['', [Validators.required, this.emailValidator]],
         groups: [[], [Validators.required]],
         password: ['', [Validators.required]]
       });
@@ -70,7 +70,7 @@ export class UserFormComponent implements OnInit {
   }
 
   createUser() {
-    this.userFormGroup.controls.groups.patchValue([this.userFormGroup.controls.groups.value])
+    this.userFormGroup.controls.groups.patchValue([this.userFormGroup.controls.groups.value]);
     const user = this.userFormGroup.value;
     if (user.id) {
       this.userService.updateUser(user)
@@ -117,4 +117,17 @@ export class UserFormComponent implements OnInit {
       });
   }
 
+  emailValidator(mail): any {
+    if (mail.pristine) {
+      return null;
+    }
+    // const MAIL_REGEXP = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(mail.value);
+    const MAIL_REGEXP = /^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@edu.fh-joanneum.at$/.test(mail.value);
+    if (MAIL_REGEXP) {
+      return null;
+    }
+    return {
+      invalidMail: true
+    };
+  }
 }

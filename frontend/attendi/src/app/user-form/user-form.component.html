@@ -5,19 +5,33 @@
       <ng-template matStepLabel>Create User</ng-template>
 
       <mat-form-field>
-        <input matInput placeholder="Username" formControlName="username" required>
+        <input matInput id="username" placeholder="Username" formControlName="username" required>
+        <mat-error *ngIf="userFormGroup.controls.username.hasError('pattern')">Username can only contain letters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.username.hasError('required')">Username is required!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.username.hasError('minlength')">Username must contain at least 5 characters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.username.hasError('maxlength')">Username can only contain 15 characters!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="First name" formControlName="first_name" required>
+        <mat-error *ngIf="userFormGroup.controls.first_name.hasError('pattern')">Firstname can only contain letters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.first_name.hasError('required')">Firstname is required!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.first_name.hasError('minlength')">Firstname must contain at least 3 characters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.first_name.hasError('maxlength')">Firstname can only contain 30 characters!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Last name" formControlName="last_name" required>
+        <mat-error *ngIf="userFormGroup.controls.last_name.hasError('pattern')">Lastname can only contain letters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.last_name.hasError('required')">Lastname is required!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.last_name.hasError('minlength')">Lastname must contain at least 3 characters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.last_name.hasError('maxlength')">Lastname can only contain 30 characters!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="email" placeholder="E-mail address" formControlName="email" required>
+        <input matInput type="email" placeholder="E-mail address like username@edu.fh-joanneum.at" formControlName="email" required>
+        <mat-error *ngIf="userFormGroup.controls.email.hasError('required')">E-mail is required!</mat-error>
+        <!-- <mat-error *ngIf="userFormGroup.controls.email.hasError('emailValidator')">E-mail is not valid! The Mail must contain the @edu.fh-joanneum.at!</mat-error> -->
       </mat-form-field>
 
       <mat-form-field>
@@ -27,10 +41,12 @@
                       *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
 
         </mat-select>
+        <mat-error *ngIf="userFormGroup.controls.groups.hasError('required')">Groups are required!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-error *ngIf="userFormGroup.controls.password.hasError('required')">Password is required!</mat-error>
       </mat-form-field>
 
       <div>

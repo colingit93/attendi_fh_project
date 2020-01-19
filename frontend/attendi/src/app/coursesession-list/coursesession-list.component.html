@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let attendanceItem">{{attendanceItem.course_session.date}}</td>
+      <td mat-cell *matCellDef="let attendanceItem">{{attendanceItem.course_session.date | date:'dd.MM.yyyy'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="start_time">
