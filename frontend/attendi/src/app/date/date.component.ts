@@ -33,11 +33,11 @@ export class DateComponent implements OnInit, ControlValueAccessor  {
   private propagateChange: any;
 
   @Input()
-  minDate = new Date(2020, 0, 1);
+  minDate: any;
   @Input()
-  maxDate = new Date(2020, 6, 30);
+  maxDate: any;
   @Input()
-  startDate = new Date(Date.now());
+  startDate: any;
   @Input()
   placeholder: string;
   @Input()
