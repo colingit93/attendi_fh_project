@@ -10,9 +10,9 @@ import {AttendanceItemService} from '../service/attendance-item.service';
 
 
 @Component({
-  selector: 'app-coursesession-list',
-  templateUrl: './courseSession-list.component.html',
-  styleUrls: ['./courseSession-list.component.scss']
+  selector: 'app-course-session-list',
+  templateUrl: './course-session-list.component.html',
+  styleUrls: ['./course-session-list.component.scss']
 })
 export class CourseSessionListComponent implements OnInit {
 

@@ -60,7 +60,7 @@
       <th mat-header-cell *matHeaderCellDef>Actions</th>
 
       <td mat-cell *matCellDef="let attendanceItem">
-        <button mat-button [routerLink]="'/coursesession-form/' + attendanceItem.course_session.id"
+        <button mat-button [routerLink]="'/course-session-form/' + attendanceItem.course_session.id"
                 *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit
         </button>
         <button mat-button (click)="deleteCourseSession(attendanceItem)"

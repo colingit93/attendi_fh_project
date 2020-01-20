@@ -17,8 +17,8 @@ import {
 } from '@angular/material';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
-import { CoursesessionFormComponent } from './coursesession-form/coursesession-form.component';
-import { CourseSessionListComponent } from './courSesession-list/courseSession-list.component';
+import { CourseSessionFormComponent } from './course-session-form/course-session-form.component';
+import { CourseSessionListComponent } from './course-session-list/course-session-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
@@ -46,7 +46,7 @@ export function tokenGetter() {
     UserFormComponent,
     CourseFormComponent,
     CourseListComponent,
-    CoursesessionFormComponent,
+    CourseSessionFormComponent,
     CourseSessionListComponent,
     UserListComponent,
     AttendanceListComponent,

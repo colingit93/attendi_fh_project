@@ -60,8 +60,8 @@ class CourseSessionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseSession
 
-        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name', 'student_group',
-                  'password']
+        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'course_name',
+                  'student_group', 'password']
 
     def get_course_name(self, obj):
         return obj.course.name if obj.course else ''

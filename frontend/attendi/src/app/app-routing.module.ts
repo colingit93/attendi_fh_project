@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CourseFormComponent} from './course-form/course-form.component';
-import {CoursesessionFormComponent} from './coursesession-form/coursesession-form.component';
+import {CourseSessionFormComponent} from './course-session-form/course-session-form.component';
 import {UserOptionsResolver} from './resolver/user-options.resolver';
 import {CourseResolver} from './resolver/course.resolver';
 import {CoursesessionResolver} from './resolver/coursesession.resolver';
@@ -11,7 +11,7 @@ import {UserResolver} from './resolver/user.resolver';
 import {CourseListComponent} from './course-list/course-list.component';
 import {ProfileResolver} from './resolver/profile.resolver';
 import {StatisticListComponent} from './statistic-list/statistic-list.component';
-import {CourseSessionListComponent} from './courSesession-list/courseSession-list.component';
+import {CourseSessionListComponent} from './course-session-list/course-session-list.component';
 import {AttendanceListComponent} from './attendance-list/attendance-list.component';
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
 import {LoginComponent} from './login/login.component';
@@ -44,14 +44,14 @@ const routes: Routes = [
     }
   },
   {
-    path: 'courseSession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+    path: 'course-session-form', component: CourseSessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver
     }
   },
   {
-    path: 'courseSession-form/:id', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+    path: 'course-session-form/:id', component: CourseSessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver,
-      coursesession: CoursesessionResolver
+      courseSession: CoursesessionResolver
     }
   },
   {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
@@ -68,7 +68,7 @@ const routes: Routes = [
     }
   },
   {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
-  {path: 'courseSession-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
+  {path: 'course-session-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
   {path: 'present', component: PresentComponent, canActivate: [AuthGuard]},
 ];
 
