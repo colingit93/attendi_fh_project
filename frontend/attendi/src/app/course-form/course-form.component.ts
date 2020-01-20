@@ -36,10 +36,10 @@ export class CourseFormComponent implements OnInit {
 
     this.courseFormGroup = this.fb.group({
       id: [null],
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Z]+$/)]],
       description: ['', [Validators.minLength(10), Validators.maxLength(400)]],
-      students: [[]],
-      lecturer: [[]],
+      students: [[], Validators.required],
+      lecturer: [[], Validators.required],
     });
 
     if (data.course) {

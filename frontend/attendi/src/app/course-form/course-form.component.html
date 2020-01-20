@@ -3,15 +3,19 @@
     <input matInput type="text" placeholder="Name" formControlName="name" required>
     <mat-hint align="end">The name of the Course</mat-hint>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('required')">Name is required</mat-error>
-    <mat-error *ngIf="courseFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists</mat-error>
+    <mat-error *ngIf="courseFormGroup.controls.name.hasError('pattern')">Name can only contain uppercase letters!</mat-error>
+    <mat-error *ngIf="courseFormGroup.controls.name.hasError('minlength')">Name must contain at least 2 characters!</mat-error>
+    <mat-error *ngIf="courseFormGroup.controls.name.hasError('maxlength')">Name can only contain 50 characters!</mat-error>
+   <!-- <mat-error *ngIf="courseFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists</mat-error> -->
   </mat-form-field>
 
 
   <mat-form-field>
     <input matInput type="text" placeholder="Description" formControlName="description">
     <mat-hint align="end">The description of the Course</mat-hint>
-    <mat-error *ngIf="courseFormGroup.controls.description.hasError('required')">Description is required</mat-error>
-    <mat-error *ngIf="courseFormGroup.controls.description.hasError('descriptionAlreadyExists')">Description already exists</mat-error>
+    <!-- <mat-error *ngIf="courseFormGroup.controls.description.hasError('descriptionAlreadyExists')">Description already exists</mat-error> -->
+    <mat-error *ngIf="courseFormGroup.controls.description.hasError('minlength')">Description must contain at least 10 characters!</mat-error>
+    <mat-error *ngIf="courseFormGroup.controls.description.hasError('maxlength')">Description can only contain 400 characters!</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -20,6 +24,7 @@
                   *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Students of the Course</mat-hint>
+    <mat-error *ngIf="courseFormGroup.controls.students.hasError('required')">At least 1 student is required</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -29,6 +34,7 @@
                   *ngFor="let userOption of userOptions">{{userOption.fullname}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Lecturer of the Course</mat-hint>
+    <mat-error *ngIf="courseFormGroup.controls.lecturer.hasError('required')">Lecturer is required</mat-error>
   </mat-form-field>
 
 

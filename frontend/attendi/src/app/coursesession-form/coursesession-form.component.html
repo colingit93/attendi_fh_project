@@ -7,6 +7,7 @@
                   *ngFor="let location of locationService.locations | keyvalue">{{location.value}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Location of the Coursesession</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.location.hasError('required')">Location is required!</mat-error>
   </mat-form-field>
 
   <br>
@@ -32,6 +33,7 @@
                   *ngFor="let courseOption of courseOptions">{{courseOption.name}}</mat-option>
     </mat-select>
     <mat-hint align="end">The Course of this Session</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.course.hasError('required')">Course is required!</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -40,6 +42,8 @@
       <mat-option [value]="group.key"
                   *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
     </mat-select>
+    <mat-hint align="end">The Studentgroup of this Session</mat-hint>
+    <mat-error *ngIf="coursesessionFormGroup.controls.student_group.hasError('required')">Studentgroup is required!</mat-error>
   </mat-form-field>
 
   <mat-form-field>

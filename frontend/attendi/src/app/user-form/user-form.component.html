@@ -29,9 +29,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="email" placeholder="E-mail address like username@edu.fh-joanneum.at" formControlName="email" required>
-        <mat-error *ngIf="userFormGroup.controls.email.hasError('required')">E-mail is required!</mat-error>
-        <!-- <mat-error *ngIf="userFormGroup.controls.email.hasError('emailValidator')">E-mail is not valid! The Mail must contain the @edu.fh-joanneum.at!</mat-error> -->
+        <input matInput type="email" placeholder="E-mail address like firstname.lastname@edu.fh-joanneum.at" formControlName="email" required>
+        <mat-error *ngIf="userFormGroup.controls.email.hasError('required')">E-mail is required! Mail must contain @edu.fh-joanneum.at!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -63,19 +62,20 @@
 
       <ng-template matStepLabel>Add Profile Information</ng-template>
 
-      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [required]="true" [startDate]="startDate"
-                [maxDate]="maxDate"></app-date>
+      <app-date placeholder="Date of Birth" formControlName="date_of_birth" [startDate]="startDate"
+                [maxDate]="maxDate" [required]="true"></app-date>
 
       <mat-form-field>
-        <mat-select placeholder="Group" formControlName="student_group" required>
+        <mat-select placeholder="Group" formControlName="student_group" [required]="true">
           <mat-option [value]="null">Unknown</mat-option>
           <mat-option [value]="group.key"
                       *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
         </mat-select>
+       <mat-error *ngIf="profileFormGroup.controls.student_group.hasError('required')">Studentgroup is required!</mat-error>
       </mat-form-field>
 
 
-      <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+      <input style="display: none" type="file" accept="image/jpeg, image/png" (change)="onFileSelected($event)" #fileUpload/>
       <button mat-button (click)="fileUpload.click()">Pick File</button>
       <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
       <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">

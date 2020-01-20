@@ -61,9 +61,9 @@ export class UserFormComponent implements OnInit {
         {
           id: [data.user.id],
           user: [data.user.id],
-          date_of_birth: [null],
-          student_group: [''],
-          image: [[]]
+          date_of_birth: [null, [Validators.required]],
+          student_group: ['', [Validators.required]],
+          image: [[], ]
         });
       this.profileFormGroup.patchValue(data.profile);
     }
@@ -121,8 +121,7 @@ export class UserFormComponent implements OnInit {
     if (mail.pristine) {
       return null;
     }
-    // const MAIL_REGEXP = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(mail.value);
-    const MAIL_REGEXP = /^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@edu.fh-joanneum.at$/.test(mail.value);
+    const MAIL_REGEXP = /^[_A-Za-z0-9-\\+]+(\.[_A-Za-z0-9-]+)*@edu.fh-joanneum.at$/.test(mail.value);
     if (MAIL_REGEXP) {
       return null;
     }
@@ -130,4 +129,7 @@ export class UserFormComponent implements OnInit {
       invalidMail: true
     };
   }
+
 }
+
+
