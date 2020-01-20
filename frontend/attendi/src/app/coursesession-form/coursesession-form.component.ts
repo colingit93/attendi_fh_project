@@ -64,7 +64,7 @@ export class CoursesessionFormComponent implements OnInit {
     if (coursesession.id) {
       this.courseSessionService.updateCourseSession(coursesession)
         .subscribe(() => {
-          this.router.navigate(['/coursesession-list/']);
+          this.router.navigate(['/attendance-list/']);
           this.snackBar.open('Session entry updated!', 'Dismiss',
             {
               duration: 3000
@@ -73,7 +73,7 @@ export class CoursesessionFormComponent implements OnInit {
     } else {
       this.courseSessionService.createCourseSession(coursesession)
         .subscribe((response: any) => {
-          this.router.navigate(['/coursesession-list/']);
+          this.router.navigate(['/attendance-list/']);
           this.snackBar.open('Session entry created!', 'Dismiss',
             {
               duration: 3000

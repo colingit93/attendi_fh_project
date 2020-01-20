@@ -23,7 +23,7 @@ import {CurrentUserResolver} from './resolver/currentUser.resolver';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: 'coursesession-list', pathMatch: 'full'},
+  {path: '', redirectTo: 'attendance-list', pathMatch: 'full'},
   {
     path: 'course-list', component: CourseListComponent, canActivate: [AuthGuard]
   },
@@ -39,17 +39,17 @@ const routes: Routes = [
     }
   },
   {
-    path: 'coursesession-list', component: CoursesessionListComponent, canActivate: [AuthGuard], resolve: {
+    path: 'attendance-list', component: CoursesessionListComponent, canActivate: [AuthGuard], resolve: {
       currentUser: CurrentUserResolver
     }
   },
   {
-    path: 'coursesession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+    path: 'courseSession-form', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver
     }
   },
   {
-    path: 'coursesession-form/:id', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
+    path: 'courseSession-form/:id', component: CoursesessionFormComponent, canActivate: [AuthGuard], resolve: {
       courseOptions: CourseOptionsResolver,
       coursesession: CoursesessionResolver
     }
