@@ -19,7 +19,8 @@ from .models import Course, CourseSession, User, Statistic, AttendanceItem, Medi
 from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
     UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
-    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer, StatisticListSerializer, GroupSerializer
+    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer, StatisticListSerializer, GroupSerializer, \
+    AttendanceItemUpdateSerializer
 
 
 def create_statistic(primarykey):
@@ -514,7 +515,7 @@ def attendance_item_update(request, pk):
     except Course.DoesNotExist:
         return Response({'error': 'AttendanceItem does not exist.'}, status=404)
 
-    serializer = AttendanceItemSerializer(attendance_item, data=request.data)
+    serializer = AttendanceItemUpdateSerializer(attendance_item, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)

@@ -117,6 +117,12 @@ class AttendanceItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'present', 'course_session', 'absence_note']
 
 
+class AttendanceItemUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendanceItem
+        fields = ['id', 'present', 'course_session', 'absence_note']
+
+
 class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media

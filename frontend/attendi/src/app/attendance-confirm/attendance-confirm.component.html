@@ -17,7 +17,7 @@
 <div id="dialog-content-wrapper">
 <h2 mat-dialog-title>{{title}}</h2>
 
-<mat-dialog-content [formGroup]="form">
+<mat-dialog-content [formGroup]="form" class="form">
 
   <mat-form-field>
     <input matInput
@@ -25,10 +25,16 @@
            formControlName="input">
   </mat-form-field>
 
+  <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+  <button mat-button (click)="fileUpload.click()">Pick File</button>
+  <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
+  <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
+  <button mat-button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="checkCode()">Submit</button>
+  <button class="mat-raised-button mat-primary" (click)="checkPassword()">Submit</button>
   <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
 </mat-dialog-actions>
 </div>

@@ -43,7 +43,7 @@ urlpatterns = [
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/get', views.profile_form_get),
     path('attendance_item/list', views.attendance_item_list),
-    path('attendance_item/<int:pk>/list', views.attendance_item_list),
+    path('attendance_item/<int:pk>/list', views.attendance_item_list), # pk of user not attendance_item!!!
     path('attendance_item/<int:pk>/update', views.attendance_item_update),
     path('attendance_item/options', views.attendance_item_option_list),
     path('attendance_item/<int:pk>/get', views.attendance_item_get),
