@@ -1,15 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  AbstractControl,
-  AsyncValidatorFn,
   FormBuilder,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {CourseService} from '../service/course.service';
 import {UserService} from '../service/user.service';
 import {MatSnackBar} from '@angular/material';

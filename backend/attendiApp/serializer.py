@@ -111,10 +111,15 @@ class AttendanceListSerializer(serializers.ModelSerializer):
 
 
 class AttendanceItemSerializer(serializers.ModelSerializer):
+    student_username = serializers.SerializerMethodField()
+
     class Meta:
         model = AttendanceItem
         depth = 2
-        fields = ['id', 'present', 'course_session', 'absence_note']
+        fields = ['id', 'student_username', 'present', 'course_session', 'absence_note']
+
+    def get_student_username(self, obj):
+        return obj.student.username if obj.student else ''
 
 
 class AttendanceItemUpdateSerializer(serializers.ModelSerializer):

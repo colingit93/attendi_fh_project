@@ -21,7 +21,7 @@ export class CoursesessionListComponent implements OnInit {
   attendanceItems: any[];
   user: any;
   attendanceItemId: number;
-  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'present', 'absence_note', 'id'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'student_username', 'present', 'absence_note', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute,
