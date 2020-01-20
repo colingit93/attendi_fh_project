@@ -18,7 +18,7 @@ import {
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CoursesessionFormComponent } from './coursesession-form/coursesession-form.component';
-import { CoursesessionListComponent } from './coursesession-list/coursesession-list.component';
+import { CourseSessionListComponent } from './courSesession-list/courseSession-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
@@ -47,7 +47,7 @@ export function tokenGetter() {
     CourseFormComponent,
     CourseListComponent,
     CoursesessionFormComponent,
-    CoursesessionListComponent,
+    CourseSessionListComponent,
     UserListComponent,
     AttendanceListComponent,
     DateComponent,

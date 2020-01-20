@@ -11,10 +11,10 @@ import {AttendanceItemService} from '../service/attendance-item.service';
 
 @Component({
   selector: 'app-coursesession-list',
-  templateUrl: './coursesession-list.component.html',
-  styleUrls: ['./coursesession-list.component.scss']
+  templateUrl: './courseSession-list.component.html',
+  styleUrls: ['./courseSession-list.component.scss']
 })
-export class CoursesessionListComponent implements OnInit {
+export class CourseSessionListComponent implements OnInit {
 
   currentUser: any;
   sessionPassword: string;

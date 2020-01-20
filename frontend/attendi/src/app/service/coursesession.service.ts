@@ -16,20 +16,20 @@ export class CourseSessionService {
     return this.http.get('/api/course_session/list');
   }
 
-  createCourseSession(coursesession) {
-    return this.http.post('/api/course_session/create', coursesession);
+  createCourseSession(courseSession) {
+    return this.http.post('/api/course_session/create', courseSession);
   }
 
-  updateCourseSession(coursesession) {
-    return this.http.put('/api/course_session/' + coursesession.id + '/update', coursesession);
+  updateCourseSession(courseSession) {
+    return this.http.put('/api/course_session/' + courseSession.id + '/update', courseSession);
   }
 
   getCourseSession(id) {
     return this.http.get('/api/course_session/' + id + '/get');
   }
 
-  deleteCourseSession(coursesession) {
-    return this.http.delete('/api/course_session/' + coursesession.id + '/delete');
+  deleteCourseSession(courseSession) {
+    return this.http.delete('/api/course_session/' + courseSession.id + '/delete');
   }
 
   getCourseSessionOptions() {

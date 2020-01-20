@@ -52,7 +52,7 @@
     <ng-container matColumnDef="absence_note">
       <th mat-header-cell *matHeaderCellDef>Absence Note</th>
       <td mat-cell *matCellDef="let attendanceItem">
-        <a *ngIf="attendanceItem.absence_note" href="api/media/{{attendanceItem.absence_note.id}}" download><button mat-button>Download</button></a>
+        <a *ngIf="attendanceItem.absence_note" href="api/media/{{attendanceItem.absence_note.id}}" download><mat-icon>cloud_download</mat-icon></a>
       </td>
     </ng-container>
 
