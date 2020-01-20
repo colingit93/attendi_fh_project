@@ -83,10 +83,6 @@ export class UserService {
     return this.http.get('/api/profile/' + id + '/get');
   }
 
-  findByName(username) {
-    return this.http.get('/api/userId/' + username + '/get', username);
-  }
-
   getProfileImage(id) {
     return this.http.get('api/media/' + id + '/get');
   }

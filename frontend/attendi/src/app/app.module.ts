@@ -8,7 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatMenuModule, MatNativeDateModule,
   MatSelectModule,
@@ -87,6 +87,7 @@ export function tokenGetter() {
     }),
     FileUploadModule,
     MatDialogModule,
+    MatIconModule,
   ],
   providers: [
     {

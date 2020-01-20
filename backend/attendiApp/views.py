@@ -475,20 +475,6 @@ def media_get(request, pk):
     serializer = MediaSerializer(media)
     return Response(serializer.data)
 
-
-@swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
-@api_view(['GET'])
-@permission_required('attendiApp.view_media', raise_exception=True)
-def user_find_by_username(request, username):
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return Response({'error': 'User does not exist.'}, status=404)
-
-    serializer = UserIdSerializer(user)
-    return Response(serializer.data)
-
-
 @swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
 @api_view(['GET'])
 @permission_required('auth.view_group')

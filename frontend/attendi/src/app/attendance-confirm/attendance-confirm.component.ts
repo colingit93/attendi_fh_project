@@ -55,7 +55,6 @@ export class AttendanceConfirmComponent implements OnInit {
   checkPassword() {
     if (this.form.controls.input.value === this.password || this.form.controls.absence_note.value) {
       const fileId = this.form.controls.absence_note.value;
-      alert(fileId);
       if (this.form.controls.input.value === this.password) {
         this.presence = true;
       }
