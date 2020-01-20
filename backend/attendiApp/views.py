@@ -419,7 +419,7 @@ def user_option_list(request):
 def attendance_item_list(request, pk):
     user = User.objects.get(pk=pk)
     current_date = date.today()
-    if user.groups == [1]:
+    if user.groups.get().name in ['Administrators', 'Lecturers']:
         items = AttendanceItem.objects.all().order_by('course_session__date', 'course_session__start_time')
     else:
         items = AttendanceItem.objects.filter(student=user).exclude(course_session__date__lt=current_date).order_by('course_session__date', 'course_session__start_time')
