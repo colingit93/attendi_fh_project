@@ -222,13 +222,13 @@ def course_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_coursesession', raise_exception=True)
-def course_sessions_list(request, group='', course = -1):
+def course_sessions_list(request, courseId= -1):
     current_date = date.today()
-    if group == '' and course == -1:
-        course_sessions = CourseSession.objects.all().order_by('date', 'start_time').exclude(date__lt=current_date)
+    if courseId == -1:
+        course_sessions = CourseSession.objects.all().order_by('date', 'start_time')
     else:
-        course_sessions = CourseSession.objects.filter(student_group=group, ).order_by('date', 'start_time').exclude(
-            date__lt=current_date)
+        course = Course.objects.get(pk=courseId)
+        course_sessions = CourseSession.objects.filter(course=course).order_by('date', 'start_time')
     serializer = CourseSessionListSerializer(course_sessions, many=True)
     return Response(serializer.data)
 

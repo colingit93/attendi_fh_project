@@ -26,7 +26,7 @@ urlpatterns = [
     path('course/<int:pk>/delete', views.course_delete),
     path('course/options', views.course_option_list),
     path('course_session/list', views.course_sessions_list),
-    path('course_session/<str:group>/<int: course>/list', views.course_sessions_list),
+    path('course_session/<int: courseId>/list', views.course_sessions_list),
     path('course_session/create', views.coursesession_form_create),
     path('course_session/<int:pk>/get', views.coursesession_form_get),
     path('course_session/<int:pk>/update', views.coursesession_form_update),

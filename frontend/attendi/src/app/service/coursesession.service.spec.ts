@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import {CourseSessionService} from './coursesession.service';
 
-import { CourseSessionService } from './course_session.service';
+
 
 describe('CourseSessionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

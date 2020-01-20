@@ -11,7 +11,6 @@ import {UserResolver} from './resolver/user.resolver';
 import {CourseListComponent} from './course-list/course-list.component';
 import {ProfileResolver} from './resolver/profile.resolver';
 import {StatisticListComponent} from './statistic-list/statistic-list.component';
-import {CourseSessionListComponent} from './course-session-list/course-session-list.component';
 import {AttendanceListComponent} from './attendance-list/attendance-list.component';
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
 import {LoginComponent} from './login/login.component';
@@ -68,7 +67,10 @@ const routes: Routes = [
     }
   },
   {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
-  {path: 'course-session-list', component: AttendanceListComponent, canActivate: [AuthGuard]},
+  {path: 'course-session-list/:id', component: AttendanceListComponent, canActivate: [AuthGuard], resolve: {
+    course: CourseResolver
+    }
+  },
   {path: 'present', component: PresentComponent, canActivate: [AuthGuard]},
 ];
 

@@ -8,12 +8,8 @@ export class CourseSessionService {
 
   constructor(private http: HttpClient) { }
 
-  getGroupCourseSessions(course, group) {
-    return this.http.get('/api/course_session/' + course + group + '/list');
-  }
-
-  getAllCourseSessions() {
-    return this.http.get('/api/course_session/list');
+  getCourseSessions(courseId) {
+    return this.http.get('/api/course_session/' + courseId + '/list');
   }
 
   createCourseSession(courseSession) {

@@ -15,13 +15,10 @@ import {AttendanceItemService} from '../service/attendance-item.service';
   styleUrls: ['./course-session-list.component.scss']
 })
 export class CourseSessionListComponent implements OnInit {
-
-  currentUser: any;
-  sessionPassword: string;
-  attendanceItems: any[];
+  courseId: any;
+  courseSessions: any[];
   user: any;
-  attendanceItemId: number;
-  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'student_username', 'present', 'absence_note', 'id'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute,
@@ -30,44 +27,20 @@ export class CourseSessionListComponent implements OnInit {
 
   ngOnInit() {
     const data = this.route.snapshot.data;
-    this.currentUser = data.currentUser;
-    this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
-      this.attendanceItems = response;
+    const course = data.course;
+    this.courseSessionService.getCourseSessions(course.id).subscribe((res: any[]) => {
+      this.courseSessions = res;
     });
   }
 
-
-  deleteCourseSession(courseSession: any) { // TO-DO: Popup warning that all items of the session will be deleted
+  deleteCourseSession(courseSession: any) {
     this.courseSessionService.deleteCourseSession(courseSession)
       .subscribe(() => {
         this.ngOnInit();
       });
   }
 
-
-  openConfirmDialog(attendanceId: number) {
-    this.attendanceItemService.getAttendanceItem(attendanceId).subscribe((item: any) => {
-      this.sessionPassword = item.course_session.password;
-
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.id = 'attendance-confirm-component';
-      dialogConfig.width = '600px';
-      dialogConfig.data = {
-        title: 'Presence Confirmation',
-        attendanceItemId: attendanceId,
-        password: this.sessionPassword
-      };
-      const dialogRef = this.matDialog.open(AttendanceConfirmComponent, dialogConfig);
-
-      dialogRef.afterClosed().subscribe(
-        (res) => {
-          this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
-            this.attendanceItems = response;
-          });
-        });
-    });
+  getAttendanceList() {
 
   }
 
