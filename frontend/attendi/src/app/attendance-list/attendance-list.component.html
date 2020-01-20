@@ -8,7 +8,9 @@
 
     <ng-container matColumnDef="mandatory">
       <th mat-header-cell *matHeaderCellDef>Mandatory</th>
-      <td mat-cell *matCellDef="let attendanceItem">{{attendanceItem.course_session.mandatory}}</td>
+      <td mat-cell *matCellDef="let attendanceItem">
+        <mat-icon class="mandatory" *ngIf="attendanceItem.course_session.mandatory == true">report_problem</mat-icon>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="date">
@@ -44,7 +46,7 @@
     <ng-container matColumnDef="present">
       <th mat-header-cell *matHeaderCellDef>Present</th>
       <td mat-cell *matCellDef="let attendanceItem">
-        <mat-icon *ngIf="attendanceItem.present === true">check_circle</mat-icon>
+        <mat-icon class="check" *ngIf="attendanceItem.present === true">check_circle</mat-icon>
         <mat-icon *ngIf="attendanceItem.present != true">cancel</mat-icon>
       </td>
     </ng-container>
