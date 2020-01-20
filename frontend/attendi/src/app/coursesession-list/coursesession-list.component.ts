@@ -17,12 +17,9 @@ import {AttendanceItemService} from '../service/attendance-item.service';
 export class CoursesessionListComponent implements OnInit {
 
   currentUser: any;
-  sessionId: number;
   sessionPassword: string;
-  userProfile: any;
   attendanceItems: any[];
   user: any;
-  code: any;
   attendanceItemId: number;
   displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'present', 'id'];
 

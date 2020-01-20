@@ -1,5 +1,5 @@
 <mat-toolbar *ngIf="isLoggedIn">
-  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="isAdmin">User</button>
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="!isStudent">User</button>
   <mat-menu  #userMenu="matMenu">
     <button mat-menu-item routerLink="user-list">List Users</button>
     <button mat-menu-item routerLink="user-form">Create User</button>

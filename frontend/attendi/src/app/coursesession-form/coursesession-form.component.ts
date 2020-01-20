@@ -29,6 +29,7 @@ export class CoursesessionFormComponent implements OnInit {
 
   coursesessionFormGroup;
   courseOptions;
+  minDate = new Date();
 
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
