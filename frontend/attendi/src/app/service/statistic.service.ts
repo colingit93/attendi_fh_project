@@ -9,7 +9,7 @@ export class StatisticService {
   constructor(private http: HttpClient) {
   }
 
-  getStatisticList() {
-    return this.http.get <any[]>('/api/statistic/list');
+  getStatisticList(sessionId) {
+    return this.http.get <any[]>('/api/statistic/list/' + sessionId);
   }
 }
