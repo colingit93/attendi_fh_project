@@ -46,8 +46,8 @@
     <ng-container matColumnDef="present">
       <th mat-header-cell *matHeaderCellDef>Present</th>
       <td mat-cell *matCellDef="let attendanceItem">
-        <mat-icon class="check" *ngIf="attendanceItem.present === true">check_circle</mat-icon>
-        <mat-icon *ngIf="attendanceItem.present != true">cancel</mat-icon>
+        <mat-icon class="true" *ngIf="attendanceItem.present === true">check_circle</mat-icon>
+        <mat-icon class="false" *ngIf="attendanceItem.present != true">cancel</mat-icon>
       </td>
     </ng-container>
 

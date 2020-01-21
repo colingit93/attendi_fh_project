@@ -3,9 +3,13 @@ table {
 }
 
 .mandatory {
-  color: red;
+  color: orange;
 }
 
-.check {
+.true {
   color: green;
+}
+
+.false {
+  color: red;
 }
