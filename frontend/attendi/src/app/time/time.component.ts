@@ -1,6 +1,5 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {TimeUnit} from "ngx-material-timepicker/src/app/material-timepicker/models/time-unit.enum";
 
 @Component({
   selector: 'app-time',
@@ -19,10 +18,10 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
 
   time: FormControl;
   private propagateChange: any;
-  /*@Input()
+  @Input()
   min = '08:00';
   @Input()
-  max = '18:00';*/
+  max = '18:00';
   @Input()
   placeholder: string;
   @Input()

@@ -3,6 +3,10 @@ import {UserService} from '../service/user.service';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AttendanceItemService} from '../service/attendance-item.service';
+import DateTimeFormat = Intl.DateTimeFormat;
+
+
+
 
 @Component({
   selector: 'app-attendance-confirm',
@@ -14,6 +18,7 @@ export class AttendanceConfirmComponent implements OnInit {
   form: FormGroup;
   title: string;
   password: string;
+  isActive = false;
   attendanceItemId: any;
   attendanceItemForm: FormGroup;
 
@@ -28,6 +33,19 @@ export class AttendanceConfirmComponent implements OnInit {
 
 
   ngOnInit() {
+    this.attendanceItemService.getAttendanceItem(this.attendanceItemId).subscribe((res: any) => {
+      const date = res.course_session.date;
+      const start = res.course_session.start_time;
+      const end = res.course_session.end_time;
+      const actual = new Date();
+      const actualTime = new Date(actual.setTime( actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(11, 19);
+      const actualDate = new Date(actual.setTime( actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
+      // alert(actualDate);
+      if (date === actualDate && actualTime > start && actualTime < end) {
+        this.isActive = true;
+      }
+
+    });
     this.form = this.fb.group({
       title: [this.title, []],
       input: ['', []],
