@@ -1,6 +1,5 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {TimeUnit} from "ngx-material-timepicker/src/app/material-timepicker/models/time-unit.enum";
 
 @Component({
   selector: 'app-time',
@@ -38,7 +37,7 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
       validator = Validators.required;
     }
     this.time = this.fb.control(null, validator);
-    this.time.valueChanges.subscribe((newValue) => {
+    this.time.valueChanges.subscribe((newValue) => { // const newDate = newValue ? new Date(newValue.getTime() - (newValue.getTimezoneOffset() * 60000)).toISOString().slice(0, 10) : null;
       this.propagateChange(newValue);
     });
   }

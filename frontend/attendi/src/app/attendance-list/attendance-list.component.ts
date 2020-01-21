@@ -70,9 +70,7 @@ export class AttendanceListComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(
         (res) => {
-          this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
-            this.attendanceItems = response;
-          });
+          window.location.reload();
         });
     });
 
