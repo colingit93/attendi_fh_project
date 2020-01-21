@@ -38,13 +38,23 @@ export class AttendanceConfirmComponent implements OnInit {
       const start = res.course_session.start_time;
       const end = res.course_session.end_time;
       const actual = new Date();
-      const actualTime = new Date(actual.setTime( actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(11, 19);
-      const actualDate = new Date(actual.setTime( actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
+      const actualTime = new Date(actual.setTime(actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(11, 19);
+      const actualDate = new Date(actual.setTime(actual.getTime() - actual.getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
       // alert(actualDate);
       if (date === actualDate && actualTime > start && actualTime < end) {
         this.isActive = true;
+      } else { if (date !== actualDate || actualTime < start) {
+        this.snackBar.open('Session has not started yet! You have to wait to confirm your presence!', 'Dismiss',
+          {
+            duration: 5000
+          });
+      } else {
+        this.snackBar.open('You can not confirm your presence anymore! Please upload an absence note!', 'Dismiss',
+          {
+            duration: 5000
+          });
       }
-
+      }
     });
     this.form = this.fb.group({
       title: [this.title, []],
@@ -85,7 +95,7 @@ export class AttendanceConfirmComponent implements OnInit {
       });
       this.closeDialog();
     } else {
-      this.snackBar.open('Wrong Password!', 'Dismiss',
+      this.snackBar.open('Wrong Password or Forgot to press Upload Button!', 'Dismiss',
         {
           duration: 3000
         });
