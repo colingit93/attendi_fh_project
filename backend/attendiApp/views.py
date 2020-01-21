@@ -19,7 +19,7 @@ from .models import Course, CourseSession, User, Statistic, AttendanceItem, Medi
 from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessionFormSerializer, \
     CourseSessionListSerializer, AttendanceItemSerializer, MediaSerializer, StatisticSerializer, UserFormSerializer, \
     UserListSerializer, ProfileSerializer, UserOptionSerializer, AttendanceOptionSerializer, \
-    CourseSessionOptionSerializer, CourseOptionSerializer, UserIdSerializer, StatisticListSerializer, GroupSerializer, \
+    CourseSessionOptionSerializer, CourseOptionSerializer, StatisticListSerializer, GroupSerializer, \
     AttendanceItemUpdateSerializer
 
 
@@ -153,9 +153,18 @@ def statistic_form_get(request, pk):
 @swagger_auto_schema(method='GET', responses={200: CourseListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_course', raise_exception=True)
-def courses_list(request):
-    course = Course.objects.all()
-    serializer = CourseListSerializer(course, many=True)
+def courses_list(request, user_id=-1):
+    if user_id == -1:
+        courses = Course.objects.all()
+    else:
+        user = User.objects.get(pk=user_id)
+        if user.groups.get().name == 'Lecturers':
+            courses = Course.objects.filter(lecturer=user)
+        elif user.groups.get().name == 'Administrators':
+            courses = Course.objects.all()
+        else:
+            courses = Course.objects.filter(students=user)
+    serializer = CourseListSerializer(courses, many=True)
     return Response(serializer.data)
 
 
@@ -222,12 +231,12 @@ def course_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: CourseSessionListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_coursesession', raise_exception=True)
-def course_sessions_list(request, courseId= -1):
+def course_sessions_list(request, course_id=-1):
     current_date = date.today()
-    if courseId == -1:
+    if course_id == -1:
         course_sessions = CourseSession.objects.all().order_by('date', 'start_time')
     else:
-        course = Course.objects.get(pk=courseId)
+        course = Course.objects.get(pk=course_id)
         course_sessions = CourseSession.objects.filter(course=course).order_by('date', 'start_time')
     serializer = CourseSessionListSerializer(course_sessions, many=True)
     return Response(serializer.data)
@@ -416,13 +425,24 @@ def user_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_attendanceitem', raise_exception=True)
-def attendance_item_list(request, pk):
-    user = User.objects.get(pk=pk)
+def attendance_item_list(request, user_id=-1):
+    user = User.objects.get(pk=user_id)
     current_date = date.today()
     if user.groups.get().name in ['Administrators', 'Lecturers']:
         items = AttendanceItem.objects.all().order_by('course_session__date', 'course_session__start_time')
     else:
-        items = AttendanceItem.objects.filter(student=user).exclude(course_session__date__lt=current_date).order_by('course_session__date', 'course_session__start_time')
+        items = AttendanceItem.objects.filter(student=user).exclude(course_session__date__lt=current_date).order_by(
+            'course_session__date', 'course_session__start_time')
+    serializer = AttendanceItemSerializer(items, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('attendiApp.view_attendanceitem', raise_exception=True)
+def get_session_attendance_list(request, session_id):
+    session = CourseSession.objects.get(pk=session_id)
+    items = AttendanceItem.objects.filter(course_session=session)
     serializer = AttendanceItemSerializer(items, many=True)
     return Response(serializer.data)
 
@@ -474,6 +494,7 @@ def media_get(request, pk):
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
 @api_view(['GET'])

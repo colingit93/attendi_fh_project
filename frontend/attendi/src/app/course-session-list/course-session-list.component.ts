@@ -15,10 +15,9 @@ import {AttendanceItemService} from '../service/attendance-item.service';
   styleUrls: ['./course-session-list.component.scss']
 })
 export class CourseSessionListComponent implements OnInit {
-  courseId: any;
   courseSessions: any[];
   user: any;
-  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'id'];
+  displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name', 'student_group', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute,

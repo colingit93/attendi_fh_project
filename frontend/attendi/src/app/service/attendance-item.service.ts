@@ -13,8 +13,8 @@ export class AttendanceItemService {
     return this.http.get <any[]>('/api/attendance_item/' + userId + '/list');
   }
 
-  getCourseAttendanceList(courseId) {
-    return this.http.get <any[]>('/api/attendance_item/' + courseId + '/list');
+  getCourseAttendanceList(sessionId) {
+    return this.http.get <any[]>('/api/attendance_list/' + sessionId);
   }
 
   getAttendanceOptions() {

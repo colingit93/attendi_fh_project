@@ -30,10 +30,17 @@ export class AttendanceListComponent implements OnInit {
 
   ngOnInit() {
     const data = this.route.snapshot.data;
-    this.currentUser = data.currentUser;
-    this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
-      this.attendanceItems = response;
-    });
+    if (data.courseSession) {
+      const session = data.courseSession;
+      this.attendanceItemService.getCourseAttendanceList(session.id).subscribe((res: any[]) => {
+        this.attendanceItems = res;
+      });
+    } else {
+      this.currentUser = data.currentUser;
+      this.attendanceItemService.getUserAttendanceList(this.currentUser.id).subscribe((response: any[]) => {
+        this.attendanceItems = response;
+      });
+    }
   }
 
 

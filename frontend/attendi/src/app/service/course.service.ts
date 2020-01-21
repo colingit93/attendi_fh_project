@@ -12,6 +12,10 @@ export class CourseService {
     return this.http.get('/api/course/list');
   }
 
+  getUserCourses(userId) {
+    return this.http.get('/api/course/' + userId + '/list');
+  }
+
   createCourse(course) {
     return this.http.post('/api/course/create', course);
   }
