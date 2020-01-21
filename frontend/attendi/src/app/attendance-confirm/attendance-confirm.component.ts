@@ -95,7 +95,7 @@ export class AttendanceConfirmComponent implements OnInit {
       });
       this.closeDialog();
     } else {
-      this.snackBar.open('Wrong Password or Forgot to press Upload Button!', 'Dismiss',
+      this.snackBar.open('Wrong Password or you forgot to press Upload Button!', 'Dismiss',
         {
           duration: 3000
         });
