@@ -74,7 +74,8 @@ const routes: Routes = [
       groupOptions: GroupOptionsResolver
     }
   },
-  {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard]},
+  {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard], resolve: {
+      currentUser: CurrentUserResolver}},
   {path: 'course-session-list/:id', component: CourseSessionListComponent, canActivate: [AuthGuard], resolve: {
     course: CourseResolver
     }

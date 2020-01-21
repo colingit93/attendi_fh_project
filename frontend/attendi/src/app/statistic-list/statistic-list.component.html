@@ -1,1 +1,37 @@
-<p>statistic-list works!</p>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="statisticItems">
+
+    <ng-container matColumnDef="total_course_sessions">
+      <th mat-header-cell *matHeaderCellDef>Total Course Sessions-------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.total_course_sessions}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="visited_course_sessions">
+      <th mat-header-cell *matHeaderCellDef>Visited Course Sessions------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.visited_course_sessions}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="attendance_percentage">
+      <th mat-header-cell *matHeaderCellDef>Attendance Percentage--------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.attendance_percentage}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="statistic_course_name">
+      <th mat-header-cell *matHeaderCellDef>Course Name------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.statistic_course_name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="course_sessions_missed">
+      <th mat-header-cell *matHeaderCellDef>Course Sessions missed------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.course_sessions_missed}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total_mandatory_course_sessions">
+      <th mat-header-cell *matHeaderCellDef>Total Mandatory Course Sessions------</th>
+      <td mat-cell *matCellDef="let statisticItems">{{statisticItems.total_mandatory_course_sessions}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
