@@ -1,22 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  AbstractControl,
-  AsyncValidatorFn,
   FormBuilder,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {CourseService} from '../service/course.service';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
 import {StudentGroupService} from '../service/student-group.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
 import {MatSnackBar} from '@angular/material';
 
 
@@ -55,6 +46,10 @@ export class CourseSessionFormComponent implements OnInit {
     });
     if (data.courseSession) {
       this.courseSessionFormGroup.patchValue(data.courseSession);
+      const startTime = data.courseSession.start_time.slice(0, 5);
+      const endTime = data.courseSession.end_time.slice(0, 5);
+      this.courseSessionFormGroup.controls.start_time.patchValue(startTime);
+      this.courseSessionFormGroup.controls.end_time.patchValue(endTime);
     }
   }
 
