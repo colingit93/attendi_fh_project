@@ -1,5 +1,6 @@
 import logging
-from datetime import date
+from datetime import date, timedelta
+from datetime import datetime
 
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password
@@ -239,6 +240,7 @@ def course_sessions_list(request, course_id=-1):
         course = Course.objects.get(pk=course_id)
         course_sessions = CourseSession.objects.filter(course=course).order_by('date', 'start_time')
     serializer = CourseSessionListSerializer(course_sessions, many=True)
+    # newtime = datetime.datetime.combine(date(1,1,1), start_time) + datetime.timedelta(hours=1)).time()
     return Response(serializer.data)
 
 

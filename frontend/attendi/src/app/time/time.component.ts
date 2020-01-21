@@ -18,10 +18,10 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
 
   time: FormControl;
   private propagateChange: any;
-  /*@Input()
+  @Input()
   min = '08:00';
   @Input()
-  max = '18:00';*/
+  max = '18:00';
   @Input()
   placeholder: string;
   @Input()
