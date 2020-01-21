@@ -4,8 +4,7 @@ import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
+import {MatDialog} from '@angular/material/dialog';
 import {AttendanceItemService} from '../service/attendance-item.service';
 
 
@@ -26,10 +25,16 @@ export class CourseSessionListComponent implements OnInit {
 
   ngOnInit() {
     const data = this.route.snapshot.data;
-    const course = data.course;
-    this.courseSessionService.getCourseSessions(course.id).subscribe((res: any[]) => {
-      this.courseSessions = res;
-    });
+    if (data.course) {
+      const course = data.course;
+      this.courseSessionService.getCourseSessions(course.id).subscribe((res: any[]) => {
+        this.courseSessions = res;
+      });
+    } else {
+      this.courseSessionService.getAllCourseSessions().subscribe((res: any[]) => {
+        this.courseSessions = res;
+      });
+    }
   }
 
   deleteCourseSession(courseSession: any) {
@@ -37,10 +42,6 @@ export class CourseSessionListComponent implements OnInit {
       .subscribe(() => {
         this.ngOnInit();
       });
-  }
-
-  getAttendanceList() {
-
   }
 
 }
