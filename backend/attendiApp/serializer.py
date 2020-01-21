@@ -5,9 +5,15 @@ from .models import Course, CourseSession, User, AttendanceItem, Statistic, Medi
 
 
 class StatisticSerializer(serializers.ModelSerializer):
+    statistic_course_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Statistic
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ['id', 'course', 'total_course_sessions', 'statistic_course_name', 'total_mandatory_course_sessions', 'visited_course_sessions', 'attendance_percentage', 'course_sessions_missed', 'time_in_courses', 'profile']
+
+    def get_statistic_course_name(self, obj):
+        return obj.course.name if obj.course else ''
 
 
 class StatisticListSerializer(serializers.ModelSerializer):
@@ -60,8 +66,8 @@ class CourseSessionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseSession
 
-        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course_name', 'student_group',
-                  'password']
+        fields = ['id', 'location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'course_name',
+                  'student_group', 'password']
 
     def get_course_name(self, obj):
         return obj.course.name if obj.course else ''
@@ -111,9 +117,20 @@ class AttendanceListSerializer(serializers.ModelSerializer):
 
 
 class AttendanceItemSerializer(serializers.ModelSerializer):
+    student_username = serializers.SerializerMethodField()
+
     class Meta:
         model = AttendanceItem
         depth = 2
+        fields = ['id', 'student_username', 'present', 'course_session', 'absence_note']
+
+    def get_student_username(self, obj):
+        return obj.student.username if obj.student else ''
+
+
+class AttendanceItemUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendanceItem
         fields = ['id', 'present', 'course_session', 'absence_note']
 
 

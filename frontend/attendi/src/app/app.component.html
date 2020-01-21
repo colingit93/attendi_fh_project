@@ -9,10 +9,11 @@
     <button mat-menu-item routerLink="course-list">List Courses</button>
     <button mat-menu-item routerLink="course-form" *ngIf="userService.hasPermission('attendiApp.add_course')">Create Course</button>
   </mat-menu>
-  <button mat-button [matMenuTriggerFor]="coursesessionMenu">Course Sessions</button>
-  <mat-menu #coursesessionMenu="matMenu">
-    <button mat-menu-item routerLink="coursesession-list">My Course Sessions</button>
-    <button mat-menu-item routerLink="coursesession-form" *ngIf="userService.hasPermission('attendiApp.add_coursesession')">Create Course Session</button>
+  <button mat-button [matMenuTriggerFor]="courseSessionMenu">Course Sessions</button>
+  <mat-menu #courseSessionMenu="matMenu">
+    <button mat-menu-item routerLink="attendance-list">My Course Sessions</button>
+    <button mat-menu-item routerLink="course-session-list">Course Sessions</button>
+    <button mat-menu-item routerLink="course-session-form" *ngIf="userService.hasPermission('attendiApp.add_coursesession')">Create Course Session</button>
   </mat-menu>
   <button mat-button routerLink="statistic-list">Statistics</button>
   <app-logout></app-logout>

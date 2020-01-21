@@ -26,7 +26,7 @@ export class UserService {
       .subscribe((res: any) => {
         this.isLoggedIn.next(true);
         localStorage.setItem('access_token', res.token);
-        this.router.navigate(['coursesession-list']);
+        this.router.navigate(['attendance-list']);
       }, () => {
         alert('wrong username or password');
       });
@@ -81,10 +81,6 @@ export class UserService {
 
   getProfile(id) {
     return this.http.get('/api/profile/' + id + '/get');
-  }
-
-  findByName(username) {
-    return this.http.get('/api/userId/' + username + '/get', username);
   }
 
   getProfileImage(id) {

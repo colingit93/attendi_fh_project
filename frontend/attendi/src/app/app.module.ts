@@ -8,7 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatMenuModule, MatNativeDateModule,
   MatSelectModule,
@@ -17,8 +17,8 @@ import {
 } from '@angular/material';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
-import { CoursesessionFormComponent } from './coursesession-form/coursesession-form.component';
-import { CoursesessionListComponent } from './coursesession-list/coursesession-list.component';
+import { CourseSessionFormComponent } from './course-session-form/course-session-form.component';
+import { CourseSessionListComponent } from './course-session-list/course-session-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 import {DateComponent} from './date/date.component';
@@ -46,8 +46,8 @@ export function tokenGetter() {
     UserFormComponent,
     CourseFormComponent,
     CourseListComponent,
-    CoursesessionFormComponent,
-    CoursesessionListComponent,
+    CourseSessionFormComponent,
+    CourseSessionListComponent,
     UserListComponent,
     AttendanceListComponent,
     DateComponent,
@@ -87,6 +87,7 @@ export function tokenGetter() {
     }),
     FileUploadModule,
     MatDialogModule,
+    MatIconModule,
   ],
   providers: [
     {

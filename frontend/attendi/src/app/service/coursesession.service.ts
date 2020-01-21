@@ -8,32 +8,28 @@ export class CourseSessionService {
 
   constructor(private http: HttpClient) { }
 
-  getMyCourseSessions(group) {
-    return this.http.get('/api/coursesession/' + group + '/list');
+  getCourseSessions(courseId) {
+    return this.http.get('/api/course_session/' + courseId + '/list');
   }
 
-  getAllCourseSessions() {
-    return this.http.get('/api/coursesession/list');
+  createCourseSession(courseSession) {
+    return this.http.post('/api/course_session/create', courseSession);
   }
 
-  createCourseSession(coursesession) {
-    return this.http.post('/api/coursesession/create', coursesession);
-  }
-
-  updateCourseSession(coursesession) {
-    return this.http.put('/api/coursesession/' + coursesession.id + '/update', coursesession);
+  updateCourseSession(courseSession) {
+    return this.http.put('/api/course_session/' + courseSession.id + '/update', courseSession);
   }
 
   getCourseSession(id) {
-    return this.http.get('/api/coursesession/' + id + '/get');
+    return this.http.get('/api/course_session/' + id + '/get');
   }
 
-  deleteCourseSession(coursesession) {
-    return this.http.delete('/api/coursesession/' + coursesession.id + '/delete');
+  deleteCourseSession(courseSession) {
+    return this.http.delete('/api/course_session/' + courseSession.id + '/delete');
   }
 
   getCourseSessionOptions() {
-    return this.http.get <any[]> ('/api/coursesession/options');
+    return this.http.get <any[]> ('/api/course_session/options');
   }
 
 }

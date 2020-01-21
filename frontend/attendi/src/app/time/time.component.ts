@@ -28,15 +28,18 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
   hint: any;
   @Input()
   required = false;
+  @Input()
+  input: string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     let validator = null;
     if (this.required) {
       validator = Validators.required;
     }
-    this.time = this.fb.control(null, validator);
+    this.time = this.fb.control( null, validator);
     this.time.valueChanges.subscribe((newValue) => {
       this.propagateChange(newValue);
     });
@@ -46,11 +49,14 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
   writeValue(obj: any): void {
     this.time.patchValue(obj, {emitEvent: false});
   }
+
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
+
   registerOnTouched(fn: any): void {
   }
+
   setDisabledState?(isDisabled: boolean): void {
   }
 

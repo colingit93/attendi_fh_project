@@ -1,33 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  AbstractControl,
-  AsyncValidatorFn,
   FormBuilder,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {CourseService} from '../service/course.service';
 import {CourseSessionService} from '../service/coursesession.service';
 import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
 import {StudentGroupService} from '../service/student-group.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AttendanceConfirmComponent} from '../attendance-confirm/attendance-confirm.component';
 import {MatSnackBar} from '@angular/material';
 
 
 @Component({
-  selector: 'app-coursesession-form',
-  templateUrl: './coursesession-form.component.html',
-  styleUrls: ['./coursesession-form.component.scss']
+  selector: 'app-course-session-form',
+  templateUrl: './course-session-form.component.html',
+  styleUrls: ['./course-session-form.component.scss']
 })
-export class CoursesessionFormComponent implements OnInit {
+export class CourseSessionFormComponent implements OnInit {
 
-  coursesessionFormGroup;
+  courseSessionFormGroup;
   courseOptions;
   minDate = new Date();
 
@@ -42,7 +33,7 @@ export class CoursesessionFormComponent implements OnInit {
     const data = this.route.snapshot.data;
     this.courseOptions = data.courseOptions;
 
-    this.coursesessionFormGroup = this.fb.group({
+    this.courseSessionFormGroup = this.fb.group({
       id: [null],
       location: ['', [Validators.required]],
       mandatory: [true],
@@ -53,27 +44,30 @@ export class CoursesessionFormComponent implements OnInit {
       student_group: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
-    if (data.coursesession) {
-      this.coursesessionFormGroup.patchValue(data.coursesession);
+    if (data.courseSession) {
+      this.courseSessionFormGroup.patchValue(data.courseSession);
+      const startTime = data.courseSession.start_time.slice(0, 5);
+      const endTime = data.courseSession.end_time.slice(0, 5);
+      this.courseSessionFormGroup.controls.start_time.patchValue(startTime);
+      this.courseSessionFormGroup.controls.end_time.patchValue(endTime);
     }
   }
 
-
   createCourseSession() {
-    const coursesession = this.coursesessionFormGroup.value;
-    if (coursesession.id) {
-      this.courseSessionService.updateCourseSession(coursesession)
+    const courseSession = this.courseSessionFormGroup.value;
+    if (courseSession.id) {
+      this.courseSessionService.updateCourseSession(courseSession)
         .subscribe(() => {
-          this.router.navigate(['/coursesession-list/']);
+          this.router.navigate(['/attendance-list/']);
           this.snackBar.open('Session entry updated!', 'Dismiss',
             {
               duration: 3000
             });
         });
     } else {
-      this.courseSessionService.createCourseSession(coursesession)
+      this.courseSessionService.createCourseSession(courseSession)
         .subscribe((response: any) => {
-          this.router.navigate(['/coursesession-list/']);
+          this.router.navigate(['/attendance-list/']);
           this.snackBar.open('Session entry created!', 'Dismiss',
             {
               duration: 3000

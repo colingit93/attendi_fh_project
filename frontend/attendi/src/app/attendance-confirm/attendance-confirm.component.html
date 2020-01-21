@@ -1,23 +1,7 @@
-<!--<div id="dialog-content-wrapper">
-  <header id="dialog-header">
-    <h1 id="dialog-title">{{dialogData.title }}</h1>
-  </header>
-  <section id="dialog-body">
-    <p>{{ dialogData.description }}</p>
-  </section>
-  <footer id="dialog-footer">
-    <button mat-raised-button id="dialog-action-button" (click)="actionFunction()">
-      {{ dialogData.actionButtonText }}
-    </button>
-    <button mat-raised-button id="dialog-cancel-button" (click)="closeDialog()">
-      Go back
-    </button>
-  </footer>
-</div> -->
 <div id="dialog-content-wrapper">
 <h2 mat-dialog-title>{{title}}</h2>
 
-<mat-dialog-content [formGroup]="form">
+<mat-dialog-content [formGroup]="form" class="form">
 
   <mat-form-field>
     <input matInput
@@ -25,10 +9,16 @@
            formControlName="input">
   </mat-form-field>
 
+  <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+  <button mat-button (click)="fileUpload.click()">Pick File</button>
+  <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
+  <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
+  <button mat-button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" [disabled]="!isActive" (click)="checkCode()">Submit</button>
+  <button class="mat-raised-button mat-primary" (click)="checkPassword()">Submit</button>
   <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
 </mat-dialog-actions>
 </div>
