@@ -1,7 +1,17 @@
 # attendi
-The goal of the project is to create an online attendance list, where students can confirm their presence at a course on their mobile phone or computer. The application will provide an interface for students and lecturers. Lecturers will be able to create and manage their courses, add and remove students as well as setting course times. Students will be presented with a list of courses they need to attend and once the course starts, they are able to confirm their presence. Confirming attendance could be confirmed by entering a passphrase provided by the lecturer. The application should only be accessible on the lecturing premises.
 
+[GitHub](https://github.com/colingit93/attendi_fh_project)
 
+The goal of the project is to create an online attendance list, where students can confirm their presence at a course on their mobile phone or computer. The application will provide an interface for students and lecturers. Lecturers will be able to create and manage their courses, add and remove students as well as setting course times. Students will be presented with a list of courses they need to attend and they are able to confirm their presence. Confirming attendance is confirmed by entering a passphrase into the attendance item provided by the lecturer. The application should only be accessible on the lecturing premises.
+
+# Team
+
+Marcel Kahr: [GitHub](https://github.com/colingit93/attendi_fh_project)
+Colin Jochum: [GitHub](https://github.com/colingit93/attendi_fh_project)
+Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
+~~Tripolt Christoph:~~
+
+Commits for Colin Jochum were linked to the wrong user. Colin Jochum = colingit93
 
 # Project Proposal
 
@@ -15,3 +25,65 @@ The goal of the project is to create an online attendance list, where students c
 | User Stories (Who, wants what and why?)                      | 1. As lecturer I want to create lectures in my dashboard on a certain date, at a certain time and for specific student groups (classes) to confirm students are attending my course.<br/>2. As a student I want to be able to upload an absence note to inform the lecturer of my absence.<br/>3. As a student I want to see some statistics regarding attendance on my dashboard, so I can quickly assess the progress of attendance.<br/>4. As a student I want I want to see for which courses attendance is mandatory to know which courses I absolutely need to attend.<br/>5. As a student I want to sign the attendance list to confirm my presence at the course. |
 
 ![UML-BackendModel](https://github.com/colingit93/attendi_fh_project/blob/master/UML-BackendModel.jpeg)
+
+
+
+## How does it work (from a users perspective)
+
+
+
+## Backend
+
+Use the *initial_data.json* fixture when creating the backend!
+
+Default User: admin PW: admin
+Default Student: greta PW: greta
+
+URL: http://localhost:8000/ http://localhost:8000/admin/
+
+Libraries: django==2.2.7; djangorestframework==3.10.3; drf-yasg==1.17.0; djangorestframework-jwt==1.11.0
+
+###Backend Models
+
+**Media:** The administrator can set profile pictures for the students and lecturers.
+
+**Profile:** A new profile is created when a new user in the default Django *Users* model is created. This means that the *Profile* model is derived from the *Users* model and therefore share the same id/primary_key! It is important to create a new user in the *Users* model first because otherwise the primary key in the profile model would not match anymore which is important! Inside the created Profile it is possible to set the *Date of birth*, *Student Group*, *Image*. This task can only be done by the Administrator.
+*Date of birth*: When was the student born
+*Student Group:* Select the Group in which the student is put into. This plays a big role in the Course Sessions Model where a bunch of students is assigned to a Course Session.
+*Image:* Assign an Image to the Student/lecturer
+
+**Course:** This model is one of the main Objects of this project. A course consists has the attributes *Name*, *Description*, *Students*, *Lecturer* and consists of multiple smaller course sessions! Courses can only be created by Administrators or Lecturers. 
+*Name:* The name of the Course e.g. Biology, Mathematics
+*Description:* Short description what the course is about
+*Students:* Assign individiual students to the course
+*Lecturer:* Assign the lecturer of the course
+**When a new course is created the backend will automatically create a Statistic item for each Student assigned to the course!**
+
+**Course Session:** A course session is a single session which students can attend. **If a new course session is created (by administrator or lecturer) the student automatically gets a new attendance item for this course session! It is also checked if the student is in the selected group for the new course session.** If the student attends the course session he needs to check the *present* checkbox. However there is a Password for each course session which has to be entered when the students want to fill out his attendance item. This prevents students abusing the system! They have to know the password which the lecturer tells the students in the course session. The students need to enter this password when filling out their attendance item.
+*Location:* The room/location where the course session takes place.
+*Mandatory:* This boolean value defines if the course session is mandatory for the students or if it is an optional course session which the students do not need to attend.
+*Date:* The calendar date when the course session takes place.
+*Start time:* Time when the course session starts
+*End time:* Time when the course session end
+*Course:* The course of the course session
+*Student group:* Select the student group for the course session
+*Password:* Password of the course session. This password needs to be entered in the Attendance Item of the student and prevents the abuse of the system.
+
+**Attendance Item:**
+
+**Statistic:**
+
+
+
+### Security
+
+REST framework JWT Auth: https://jpadilla.github.io/django-rest-framework-jwt/
+**Auth. Token:** curl -X POST -d "username=admin&password=password123" http://localhost:8000/api-token-auth/
+**Refresh Auth. Token:** curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8000/api-token-refresh/
+
+Token Expiration Time: 3 days
+
+## Frontend
+
+
+
