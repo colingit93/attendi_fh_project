@@ -34,7 +34,7 @@ import {HttperrorInterceptor} from './httperror.interceptor';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatSortModule} from "@angular/material/sort";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -88,6 +88,7 @@ export function tokenGetter() {
     FileUploadModule,
     MatDialogModule,
     MatIconModule,
+    MatSortModule,
   ],
   providers: [
     {
@@ -97,6 +98,7 @@ export function tokenGetter() {
       deps: [MatSnackBar]
     }
   ],
+
   bootstrap: [AppComponent],
   entryComponents: [AttendanceConfirmComponent]
 })

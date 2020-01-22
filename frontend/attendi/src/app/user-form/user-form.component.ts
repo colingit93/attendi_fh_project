@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
@@ -7,6 +7,8 @@ import {StudentGroupService} from '../service/student-group.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {HttpClient} from '@angular/common/http';
 import {GroupService} from '../service/group.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-form',
@@ -41,10 +43,10 @@ export class UserFormComponent implements OnInit {
     this.userFormGroup = this.fb.group(
       {
         id: [null],
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(/^[A-Za-z]+$/)]],
+        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(/^[A-Za-z]+$/)], this.usernameEmailValidator()],
         first_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
         last_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
-        email: ['', [Validators.required, this.emailValidator]],
+        email: ['', [Validators.required, this.emailValidator], this.usernameEmailValidator()],
         groups: [[], [Validators.required]],
         password: ['', [Validators.required]]
       });
@@ -127,6 +129,33 @@ export class UserFormComponent implements OnInit {
     }
     return {
       invalidMail: true
+    };
+  }
+
+  usernameEmailValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+      return this.userService.getUserList()
+        .pipe(
+          map((users: any[]) => {
+            const currentId = this.userFormGroup.controls.id.value;
+            const currentUsername = this.userFormGroup.controls.username.value;
+            const currentEmail = this.userFormGroup.controls.email.value;
+            const userWithSameUsername = users.find((m) => {
+              return (currentId || m.id !== currentId) && m.username === currentUsername;
+            });
+            const userWithSameEmail = users.find((m) => {
+              return (currentId || m.id !== currentId) && m.email === currentEmail;
+            });
+            if (userWithSameUsername || userWithSameEmail) {
+              return {
+                usernameAlreadyExists: true,
+                emailAlreadyExists: true
+              };
+            } else {
+              return null;
+            }
+          })
+        );
     };
   }
 

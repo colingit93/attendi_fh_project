@@ -10,6 +10,7 @@
         <mat-error *ngIf="userFormGroup.controls.username.hasError('required')">Username is required!</mat-error>
         <mat-error *ngIf="userFormGroup.controls.username.hasError('minlength')">Username must contain at least 5 characters!</mat-error>
         <mat-error *ngIf="userFormGroup.controls.username.hasError('maxlength')">Username can only contain 15 characters!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.username.hasError('usernameAlreadyExists')">Username already exists!</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -30,7 +31,9 @@
 
       <mat-form-field>
         <input matInput type="email" placeholder="E-mail address like firstname.lastname@edu.fh-joanneum.at" formControlName="email" required>
-        <mat-error *ngIf="userFormGroup.controls.email.hasError('required')">E-mail is required! Mail must contain @edu.fh-joanneum.at!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.email.hasError('required')">E-mail is required!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.email.hasError('invalidMail')">Mail is invalid! Mail must contain @edu.fh-joanneum.at!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.email.hasError('emailAlreadyExists')">E-mail already exists!</mat-error>
       </mat-form-field>
 
       <mat-form-field>

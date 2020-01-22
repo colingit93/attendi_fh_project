@@ -6,14 +6,13 @@
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('pattern')">Name can only contain uppercase letters!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('minlength')">Name must contain at least 2 characters!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('maxlength')">Name can only contain 50 characters!</mat-error>
-   <!-- <mat-error *ngIf="courseFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists</mat-error> -->
+    <mat-error *ngIf="courseFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists!</mat-error>
   </mat-form-field>
 
 
   <mat-form-field>
     <input matInput type="text" placeholder="Description" formControlName="description">
     <mat-hint align="end">The description of the Course</mat-hint>
-    <!-- <mat-error *ngIf="courseFormGroup.controls.description.hasError('descriptionAlreadyExists')">Description already exists</mat-error> -->
     <mat-error *ngIf="courseFormGroup.controls.description.hasError('minlength')">Description must contain at least 10 characters!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.description.hasError('maxlength')">Description can only contain 400 characters!</mat-error>
   </mat-form-field>

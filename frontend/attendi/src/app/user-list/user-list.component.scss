@@ -8,3 +8,17 @@ table {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  padding-left: 25px;
+
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+

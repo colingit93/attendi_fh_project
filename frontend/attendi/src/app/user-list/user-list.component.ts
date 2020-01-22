@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../service/user.service';
 import {MatSnackBar} from '@angular/material';
 import {StudentGroupService} from '../service/student-group.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-user-list',
@@ -11,8 +13,10 @@ import {StudentGroupService} from '../service/student-group.service';
 })
 export class UserListComponent implements OnInit {
 
-  users: any[];
+  users: MatTableDataSource<any>;
   displayedColumns = ['image', 'full_name', 'username', 'student_group', 'id'];
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private http: HttpClient, private userService: UserService, private snackBar: MatSnackBar,
               public studentGroupService: StudentGroupService) {
@@ -21,7 +25,8 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserList()
       .subscribe((response: any[]) => {
-        this.users = response;
+        this.users = new MatTableDataSource(response);
+        this.users.sort = this.sort;
       });
   }
 
@@ -34,6 +39,10 @@ export class UserListComponent implements OnInit {
             duration: 3000
           });
       });
+  }
+
+  applyFilter(value: string) {
+    this.users.filter = value.trim().toLowerCase();
   }
 
 }

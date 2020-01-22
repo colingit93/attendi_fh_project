@@ -1,12 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  FormBuilder,
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder, ValidationErrors,
   Validators
 } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CourseService} from '../service/course.service';
 import {UserService} from '../service/user.service';
 import {MatSnackBar} from '@angular/material';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 
 @Component({
@@ -30,7 +34,7 @@ export class CourseFormComponent implements OnInit {
 
     this.courseFormGroup = this.fb.group({
       id: [null],
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Z]+$/)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z]+$/)], this.nameValidator()],
       description: ['', [Validators.minLength(10), Validators.maxLength(400)]],
       students: [[], Validators.required],
       lecturer: [[], Validators.required],
@@ -63,6 +67,28 @@ export class CourseFormComponent implements OnInit {
             });
         });
     }
+  }
+
+  nameValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+      return this.courseService.getCourses()
+        .pipe(
+          map((courses: any[]) => {
+            const currentId = this.courseFormGroup.controls.id.value;
+            const currentName = this.courseFormGroup.controls.name.value;
+            const courseWithSameName = courses.find((m) => {
+              return (currentId || m.id !== currentId) && m.name === currentName;
+            });
+            if (courseWithSameName) {
+              return {
+                nameAlreadyExists: true
+              };
+            } else {
+              return null;
+            }
+          })
+        );
+    };
   }
 
 }
