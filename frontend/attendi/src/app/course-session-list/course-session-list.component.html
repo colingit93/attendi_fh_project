@@ -51,7 +51,7 @@
                 *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete
         </button>
         <button mat-button [routerLink]="'/attendance-list/' + courseSession.id"
-                *ngIf="userService.hasPermission('attendiApp.create_course')">Attendance List
+                *ngIf="userService.hasPermission('attendiApp.add_course')">Attendance List
         </button>
       </td>
     </ng-container>
