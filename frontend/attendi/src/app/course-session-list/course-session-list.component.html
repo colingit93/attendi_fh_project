@@ -43,7 +43,6 @@
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
-
       <td mat-cell *matCellDef="let courseSession">
         <button mat-button [routerLink]="'/course-session-form/' + courseSession.id"
                 *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit
@@ -52,7 +51,7 @@
                 *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete
         </button>
         <button mat-button [routerLink]="'/attendance-list/' + courseSession.id"
-                *ngIf="userService.hasPermission('attendiApp.view_attendanceitem')">Attendance List
+                *ngIf="userService.hasPermission('attendiApp.create_course')">Attendance List
         </button>
       </td>
     </ng-container>
