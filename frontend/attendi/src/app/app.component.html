@@ -4,6 +4,7 @@
   <button mat-button routerLink="course-list"><mat-icon>book</mat-icon> Courses</button>
   <button mat-button routerLink="course-session-list"><mat-icon>collections_bookmark</mat-icon> Sessions</button>
   <button mat-button routerLink="statistic-list"><mat-icon>assessment</mat-icon> Statistics</button>
+  <span class="spacer"></span>
   <app-logout></app-logout>
 </mat-toolbar>
 <!------------------------------- LECTURER/ADMIN MENU ------------------------------->
@@ -23,7 +24,8 @@
     <button mat-menu-item routerLink="course-session-list">Course Sessions</button>
     <button mat-menu-item routerLink="course-session-form">Create Course Session</button>
   </mat-menu>
-  <button mat-button routerLink="attendance-list"><mat-icon>list</mat-icon> All Attendance Items</button>
+  <button mat-button routerLink="attendance-list"><mat-icon>list</mat-icon>Attendance</button>
+  <span class="spacer"></span>
   <app-logout></app-logout>
 </mat-toolbar>
 <router-outlet></router-outlet>
