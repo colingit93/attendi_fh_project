@@ -518,7 +518,7 @@ def attendance_item_get(request, pk):
 
 @swagger_auto_schema(method='PUT', request_body=AttendanceItemSerializer, responses={200: AttendanceItemSerializer()})
 @api_view(['PUT'])
-@permission_required('attendiApp.change_coursesession', raise_exception=True)
+@permission_required('attendiApp.change_attendanceitem', raise_exception=True)
 def attendance_item_update(request, pk):
     try:
         attendance_item = AttendanceItem.objects.get(pk=pk)
