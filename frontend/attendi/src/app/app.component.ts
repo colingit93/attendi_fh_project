@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.userService.isLoggedIn.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
-    if (this.userService.hasPermission('auth.delete_user')) {
+    if (this.userService.hasPermission('auth.view_user')) {
       this.isStudent = false;
     }
 

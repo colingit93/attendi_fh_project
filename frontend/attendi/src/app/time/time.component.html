@@ -1,6 +1,6 @@
 <mat-form-field>
-  <input matInput [ngxTimepicker]="toggleTimepicker" [placeholder]="placeholder"  type="time" [format]="24"  [formControl]="time" required> <!--[min]="min" [max]="max"-->
-  <ngx-material-timepicker-toggle matPrefix [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+  <input matInput [ngxTimepicker]="toggleTimepicker" [placeholder]="placeholder"  type="time" [format]="24" [min]="min" [formControl]="time" required>
+  <ngx-material-timepicker-toggle matPrefix [for]="toggleTimepicker"></ngx-material-timepicker-toggle> <!--[max]="max" -->
   <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepicker></ngx-material-timepicker>
   <mat-hint align="end">{{hint}}</mat-hint>
   <mat-error *ngIf="this.time.hasError('required')">Time is required</mat-error>

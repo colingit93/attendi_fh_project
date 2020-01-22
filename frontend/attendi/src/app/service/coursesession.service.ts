@@ -12,6 +12,10 @@ export class CourseSessionService {
     return this.http.get('/api/course_session/' + courseId + '/list');
   }
 
+  getAllCourseSessions() {
+    return this.http.get('/api/course_session/list');
+  }
+
   createCourseSession(courseSession) {
     return this.http.post('/api/course_session/create', courseSession);
   }

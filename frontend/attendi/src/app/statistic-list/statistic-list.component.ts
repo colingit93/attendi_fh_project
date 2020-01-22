@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {StatisticService} from "../service/statistic.service";
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {StatisticService} from '../service/statistic.service';
 
 import {ChartOptions, ChartType, ChartDataSets, NestedTickOptions} from 'chart.js';
 import { Label } from 'ng2-charts';

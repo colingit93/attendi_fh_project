@@ -129,6 +129,7 @@ def update_statistic(pk):
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
 @api_view(['GET'])
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def statistic_list(request, pk):
     update_statistic(pk)
     logger.warning("Get List Called")
@@ -139,7 +140,7 @@ def statistic_list(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: StatisticListSerializer()})
 @api_view(['GET'])
-# @permission_required('.view_course', raise_exception=True)
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def statistic_form_get(request, pk):
     try:
         statistic = Statistic.objects.get(pk=pk)
@@ -152,7 +153,7 @@ def statistic_form_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CourseListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_course', raise_exception=True)
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def courses_list(request, user_id=-1):
     if user_id == -1:
         courses = Course.objects.all()
@@ -239,6 +240,7 @@ def course_sessions_list(request, course_id=-1):
         course = Course.objects.get(pk=course_id)
         course_sessions = CourseSession.objects.filter(course=course).order_by('date', 'start_time')
     serializer = CourseSessionListSerializer(course_sessions, many=True)
+    # newtime = datetime.datetime.combine(date(1,1,1), start_time) + datetime.timedelta(hours=1)).time()
     return Response(serializer.data)
 
 
@@ -404,7 +406,7 @@ def user_form_get(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('attendiApp.delete_user', raise_exception=True)
+@permission_required('auth.delete_user', raise_exception=True)
 def user_delete(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -498,7 +500,7 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
 @api_view(['GET'])
-@permission_required('auth.view_group')
+@permission_required('auth.view_group', raise_exception=True)
 def group_option_list(request):
     group = Group.objects.all()
     serializer = GroupSerializer(group, many=True)
@@ -507,6 +509,7 @@ def group_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer()})
 @api_view(['GET'])
+@permission_required('attendiApp.view_attendanceitem', raise_exception=True)
 def attendance_item_get(request, pk):
     attendance_item = AttendanceItem.objects.get(pk=pk)
     serializer = AttendanceItemSerializer(attendance_item)
@@ -515,7 +518,7 @@ def attendance_item_get(request, pk):
 
 @swagger_auto_schema(method='PUT', request_body=AttendanceItemSerializer, responses={200: AttendanceItemSerializer()})
 @api_view(['PUT'])
-@permission_required('attendiApp.change_coursesession', raise_exception=True)
+@permission_required('attendiApp.change_attendanceitem', raise_exception=True)
 def attendance_item_update(request, pk):
     try:
         attendance_item = AttendanceItem.objects.get(pk=pk)
