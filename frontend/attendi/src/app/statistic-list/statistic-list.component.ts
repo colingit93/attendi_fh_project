@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StatisticService} from "../service/statistic.service";
 
+import {ChartOptions, ChartType, ChartDataSets, NestedTickOptions} from 'chart.js';
+import { Label } from 'ng2-charts';
+
 @Component({
   selector: 'app-statistic-list',
   templateUrl: './statistic-list.component.html',
@@ -10,6 +13,9 @@ import {StatisticService} from "../service/statistic.service";
 })
 export class StatisticListComponent implements OnInit {
 
+  myarray = new Array<number>();
+  labelarray = new Array<string>();
+  length: number;
   statisticItems: any[];
   currentUser: any;
   displayedColumns = ['statistic_course_name', 'total_course_sessions', 'total_mandatory_course_sessions', 'visited_course_sessions', 'course_sessions_missed', 'attendance_percentage'];
@@ -18,23 +24,35 @@ export class StatisticListComponent implements OnInit {
   }
 
   ngOnInit() {
-/*    this.http.get('/api/statistic/list/2')
-      .subscribe((response: any[]) => {
-        this.statistics = response;
-      });*/
-
     const data = this.route.snapshot.data;
-    if (data.courseSession) {
-      const session = data.courseSession;
-      this.statisticService.getStatisticList(session.id).subscribe((res: any[]) => {
-        this.statisticItems = res;
+    this.currentUser = data.currentUser;
+    this.statisticService.getStatisticList(this.currentUser.id).subscribe((response: any[]) => {
+      this.statisticItems = response;
+      this.length = this.statisticItems.length;
+      for (let i = 0; i < this.length; i++) {
+        //Iterate Statististic Items (one for each course) and save attributes to array
+        this.myarray.push(this.statisticItems[i].attendance_percentage);
+        this.labelarray.push(this.statisticItems[i].statistic_course_name);
+      }
       });
-    } else {
-      this.currentUser = data.currentUser;
-      this.statisticService.getStatisticList(this.currentUser.id).subscribe((response: any[]) => {
-        this.statisticItems = response;
-      });
-    }
   }
+
+  barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+  barChartLabels: Label[] = this.labelarray;
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[] = [
+    { data: this.myarray, label: 'Attendance Percentage (%)', backgroundColor: 'rgba(129, 174, 233, 0.74)', hoverBackgroundColor: 'rgba(38, 116, 217, 0.74)'},
+  ];
 
 }

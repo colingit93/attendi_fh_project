@@ -34,7 +34,7 @@ import {HttperrorInterceptor} from './httperror.interceptor';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { ChartsModule } from 'ng2-charts';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -88,6 +88,7 @@ export function tokenGetter() {
     FileUploadModule,
     MatDialogModule,
     MatIconModule,
+    ChartsModule,
   ],
   providers: [
     {
