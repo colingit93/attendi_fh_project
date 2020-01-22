@@ -26,7 +26,6 @@ from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessio
 def create_statistic(primarykey):
     # create a statistic for each user which attends the course
     course_item = Course.objects.get(pk=primarykey)
-    course_student_values = course_item.students.values()
 
     student_id_list = []
     for i in range(len(course_student_values)):
@@ -50,15 +49,26 @@ def create_statistic(primarykey):
 def create_attendance_item(student_group, course_session_id):
     # attendance_item = AttendanceItem.objects.create()
     students = Profile.objects.filter(student_group=student_group)
-    # logging.warning('Students of: %s' % student_group + ' are %s' % students)
-    # logging.warning('########## %s' % students[0].pk)
+    course_session_object = CourseSession.objects.get(pk=course_session_id)
+
+    course_students = course_session_object.course.students.values()
+    course_student_list = []
+    for k in range(len(course_students)):
+        course_student_list.append(course_students[k].get('id'))
+    #logging.warning("-----debugyyyy %s" % course_student_list)
+
     for student in students:
-        attendance_item = AttendanceItem.objects.create()
-        attendance_item.student = User.objects.get(pk=student.pk)
-        attendance_item.course_session = CourseSession.objects.get(pk=course_session_id)
-        attendance_item.present = False
-        attendance_item.absence_note = None
-        attendance_item.save()
+        #check if the student is in the course otherwise we dont create attendance item!
+        if student.pk in course_student_list:
+            logging.warning("STUDENT IS IN LIST!!!!")
+            attendance_item = AttendanceItem.objects.create()
+            attendance_item.student = User.objects.get(pk=student.pk)
+            attendance_item.course_session = course_session_object
+            attendance_item.present = False
+            attendance_item.absence_note = None
+            attendance_item.save()
+        else:
+            logging.warning("STUDENT IS NOT LIST!!!!")
     return True
 
 
