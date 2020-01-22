@@ -20,10 +20,10 @@
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="courseSessionMenu">Sessions</button>
   <mat-menu #courseSessionMenu="matMenu">
-    <button mat-menu-item routerLink="attendance-list">Attendance List</button>
     <button mat-menu-item routerLink="course-session-list">Course Sessions</button>
     <button mat-menu-item routerLink="course-session-form">Create Course Session</button>
   </mat-menu>
+  <button mat-button routerLink="attendance-list">All Attendance Items</button>
   <app-logout></app-logout>
 </mat-toolbar>
 <router-outlet></router-outlet>

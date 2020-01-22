@@ -438,7 +438,7 @@ def user_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_attendanceitem', raise_exception=True)
-def attendance_item_list(request, user_id=-1):
+def attendance_item_list(request, user_id):
     user = User.objects.get(pk=user_id)
     current_date = date.today()
     if user.groups.get().name in ['Administrators', 'Lecturers']:
