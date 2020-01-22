@@ -34,7 +34,8 @@ import {HttperrorInterceptor} from './httperror.interceptor';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatSortModule} from "@angular/material/sort";
+import {MatSortModule} from '@angular/material/sort';
+import { ChartsModule } from 'ng2-charts';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -89,6 +90,7 @@ export function tokenGetter() {
     MatDialogModule,
     MatIconModule,
     MatSortModule,
+    ChartsModule,
   ],
   providers: [
     {

@@ -1,6 +1,5 @@
 import logging
-from datetime import date, timedelta
-from datetime import datetime
+from datetime import date
 
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password
@@ -51,15 +50,26 @@ def create_statistic(primarykey):
 def create_attendance_item(student_group, course_session_id):
     # attendance_item = AttendanceItem.objects.create()
     students = Profile.objects.filter(student_group=student_group)
-    # logging.warning('Students of: %s' % student_group + ' are %s' % students)
-    # logging.warning('########## %s' % students[0].pk)
+    course_session_object = CourseSession.objects.get(pk=course_session_id)
+
+    course_students = course_session_object.course.students.values()
+    course_student_list = []
+    for k in range(len(course_students)):
+        course_student_list.append(course_students[k].get('id'))
+    #logging.warning("-----debugyyyy %s" % course_student_list)
+
     for student in students:
-        attendance_item = AttendanceItem.objects.create()
-        attendance_item.student = User.objects.get(pk=student.pk)
-        attendance_item.course_session = CourseSession.objects.get(pk=course_session_id)
-        attendance_item.present = False
-        attendance_item.absence_note = None
-        attendance_item.save()
+        #check if the student is in the course otherwise we dont create attendance item!
+        if student.pk in course_student_list:
+            logging.warning("STUDENT IS IN LIST!!!!")
+            attendance_item = AttendanceItem.objects.create()
+            attendance_item.student = User.objects.get(pk=student.pk)
+            attendance_item.course_session = course_session_object
+            attendance_item.present = False
+            attendance_item.absence_note = None
+            attendance_item.save()
+        else:
+            logging.warning("STUDENT IS NOT LIST!!!!")
     return True
 
 
@@ -130,6 +140,7 @@ def update_statistic(pk):
 
 @swagger_auto_schema(method='GET', responses={200: StatisticSerializer(many=True)})
 @api_view(['GET'])
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def statistic_list(request, pk):
     update_statistic(pk)
     logger.warning("Get List Called")
@@ -140,7 +151,7 @@ def statistic_list(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: StatisticListSerializer()})
 @api_view(['GET'])
-# @permission_required('.view_course', raise_exception=True)
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def statistic_form_get(request, pk):
     try:
         statistic = Statistic.objects.get(pk=pk)
@@ -153,7 +164,7 @@ def statistic_form_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CourseListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('attendiApp.view_course', raise_exception=True)
+@permission_required('attendiApp.view_statistic', raise_exception=True)
 def courses_list(request, user_id=-1):
     if user_id == -1:
         courses = Course.objects.all()
@@ -406,7 +417,7 @@ def user_form_get(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('attendiApp.delete_user', raise_exception=True)
+@permission_required('auth.delete_user', raise_exception=True)
 def user_delete(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -427,7 +438,7 @@ def user_option_list(request):
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('attendiApp.view_attendanceitem', raise_exception=True)
-def attendance_item_list(request, user_id=-1):
+def attendance_item_list(request, user_id):
     user = User.objects.get(pk=user_id)
     current_date = date.today()
     if user.groups.get().name in ['Administrators', 'Lecturers']:
@@ -500,7 +511,7 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: GroupSerializer()})
 @api_view(['GET'])
-@permission_required('auth.view_group')
+@permission_required('auth.view_group', raise_exception=True)
 def group_option_list(request):
     group = Group.objects.all()
     serializer = GroupSerializer(group, many=True)
@@ -509,6 +520,7 @@ def group_option_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: AttendanceItemSerializer()})
 @api_view(['GET'])
+@permission_required('attendiApp.view_attendanceitem', raise_exception=True)
 def attendance_item_get(request, pk):
     attendance_item = AttendanceItem.objects.get(pk=pk)
     serializer = AttendanceItemSerializer(attendance_item)
@@ -517,7 +529,7 @@ def attendance_item_get(request, pk):
 
 @swagger_auto_schema(method='PUT', request_body=AttendanceItemSerializer, responses={200: AttendanceItemSerializer()})
 @api_view(['PUT'])
-@permission_required('attendiApp.change_coursesession', raise_exception=True)
+@permission_required('attendiApp.change_attendanceitem', raise_exception=True)
 def attendance_item_update(request, pk):
     try:
         attendance_item = AttendanceItem.objects.get(pk=pk)

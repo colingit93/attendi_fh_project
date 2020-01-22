@@ -1,0 +1,294 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Administrators",
+      "permissions": [
+        1,
+        2,
+        3,
+        4,
+        45,
+        46,
+        47,
+        48,
+        25,
+        26,
+        27,
+        28,
+        41,
+        42,
+        43,
+        44,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        9,
+        10,
+        11,
+        12,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Lecturers",
+      "permissions": [
+        45,
+        48,
+        25,
+        26,
+        27,
+        28,
+        41,
+        42,
+        43,
+        44,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        40,
+        12,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Students",
+      "permissions": [
+        45,
+        46,
+        48,
+        28,
+        44,
+        29,
+        30,
+        31,
+        32,
+        36,
+        37,
+        38,
+        39,
+        40,
+        12,
+        8,
+        16,
+        17,
+        18,
+        19,
+        20,
+        24
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$ekoI8Gs7UGE7$RPK/gfQTMyTlntZ5KqQeDpsz1wW2Vyij0mXgjq+ZDaE=",
+      "last_login": "2020-01-20T12:04:46.728Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "Istrator",
+      "email": "colin.jochum@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-01-16T11:13:40.921Z",
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$urqc2F1ejK9X$pT8mUPHfLUggm1vnMdhe9DncAL1lrpNxLqzsxKMGwvA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "greta",
+      "first_name": "Greta",
+      "last_name": "Thunberg",
+      "email": "greta.thunberg@greenweb.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-16T11:14:17Z",
+      "groups": [
+        3
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$YnlvRe5qa3rc$iQf/Ja3g/0A1y2aPbwLRPQYN9TO5eeBen7rrdJV9Zr4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "susi",
+      "first_name": "Susi",
+      "last_name": "Student",
+      "email": "susi.student@edu.fh-joanneum.at",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-20T12:22:22.226Z",
+      "groups": [
+        3
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$hkyXuF3p15op$/1/qGiuq4L/S3BHHZnCyojgtHG8g119CkUTCHPwWzzc=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "liam",
+      "first_name": "Liam",
+      "last_name": "Lecturer",
+      "email": "liam.lecturer@edu.fh-joanneum.at",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-22T10:39:24.453Z",
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$WV1MfTY8vneE$IRscoEbWiXPHunF/31GoTZIuSpojx8EVDsCA895aqgM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sam",
+      "first_name": "Sam",
+      "last_name": "Student",
+      "email": "sam.student@edu.fh-joanneum.at",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-22T10:41:51.379Z",
+      "groups": [
+        3
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "attendiApp.media",
+    "pk": 1,
+    "fields": {
+      "file_name": "Student Image",
+      "content_type": "png"
+    }
+  },
+  {
+    "model": "attendiApp.profile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date_of_birth": "1990-01-10",
+      "student_group": "L",
+      "image": 1
+    }
+  },
+  {
+    "model": "attendiApp.profile",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "date_of_birth": "1990-01-30",
+      "student_group": "G1",
+      "image": 1
+    }
+  },
+  {
+    "model": "attendiApp.profile",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "date_of_birth": "1990-01-02",
+      "student_group": "G1",
+      "image": 1
+    }
+  },
+  {
+    "model": "attendiApp.profile",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "date_of_birth": "1990-01-01",
+      "student_group": "L",
+      "image": 1
+    }
+  },
+  {
+    "model": "attendiApp.profile",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "date_of_birth": "1990-01-01",
+      "student_group": "G2",
+      "image": 1
+    }
+  }
+]

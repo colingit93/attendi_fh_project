@@ -1,21 +1,29 @@
-<mat-toolbar *ngIf="isLoggedIn">
-  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="!isStudent">User</button>
-  <mat-menu  #userMenu="matMenu">
+<!------------------------------- STUDENT MENU ------------------------------->
+<mat-toolbar *ngIf="isLoggedIn && !userService.hasPermission('auth.add_user')">
+  <button mat-button routerLink="attendance-list"><mat-icon>list</mat-icon> Attendance List</button>
+  <button mat-button routerLink="course-list"><mat-icon>book</mat-icon> Courses</button>
+  <button mat-button routerLink="course-session-list"><mat-icon>collections_bookmark</mat-icon> Sessions</button>
+  <button mat-button routerLink="statistic-list"><mat-icon>assessment</mat-icon> Statistics</button>
+  <app-logout></app-logout>
+</mat-toolbar>
+<!------------------------------- LECTURER/ADMIN MENU ------------------------------->
+<mat-toolbar *ngIf="isLoggedIn && userService.hasPermission('auth.add_user')">
+  <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>supervised_user_circle</mat-icon> User</button>
+  <mat-menu #userMenu="matMenu">
     <button mat-menu-item routerLink="user-list">List Users</button>
     <button mat-menu-item routerLink="user-form">Create User</button>
   </mat-menu>
-  <button mat-button [matMenuTriggerFor]="courseMenu">Courses</button>
+  <button mat-button [matMenuTriggerFor]="courseMenu"><mat-icon>book</mat-icon> Courses</button>
   <mat-menu #courseMenu="matMenu">
     <button mat-menu-item routerLink="course-list">List Courses</button>
-    <button mat-menu-item routerLink="course-form" *ngIf="userService.hasPermission('attendiApp.add_course')">Create Course</button>
+    <button mat-menu-item routerLink="course-form">Create Course</button>
   </mat-menu>
-  <button mat-button [matMenuTriggerFor]="courseSessionMenu">Course Sessions</button>
+  <button mat-button [matMenuTriggerFor]="courseSessionMenu"><mat-icon>collections_bookmark</mat-icon> Sessions</button>
   <mat-menu #courseSessionMenu="matMenu">
-    <button mat-menu-item routerLink="attendance-list">My Course Sessions</button>
     <button mat-menu-item routerLink="course-session-list">Course Sessions</button>
-    <button mat-menu-item routerLink="course-session-form" *ngIf="userService.hasPermission('attendiApp.add_coursesession')">Create Course Session</button>
+    <button mat-menu-item routerLink="course-session-form">Create Course Session</button>
   </mat-menu>
-  <button mat-button routerLink="statistic-list">Statistics</button>
+  <button mat-button routerLink="attendance-list"><mat-icon>list</mat-icon> All Attendance Items</button>
   <app-logout></app-logout>
 </mat-toolbar>
 <router-outlet></router-outlet>
