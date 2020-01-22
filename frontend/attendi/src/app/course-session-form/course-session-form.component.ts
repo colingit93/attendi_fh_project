@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  FormBuilder,
+  AbstractControl,
+  FormBuilder, FormGroup,
   Validators
 } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,6 +12,7 @@ import {StudentGroupService} from '../service/student-group.service';
 import {MatSnackBar} from '@angular/material';
 
 
+
 @Component({
   selector: 'app-course-session-form',
   templateUrl: './course-session-form.component.html',
@@ -18,15 +20,15 @@ import {MatSnackBar} from '@angular/material';
 })
 export class CourseSessionFormComponent implements OnInit {
 
-  courseSessionFormGroup;
-  courseOptions;
-  minDate = new Date();
-
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private route: ActivatedRoute, private router: Router, private userService: UserService,
               public studentGroupService: StudentGroupService, private snackBar: MatSnackBar) {
   }
+
+  courseSessionFormGroup;
+  courseOptions;
+  minDate = new Date();
 
   ngOnInit() {
 
@@ -43,6 +45,7 @@ export class CourseSessionFormComponent implements OnInit {
       course: ['', [Validators.required]],
       student_group: ['', [Validators.required]],
       password: ['', [Validators.required]]
+    }, {validator: this.timeLessThan('start_time', 'end_time')
     });
     if (data.courseSession) {
       this.courseSessionFormGroup.patchValue(data.courseSession);
@@ -74,6 +77,21 @@ export class CourseSessionFormComponent implements OnInit {
             });
         });
     }
+  }
+
+
+  timeLessThan(start: string, end: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      const startTime = group.controls[start];
+      const endTime = group.controls[end];
+      if (startTime.value < endTime.value) {
+        return null;
+      }
+      return this.snackBar.open('Endtime must be greater then Starttime!', 'Dismiss',
+        {
+          duration: 3000
+        });
+    };
   }
 
 

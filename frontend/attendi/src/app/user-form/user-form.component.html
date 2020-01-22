@@ -43,7 +43,7 @@
                       *ngFor="let groupOption of groupOptions">{{groupOption.name}}</mat-option>
 
         </mat-select>
-        <mat-error *ngIf="userFormGroup.controls.groups.hasError('required')">Groups are required!</mat-error>
+        <mat-error *ngIf="userFormGroup.controls.groups.hasError('required')">Group is required!</mat-error>
       </mat-form-field>
 
       <mat-form-field>

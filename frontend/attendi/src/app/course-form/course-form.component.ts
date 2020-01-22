@@ -69,6 +69,7 @@ export class CourseFormComponent implements OnInit {
     }
   }
 
+
   nameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return this.courseService.getCourses()
