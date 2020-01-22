@@ -26,6 +26,7 @@ from .serializer import CourseFormSerializer, CourseListSerializer, CourseSessio
 def create_statistic(primarykey):
     # create a statistic for each user which attends the course
     course_item = Course.objects.get(pk=primarykey)
+    course_student_values = course_item.students.values()
 
     student_id_list = []
     for i in range(len(course_student_values)):

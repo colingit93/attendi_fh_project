@@ -159,7 +159,7 @@
     "fields": {
       "password": "pbkdf2_sha256$150000$urqc2F1ejK9X$pT8mUPHfLUggm1vnMdhe9DncAL1lrpNxLqzsxKMGwvA=",
       "last_login": null,
-      "is_superuser": true,
+      "is_superuser": false,
       "username": "greta",
       "first_name": "Greta",
       "last_name": "Thunberg",

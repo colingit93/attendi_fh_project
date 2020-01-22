@@ -10,22 +10,14 @@ import {ActivatedRoute} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'attendi';
   isLoggedIn = false;
-  isStudent = true;
 
   constructor(private userService: UserService, private route: ActivatedRoute) {
   }
-
-  currentUserId: any;
-  studentGroup: any;
 
 
   ngOnInit() {
     this.userService.isLoggedIn.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
-    if (this.userService.hasPermission('auth.view_user')) {
-      this.isStudent = false;
-    }
-
   }
 }
