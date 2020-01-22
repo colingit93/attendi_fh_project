@@ -36,6 +36,7 @@ import { AttendanceConfirmComponent } from './attendance-confirm/attendance-conf
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import { ChartsModule } from 'ng2-charts';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -58,6 +59,7 @@ export function tokenGetter() {
     LogoutComponent,
     PresentComponent,
     AttendanceConfirmComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,7 @@ export function tokenGetter() {
   ],
 
   bootstrap: [AppComponent],
-  entryComponents: [AttendanceConfirmComponent]
+  entryComponents: [AttendanceConfirmComponent, DialogConfirmComponent]
 })
 
 export class AppModule {

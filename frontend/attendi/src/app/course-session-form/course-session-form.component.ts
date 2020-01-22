@@ -10,6 +10,8 @@ import {LocationService} from '../service/location.service';
 import {UserService} from '../service/user.service';
 import {StudentGroupService} from '../service/student-group.service';
 import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {DialogConfirmComponent} from '../dialog-confirm/dialog-confirm.component';
 
 
 
@@ -23,7 +25,7 @@ export class CourseSessionFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private route: ActivatedRoute, private router: Router, private userService: UserService,
-              public studentGroupService: StudentGroupService, private snackBar: MatSnackBar) {
+              public studentGroupService: StudentGroupService, private snackBar: MatSnackBar, public matDialog: MatDialog) {
   }
 
   courseSessionFormGroup;
@@ -93,6 +95,5 @@ export class CourseSessionFormComponent implements OnInit {
         });
     };
   }
-
 
 }

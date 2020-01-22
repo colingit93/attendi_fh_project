@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+mat-dialog-container#dialog-confirm-component {
+  border: 3px solid white;
+  border-radius: 11px;
+  background-color: white;
+}
