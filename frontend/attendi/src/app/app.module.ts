@@ -30,7 +30,6 @@ import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttperrorInterceptor} from './httperror.interceptor';
 import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -93,14 +92,6 @@ export function tokenGetter() {
     MatIconModule,
     MatSortModule,
     ChartsModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttperrorInterceptor,
-      multi: true,
-      deps: [MatSnackBar]
-    }
   ],
 
   bootstrap: [AppComponent],
