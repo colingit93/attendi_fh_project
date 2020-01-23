@@ -86,13 +86,14 @@ export class CourseSessionFormComponent implements OnInit {
     return (group: FormGroup): {[key: string]: any} => {
       const startTime = group.controls[start];
       const endTime = group.controls[end];
-      if (startTime.value < endTime.value) {
+      if ( (endTime.value && startTime.value) && startTime.value > endTime.value) {
+        return this.snackBar.open('Endtime must be greater then Starttime!', 'Dismiss',
+          {
+            duration: 3000
+          });
+      } else {
         return null;
       }
-      return this.snackBar.open('Endtime must be greater then Starttime!', 'Dismiss',
-        {
-          duration: 3000
-        });
     };
   }
 
