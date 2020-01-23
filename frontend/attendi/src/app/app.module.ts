@@ -29,8 +29,6 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { PresentComponent } from './present/present.component';
 import { AttendanceConfirmComponent } from './attendance-confirm/attendance-confirm.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
@@ -56,7 +54,6 @@ export function tokenGetter() {
     TimeComponent,
     LoginComponent,
     LogoutComponent,
-    PresentComponent,
     AttendanceConfirmComponent,
     DialogConfirmComponent,
   ],

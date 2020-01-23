@@ -15,7 +15,6 @@ import {AttendanceListComponent} from './attendance-list/attendance-list.compone
 import {CourseOptionsResolver} from './resolver/course-options.resolver';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth.guard';
-import {PresentComponent} from './present/present.component';
 import {GroupOptionsResolver} from './resolver/group-options.resolver';
 import {CurrentUserResolver} from './resolver/currentUser.resolver';
 import {CourseSessionListComponent} from './course-session-list/course-session-list.component';
@@ -80,8 +79,7 @@ const routes: Routes = [
   {path: 'course-session-list/:id', component: CourseSessionListComponent, canActivate: [AuthGuard], resolve: {
     course: CourseResolver
     }
-  },
-  {path: 'present', component: PresentComponent, canActivate: [AuthGuard]},
+  }
 ];
 
 @NgModule({
