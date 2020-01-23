@@ -71,7 +71,7 @@ export class AttendanceListComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(
         (res) => {
-          window.location.reload();
+          this.ngOnInit();
         });
     });
 
