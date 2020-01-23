@@ -776,5 +776,485 @@
       "password": "group3",
       "course": 2
     }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 1,
+    "fields": {
+      "student": 2,
+      "present": false,
+      "course_session": 1,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 2,
+    "fields": {
+      "student": 3,
+      "present": false,
+      "course_session": 1,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 3,
+    "fields": {
+      "student": 15,
+      "present": false,
+      "course_session": 1,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 4,
+    "fields": {
+      "student": 3,
+      "present": false,
+      "course_session": 2,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 5,
+    "fields": {
+      "student": 2,
+      "present": false,
+      "course_session": 2,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 6,
+    "fields": {
+      "student": 15,
+      "present": false,
+      "course_session": 4,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 7,
+    "fields": {
+      "student": 5,
+      "present": false,
+      "course_session": 3,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 8,
+    "fields": {
+      "student": 6,
+      "present": false,
+      "course_session": 3,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 9,
+    "fields": {
+      "student": 13,
+      "present": false,
+      "course_session": 3,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 10,
+    "fields": {
+      "student": 6,
+      "present": false,
+      "course_session": 6,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 11,
+    "fields": {
+      "student": 13,
+      "present": false,
+      "course_session": 7,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 12,
+    "fields": {
+      "student": 5,
+      "present": false,
+      "course_session": 7,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 13,
+    "fields": {
+      "student": 6,
+      "present": false,
+      "course_session": 7,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 14,
+    "fields": {
+      "student": 14,
+      "present": false,
+      "course_session": 5,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 15,
+    "fields": {
+      "student": 7,
+      "present": false,
+      "course_session": 5,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 16,
+    "fields": {
+      "student": 8,
+      "present": false,
+      "course_session": 5,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 17,
+    "fields": {
+      "student": 14,
+      "present": false,
+      "course_session": 8,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 18,
+    "fields": {
+      "student": 7,
+      "present": false,
+      "course_session": 8,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 19,
+    "fields": {
+      "student": 8,
+      "present": false,
+      "course_session": 9,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.attendanceitem",
+    "pk": 20,
+    "fields": {
+      "student": 7,
+      "present": false,
+      "course_session": 9,
+      "absence_note": null
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 1,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 2
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 2,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 3
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 3,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 15
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 4,
+    "fields": {
+      "course": 2,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 3
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 5,
+    "fields": {
+      "course": 2,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 2
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 6,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 15
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 7,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 5
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 8,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 6
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 9,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 13
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 10,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 14
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 11,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 7
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 12,
+    "fields": {
+      "course": 3,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 8
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 13,
+    "fields": {
+      "course": 2,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 6
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 14,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 13
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 15,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 5
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 16,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 6
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 17,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 14
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 18,
+    "fields": {
+      "course": 1,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 7
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 19,
+    "fields": {
+      "course": 2,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 8
+    }
+  },
+  {
+    "model": "attendiApp.statistic",
+    "pk": 20,
+    "fields": {
+      "course": 2,
+      "total_course_sessions": null,
+      "total_mandatory_course_sessions": null,
+      "visited_course_sessions": null,
+      "attendance_percentage": null,
+      "course_sessions_missed": null,
+      "time_in_courses": null,
+      "profile": 7
+    }
   }
 ]

@@ -45,7 +45,7 @@ export class AttendanceListComponent implements OnInit {
   }
 
 
-  deleteCourseSession(courseSession: any) { // TO-DO: Popup warning that all items of the session will be deleted
+  deleteCourseSession(courseSession: any) {
     this.courseSessionService.deleteCourseSession(courseSession)
       .subscribe(() => {
         this.ngOnInit();
