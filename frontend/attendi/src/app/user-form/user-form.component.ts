@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, FormBuilder, ValidationErrors, Validators, ValidatorFn} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
@@ -65,7 +65,7 @@ export class UserFormComponent implements OnInit {
           user: [data.user.id],
           date_of_birth: [null, [Validators.required]],
           student_group: ['', [Validators.required]],
-          image: [[],]
+          image: [[], ]
         });
       this.profileFormGroup.patchValue(data.profile);
     }
@@ -132,6 +132,7 @@ export class UserFormComponent implements OnInit {
     };
   }
 
+
   existtingUsernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return this.userService.getUserList()
@@ -175,7 +176,6 @@ export class UserFormComponent implements OnInit {
         );
     };
   }
-
 }
 
 
