@@ -3,7 +3,7 @@
     <input matInput type="text" placeholder="Name" formControlName="name" required>
     <mat-hint align="end">The name of the Course</mat-hint>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('required')">Name is required</mat-error>
-    <mat-error *ngIf="courseFormGroup.controls.name.hasError('pattern')">Name can only contain letters and number!</mat-error>
+    <mat-error *ngIf="courseFormGroup.controls.name.hasError('pattern')">Name can only contain letters, numbers and spaces!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('minlength')">Name must contain at least 2 characters!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('maxlength')">Name can only contain 50 characters!</mat-error>
     <mat-error *ngIf="courseFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists!</mat-error>
