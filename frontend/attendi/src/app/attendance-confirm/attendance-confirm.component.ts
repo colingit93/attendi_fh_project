@@ -20,7 +20,7 @@ export class AttendanceConfirmComponent implements OnInit {
   attendanceItemId: any;
   attendanceItemForm: FormGroup;
   selectedFile: any;
-  presence =  false;
+  presence = false;
 
 
   constructor(private userService: UserService, private fb: FormBuilder, private dialogRef: MatDialogRef<AttendanceConfirmComponent>,
@@ -43,17 +43,18 @@ export class AttendanceConfirmComponent implements OnInit {
       // alert(actualDate);
       if (date === actualDate && actualTime > start && actualTime < end) {
         this.isActive = true;
-      } else { if (date !== actualDate || actualTime < start) {
-        this.snackBar.open('Session has not started yet! You have to wait to confirm your presence!', 'Dismiss',
-          {
-            duration: 5000
-          });
       } else {
-        this.snackBar.open('You can not confirm your presence anymore! Please upload an absence note!', 'Dismiss',
-          {
-            duration: 5000
-          });
-      }
+        if (date !== actualDate || actualTime < start) {
+          this.snackBar.open('Session has not started yet! You have to wait to confirm your presence!', 'Dismiss',
+            {
+              duration: 5000
+            });
+        } else {
+          this.snackBar.open('You can not confirm your presence anymore! Please upload an absence note!', 'Dismiss',
+            {
+              duration: 5000
+            });
+        }
       }
     });
     this.form = this.fb.group({

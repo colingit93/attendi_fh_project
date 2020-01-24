@@ -39,7 +39,7 @@ export class TimeComponent implements ControlValueAccessor, OnInit {
     if (this.required) {
       validator = Validators.required;
     }
-    this.time = this.fb.control( null, validator);
+    this.time = this.fb.control(null, validator);
     this.time.valueChanges.subscribe((newValue) => {
       this.propagateChange(newValue);
     });

@@ -1,25 +1,25 @@
 <div id="dialog-content-wrapper">
-<h2 mat-dialog-title>{{title}}</h2>
+  <h2 mat-dialog-title>{{title}}</h2>
 
-<mat-dialog-content [formGroup]="form" class="form">
+  <mat-dialog-content [formGroup]="form" class="form">
 
-  <mat-form-field>
-    <input matInput
-           placeholder="Course Session Code"
-           formControlName="input" [readonly]="!isActive">
-  </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             placeholder="Course Session Code"
+             formControlName="input" [readonly]="!isActive">
+    </mat-form-field>
 
-  <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
-  <button mat-button (click)="fileUpload.click()">Pick File</button>
-  <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
-  <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
+    <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
+    <button mat-button (click)="fileUpload.click()">Pick File</button>
+    <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
+    <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
 
-</mat-dialog-content>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="checkPassword()">Submit</button>
-  <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" (click)="checkPassword()">Submit</button>
+    <button class="mat-raised-button" [mat-dialog-close]="false" (click)="closeDialog()">Close</button>
+  </mat-dialog-actions>
 </div>
 
 

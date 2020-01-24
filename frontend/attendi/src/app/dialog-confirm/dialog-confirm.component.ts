@@ -16,7 +16,8 @@ export class DialogConfirmComponent implements OnInit {
     console.log(this.modalData);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   actionFunction() {
     this.userService.logout();

@@ -1,5 +1,6 @@
 <mat-form-field>
-  <input matInput [ngxTimepicker]="toggleTimepicker" [placeholder]="placeholder"  type="time" [format]="24" [min]="min" [max]="max" [formControl]="time" required>
+  <input matInput [ngxTimepicker]="toggleTimepicker" [placeholder]="placeholder" type="time" [format]="24" [min]="min"
+         [max]="max" [formControl]="time" required>
   <ngx-material-timepicker-toggle matPrefix [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
   <ngx-material-timepicker [enableKeyboardInput]="true" #toggleTimepicker></ngx-material-timepicker>
   <mat-hint align="end">{{hint}}</mat-hint>

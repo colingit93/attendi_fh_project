@@ -14,7 +14,6 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {DialogConfirmComponent} from '../dialog-confirm/dialog-confirm.component';
 
 
-
 @Component({
   selector: 'app-course-session-form',
   templateUrl: './course-session-form.component.html',
@@ -47,7 +46,8 @@ export class CourseSessionFormComponent implements OnInit {
       course: ['', [Validators.required]],
       student_group: ['', [Validators.required]],
       password: ['', [Validators.required]]
-    }, {validator: this.timeLessThan('start_time', 'end_time')
+    }, {
+      validator: this.timeLessThan('start_time', 'end_time')
     });
     if (data.courseSession) {
       this.courseSessionFormGroup.patchValue(data.courseSession);
@@ -83,10 +83,10 @@ export class CourseSessionFormComponent implements OnInit {
 
 
   timeLessThan(start: string, end: string) {
-    return (group: FormGroup): {[key: string]: any} => {
+    return (group: FormGroup): { [key: string]: any } => {
       const startTime = group.controls[start];
       const endTime = group.controls[end];
-      if ( (endTime.value && startTime.value) && startTime.value > endTime.value) {
+      if ((endTime.value && startTime.value) && startTime.value > endTime.value) {
         return this.snackBar.open('Endtime must be greater then Starttime!', 'Dismiss',
           {
             duration: 3000

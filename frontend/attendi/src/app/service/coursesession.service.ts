@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -6,7 +6,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CourseSessionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCourseSessions(courseId) {
     return this.http.get('/api/course_session/' + courseId + '/list');
@@ -33,7 +34,7 @@ export class CourseSessionService {
   }
 
   getCourseSessionOptions() {
-    return this.http.get <any[]> ('/api/course_session/options');
+    return this.http.get <any[]>('/api/course_session/options');
   }
 
 }

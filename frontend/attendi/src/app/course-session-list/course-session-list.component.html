@@ -13,7 +13,9 @@
 
     <ng-container matColumnDef="mandatory">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</th>
-      <td mat-cell *matCellDef="let courseSession"><mat-icon *ngIf="courseSession.mandatory">report_problem</mat-icon></td>
+      <td mat-cell *matCellDef="let courseSession">
+        <mat-icon *ngIf="courseSession.mandatory">report_problem</mat-icon>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="date">

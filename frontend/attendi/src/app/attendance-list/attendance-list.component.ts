@@ -22,7 +22,7 @@ export class AttendanceListComponent implements OnInit {
   user: any;
   attendanceItemId: number;
   displayedColumns = ['location', 'mandatory', 'date', 'start_time', 'end_time', 'course', 'student_group', 'student_username', 'present',
-                      'absence_note', 'id'];
+    'absence_note', 'id'];
 
   constructor(private http: HttpClient, private courseSessionService: CourseSessionService, public locationService: LocationService,
               private userService: UserService, private router: Router, private matDialog: MatDialog, private route: ActivatedRoute,

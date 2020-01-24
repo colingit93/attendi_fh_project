@@ -7,7 +7,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
 
-
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -21,7 +20,8 @@ export class CourseListComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private http: HttpClient, private courseService: CourseService, private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private courseService: CourseService, private userService: UserService, private route: ActivatedRoute) {
+  }
 
 
   ngOnInit() {
@@ -44,7 +44,6 @@ export class CourseListComponent implements OnInit {
   applyFilter(value: string) {
     this.courses.filter = value.trim().toLowerCase();
   }
-
 
 
 }

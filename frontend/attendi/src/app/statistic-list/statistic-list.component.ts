@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StatisticService} from '../service/statistic.service';
 
 import {ChartOptions, ChartType, ChartDataSets, NestedTickOptions} from 'chart.js';
-import { Label } from 'ng2-charts';
+import {Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-statistic-list',
@@ -34,7 +34,7 @@ export class StatisticListComponent implements OnInit {
         this.myarray.push(this.statisticItems[i].attendance_percentage);
         this.labelarray.push(this.statisticItems[i].statistic_course_name);
       }
-      });
+    });
   }
 
   barChartOptions: ChartOptions = {
@@ -52,7 +52,12 @@ export class StatisticListComponent implements OnInit {
   barChartLegend = true;
   barChartPlugins = [];
   barChartData: ChartDataSets[] = [
-    { data: this.myarray, label: 'Attendance Percentage (%)', backgroundColor: 'rgba(129, 174, 233, 0.74)', hoverBackgroundColor: 'rgba(38, 116, 217, 0.74)'},
+    {
+      data: this.myarray,
+      label: 'Attendance Percentage (%)',
+      backgroundColor: 'rgba(129, 174, 233, 0.74)',
+      hoverBackgroundColor: 'rgba(38, 116, 217, 0.74)'
+    },
   ];
 
 }

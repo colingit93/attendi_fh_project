@@ -73,11 +73,15 @@ const routes: Routes = [
       groupOptions: GroupOptionsResolver
     }
   },
-  {path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard], resolve: {
-      currentUser: CurrentUserResolver}},
+  {
+    path: 'statistic-list', component: StatisticListComponent, canActivate: [AuthGuard], resolve: {
+      currentUser: CurrentUserResolver
+    }
+  },
   {path: 'course-session-list', component: CourseSessionListComponent, canActivate: [AuthGuard]},
-  {path: 'course-session-list/:id', component: CourseSessionListComponent, canActivate: [AuthGuard], resolve: {
-    course: CourseResolver
+  {
+    path: 'course-session-list/:id', component: CourseSessionListComponent, canActivate: [AuthGuard], resolve: {
+      course: CourseResolver
     }
   }
 ];

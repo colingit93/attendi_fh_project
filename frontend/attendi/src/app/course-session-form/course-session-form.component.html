@@ -43,7 +43,8 @@
                   *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
     </mat-select>
     <mat-hint align="end">The student group of this session</mat-hint>
-    <mat-error *ngIf="courseSessionFormGroup.controls.student_group.hasError('required')">Studentgroup is required!</mat-error>
+    <mat-error *ngIf="courseSessionFormGroup.controls.student_group.hasError('required')">Studentgroup is required!
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -54,7 +55,8 @@
 
 
   <mat-card-actions align="center">
-    <button mat-raised-button color="primary" [disabled]="!courseSessionFormGroup.valid" (click)="createCourseSession()" *ngIf="userService.hasPermission('attendiApp.add_coursesession' && 'attendiApp.change_coursesession')">
+    <button mat-raised-button color="primary" [disabled]="!courseSessionFormGroup.valid" (click)="createCourseSession()"
+            *ngIf="userService.hasPermission('attendiApp.add_coursesession' && 'attendiApp.change_coursesession')">
       <span *ngIf="!courseSessionFormGroup.controls.id.value">Create</span>
       <span *ngIf="courseSessionFormGroup.controls.id.value">Update</span>
     </button>

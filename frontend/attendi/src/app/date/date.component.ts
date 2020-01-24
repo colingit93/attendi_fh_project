@@ -24,11 +24,11 @@ export const MY_FORMATS = {
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss'],
   providers: [
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
     CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR
   ],
 })
-export class DateComponent implements OnInit, ControlValueAccessor  {
+export class DateComponent implements OnInit, ControlValueAccessor {
   date: FormControl;
   private propagateChange: any;
 
