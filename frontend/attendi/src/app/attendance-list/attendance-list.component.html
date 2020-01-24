@@ -65,9 +65,9 @@
         <button mat-button [routerLink]="'/course-session-form/' + attendanceItem.course_session.id"
                 *ngIf="userService.hasPermission('attendiApp.change_coursesession')">Edit
         </button>
-        <button mat-button (click)="deleteCourseSession(attendanceItem)"
+        <!--<button mat-button (click)="deleteCourseSession(attendanceItem)"
                 *ngIf="userService.hasPermission('attendiApp.delete_coursesession')">Delete
-        </button>
+        </button>-->
         <button mat-button id="confirm-button" (click)="openConfirmDialog(attendanceItem.id)">Confirm Presence</button>
       </td>
     </ng-container>

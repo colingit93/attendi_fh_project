@@ -32,8 +32,8 @@
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let user">
-      <button mat-button [routerLink]="'/user-form/' + user.id">Edit</button>
-      <button mat-button (click)="deleteUser(user)">Delete</button>
+      <button mat-button [routerLink]="'/user-form/' + user.id" *ngIf="userService.hasPermission('auth.change_user')">Edit</button>
+      <button mat-button (click)="deleteUser(user)" *ngIf="userService.hasPermission('auth.delete_user')">Delete</button>
     </td>
   </ng-container>
 
