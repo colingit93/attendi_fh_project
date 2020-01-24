@@ -156,7 +156,7 @@
     "model": "auth.user",
     "pk": 2,
     "fields": {
-      "password": "pbkdf2_sha256$150000$urqc2F1ejK9X$pT8mUPHfLUggm1vnMdhe9DncAL1lrpNxLqzsxKMGwvA=",
+      "password": "pbkdf2_sha256$150000$C6Cjw4aMXjYC$z6YSrVqdR/mssDW5I42wmEAAMtvmFJWs+hy8nbco4yI=",
       "last_login": null,
       "is_superuser": false,
       "username": "greta",
@@ -176,7 +176,7 @@
     "model": "auth.user",
     "pk": 3,
     "fields": {
-      "password": "pbkdf2_sha256$150000$YnlvRe5qa3rc$iQf/Ja3g/0A1y2aPbwLRPQYN9TO5eeBen7rrdJV9Zr4=",
+      "password": "pbkdf2_sha256$150000$wZAHgbschi0s$lGti+VKVCMrSU3cXOtTADlQw8Tcu0xbs2dcMfml2a/U=",
       "last_login": null,
       "is_superuser": false,
       "username": "susi",
@@ -216,7 +216,7 @@
     "model": "auth.user",
     "pk": 5,
     "fields": {
-      "password": "pbkdf2_sha256$150000$WV1MfTY8vneE$IRscoEbWiXPHunF/31GoTZIuSpojx8EVDsCA895aqgM=",
+      "password": "pbkdf2_sha256$150000$Tb7kBiL2D1Bc$BmAqMCpCKTUcfaIDRd/jAW/ZS3whguGcPiPWwXXG3/8=",
       "last_login": null,
       "is_superuser": false,
       "username": "sam",
