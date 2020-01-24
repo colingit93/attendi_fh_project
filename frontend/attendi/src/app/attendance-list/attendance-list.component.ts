@@ -44,15 +44,6 @@ export class AttendanceListComponent implements OnInit {
     }
   }
 
-
-  deleteCourseSession(courseSession: any) {
-    this.courseSessionService.deleteCourseSession(courseSession)
-      .subscribe(() => {
-        this.ngOnInit();
-      });
-  }
-
-
   openConfirmDialog(attendanceId: number) {
     this.attendanceItemService.getAttendanceItem(attendanceId).subscribe((item: any) => {
       this.sessionPassword = item.course_session.password;
