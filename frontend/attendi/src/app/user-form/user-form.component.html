@@ -82,8 +82,6 @@
       <button mat-button (click)="fileUpload.click()">Pick File</button>
       <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
       <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">
-      <button mat-button [disabled]="!selectedImage" (click)="onUpload()">Upload</button>
-
 
       <div>
         <button mat-raised-button (click)="updateProfile()">Update Profile</button>

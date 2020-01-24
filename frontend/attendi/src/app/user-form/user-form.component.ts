@@ -107,6 +107,7 @@ export class UserFormComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedImage = event.target.files[0];
+    this.onUpload();
   }
 
   onUpload() {

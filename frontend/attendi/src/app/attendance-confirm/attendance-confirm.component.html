@@ -13,7 +13,6 @@
   <button mat-button (click)="fileUpload.click()">Pick File</button>
   <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
   <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
-  <button mat-button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
 
 </mat-dialog-content>
 

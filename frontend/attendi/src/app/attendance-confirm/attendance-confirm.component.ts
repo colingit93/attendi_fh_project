@@ -65,6 +65,7 @@ export class AttendanceConfirmComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
+    this.onUpload();
   }
 
   onUpload() {
@@ -95,7 +96,7 @@ export class AttendanceConfirmComponent implements OnInit {
       });
       this.closeDialog();
     } else {
-      this.snackBar.open('Wrong Password or you forgot to press Upload Button!', 'Dismiss',
+      this.snackBar.open('Wrong Password!', 'Dismiss',
         {
           duration: 3000
         });
