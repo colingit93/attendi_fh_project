@@ -11,7 +11,7 @@ Colin Jochum: [GitHub](https://github.com/colingit93/attendi_fh_project)
 Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
 ~~Tripolt Christoph:~~
 
-Commits for Colin Jochum were linked to the wrong user. Colin Jochum = colingit93
+**Note:** Commits in GitHub from Author Colin Jochum were actually from colingit93!
 
 # Project Proposal
 
@@ -28,9 +28,29 @@ Commits for Colin Jochum were linked to the wrong user. Colin Jochum = colingit9
 
 
 
-## How does it work (from a users perspective)
+## Installation
 
+####Backend Installation
 
+Switch into your virtual environment first which should have the necessary libraries installed! The required libraried are listen in the **Backend** section of this README.
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py loaddata xxxx.json
+python3 manage.py runserver
+
+#### Frontend Intallation
+
+Install the necessary dependencies and modules with: ng install
+
+Necessary dependencies are listed in the: package-lock.json
+
+Run the backend with ng serve
+
+**Login Credentials from fixtures:**
+Administrator: admin admin
+Students: greta django123; susi susi; sam sam; tom tom; marcel marcel; colin colin; kevin kevin; julia julia; martina martina
+Lecturers: liam liam; karl karl; stefan stefan; werner werner; robert robert;
 
 ## Backend
 
@@ -69,11 +89,19 @@ Libraries: django==2.2.7; djangorestframework==3.10.3; drf-yasg==1.17.0; djangor
 *Student group:* Select the student group for the course session
 *Password:* Password of the course session. This password needs to be entered in the Attendance Item of the student and prevents the abuse of the system.
 
-**Attendance Item:**
+**Attendance Item:** The attendance item is automatically created for the student if a new course session is created. The student has to be assigned to the course to get the attendance item. The student is able to tick the **present** checkbox which means he attended the course session.
+*student:* Student which the attendance item is for
+*course_session:* The course session to which the attendance item is linked to
+*present:* Shows if the student attendet the course session or not
+*absence_note:* Student can upload an absence note here
 
-**Statistic:**
-
-
+**Statistic:** The statistics give the student a quick overview of the statistics. In addition to that a visual bar graph gives a visual demonstration on how many course session the student attended for the courses he is assigned to. For the visual demonstration the ng2-charts library is used. Each course the student attends has its own statistic model and it gets automatically created when a student is assigned to a course.
+*course:* The course for which the statistics get shown
+*total_course_sessions:* The total ammount of course sessions for this course
+*total_mandatory_course_sessions:* The total ammount of mandatory ammount of course session for this course
+*visited_course_sessions:* The ammount of course sessions the student actually visited
+*attendance_percentage:* visited_course_sessions/total_course_sessions - How many course sessions the student attended out of the total course sessions
+*course_sessions_missed:* The ammount of course sesssions the student missed
 
 ### Security
 
@@ -85,5 +113,7 @@ Token Expiration Time: 3 days
 
 ## Frontend
 
+URL: http://localhost:4200/
 
+Login with Student or Lecturer Credentials
 
