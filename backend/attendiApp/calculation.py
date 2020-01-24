@@ -6,7 +6,8 @@ from attendiApp.models import Statistic
 
 logger = logging.getLogger(__name__)
 
+
 @receiver(post_save, sender=Statistic)
 def exec(sender, **kwargs):
-    #nothing here
+    # nothing here
     logger.error('Something went wrong!')

@@ -9,8 +9,10 @@ class StatisticSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Statistic
-        #fields = '__all__'
-        fields = ['id', 'course', 'total_course_sessions', 'statistic_course_name', 'total_mandatory_course_sessions', 'visited_course_sessions', 'attendance_percentage', 'course_sessions_missed', 'time_in_courses', 'profile']
+        # fields = '__all__'
+        fields = ['id', 'course', 'total_course_sessions', 'statistic_course_name', 'total_mandatory_course_sessions',
+                  'visited_course_sessions', 'attendance_percentage', 'course_sessions_missed', 'time_in_courses',
+                  'profile']
 
     def get_statistic_course_name(self, obj):
         return obj.course.name if obj.course else ''

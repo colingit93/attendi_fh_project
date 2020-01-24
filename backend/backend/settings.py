@@ -15,7 +15,6 @@ import os
 import logging, logging.config
 import sys
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -119,8 +118,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#Logging
-#LOGGING = {
+# Logging
+# LOGGING = {
 #    'version': 1,
 #    'handlers': {
 #        'console': {
@@ -132,16 +131,16 @@ STATIC_URL = '/static/'
 #        'handlers': ['console'],
 #        'level': 'INFO'
 #    }
-#}
-#logging.config.dictConfig(LOGGING)
-#logging.info('Hello')
+# }
+# logging.config.dictConfig(LOGGING)
+# logging.info('Hello')
 
 # DataFlair #Logging Information
 LOGGING = {
     'version': 1,
     # Version of logging
     'disable_existing_loggers': False,
-    #disable logging
+    # disable logging
     # Handlers #############################################################
     'handlers': {
         'file': {
@@ -149,7 +148,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': 'dataflair-debug.log',
         },
-########################################################################
+        ########################################################################
         'console': {
             'class': 'logging.StreamHandler',
         },

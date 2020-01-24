@@ -16,6 +16,7 @@ class StatisticAdmin(admin.ModelAdmin): pass
 
 class ProfileAdmin(admin.ModelAdmin): pass
 
+
 class MediaAdmin(admin.ModelAdmin): pass
 
 

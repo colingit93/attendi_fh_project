@@ -89,7 +89,6 @@ class CourseSession(models.Model):
     student_group = models.CharField(max_length=2, choices=GROUP, null=True)
     password = models.TextField()
 
-
     def __str__(self):
         return str(self.course.name) + '-' + str(self.pk)
 

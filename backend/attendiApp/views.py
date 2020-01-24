@@ -56,10 +56,10 @@ def create_attendance_item(student_group, course_session_id):
     course_student_list = []
     for k in range(len(course_students)):
         course_student_list.append(course_students[k].get('id'))
-    #logging.warning("-----debugyyyy %s" % course_student_list)
+    # logging.warning("-----debugyyyy %s" % course_student_list)
 
     for student in students:
-        #check if the student is in the course otherwise we dont create attendance item!
+        # check if the student is in the course otherwise we dont create attendance item!
         if student.pk in course_student_list:
             logging.warning("STUDENT IS IN LIST!!!!")
             attendance_item = AttendanceItem.objects.create()
