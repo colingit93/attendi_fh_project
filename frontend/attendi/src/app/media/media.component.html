@@ -1,0 +1,9 @@
+<input style="display: none" type="file" [accept]="acceptedInput" (change)="onFileSelected($event)"
+       #fileUpload/>
+<button mat-stroked-button (click)="fileUpload.click()">Pick File</button>
+<div class="info">
+  <mat-spinner *ngIf="uploading"></mat-spinner>
+  <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
+  <input *ngIf="!selectedImage && currentImage" matInput readonly value="Current Image: {{currentImage}}">
+  <input *ngIf="!selectedImage && !currentImage" matInput readonly value="Please select a file ...">
+</div>
