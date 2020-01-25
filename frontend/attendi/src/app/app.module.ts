@@ -10,7 +10,7 @@ import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
   MatFormFieldModule, MatIconModule,
   MatInputModule,
-  MatMenuModule, MatNativeDateModule,
+  MatMenuModule, MatNativeDateModule, MatProgressSpinnerModule,
   MatSelectModule,
   MatSnackBarModule, MatStepperModule, MatTableModule,
   MatToolbarModule
@@ -34,6 +34,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import {ChartsModule} from 'ng2-charts';
 import {DialogConfirmComponent} from './dialog-confirm/dialog-confirm.component';
+import { MediaComponent } from './media/media.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -56,6 +57,7 @@ export function tokenGetter() {
     LogoutComponent,
     AttendanceConfirmComponent,
     DialogConfirmComponent,
+    MediaComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +91,7 @@ export function tokenGetter() {
     MatIconModule,
     MatSortModule,
     ChartsModule,
+    MatProgressSpinnerModule,
   ],
 
   bootstrap: [AppComponent],

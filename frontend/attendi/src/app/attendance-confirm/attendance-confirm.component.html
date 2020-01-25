@@ -9,10 +9,7 @@
              formControlName="input" [readonly]="!isActive">
     </mat-form-field>
 
-    <input style="display: none" type="file" (change)="onFileSelected($event)" #fileUpload/>
-    <button mat-button (click)="fileUpload.click()">Pick File</button>
-    <input *ngIf="selectedFile" matInput readonly value="Selected File: {{selectedFile.name}}">
-    <input *ngIf="!selectedFile" matInput readonly value="Please select a file...">
+    <app-media formControlName="absence_note"></app-media>
 
   </mat-dialog-content>
 

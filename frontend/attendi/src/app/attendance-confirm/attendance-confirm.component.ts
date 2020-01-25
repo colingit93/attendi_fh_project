@@ -19,7 +19,6 @@ export class AttendanceConfirmComponent implements OnInit {
   isActive = false;
   attendanceItemId: any;
   attendanceItemForm: FormGroup;
-  selectedFile: any;
   presence = false;
 
 
@@ -62,21 +61,6 @@ export class AttendanceConfirmComponent implements OnInit {
       input: ['', []],
       absence_note: []
     });
-  }
-
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0];
-    this.onUpload();
-  }
-
-  onUpload() {
-    const fd = new FormData();
-    fd.append('file', this.selectedFile, this.selectedFile.name);
-    fd.append('content_type', this.selectedFile.type);
-    this.http.post('/api/media', fd)
-      .subscribe((response: any) => {
-        this.form.controls.absence_note.setValue(response.id);
-      });
   }
 
   checkPassword() {

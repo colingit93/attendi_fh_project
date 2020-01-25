@@ -29,13 +29,11 @@ export class UserFormComponent implements OnInit {
   profileFormGroup;
   maxDate = new Date();
   startDate = new Date(1990, 0, 1);
-  selectedImage: File = null;
   groupOptions;
   currentImage = 'No Image';
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,
-              private router: Router, private snackBar: MatSnackBar, public groupService: GroupService,
-              public studentGroupService: StudentGroupService, private http: HttpClient) {
+              private router: Router, private snackBar: MatSnackBar, public studentGroupService: StudentGroupService) {
   }
 
   ngOnInit() {
@@ -50,7 +48,7 @@ export class UserFormComponent implements OnInit {
     this.userFormGroup = this.fb.group(
       {
         id: [null],
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(/^[A-Za-z]+$/)], [this.existtingUsernameValidator()]],
+        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(/^[A-Za-z]+$/)], [this.existingUsernameValidator()]],
         first_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
         last_name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(/^[A-Za-z]+$/)]],
         email: ['', [Validators.required, this.emailValidator], [this.existingEmailValidator()]],
@@ -72,7 +70,7 @@ export class UserFormComponent implements OnInit {
           user: [data.user.id],
           date_of_birth: [null, [Validators.required]],
           student_group: ['', [Validators.required]],
-          image: [[],]
+          image: [[], ]
         });
       this.profileFormGroup.patchValue(data.profile);
     }
@@ -112,21 +110,6 @@ export class UserFormComponent implements OnInit {
       });
   }
 
-  onFileSelected(event) {
-    this.selectedImage = event.target.files[0];
-    this.onUpload();
-  }
-
-  onUpload() {
-    const fd = new FormData();
-    fd.append('file', this.selectedImage, this.selectedImage.name);
-    fd.append('content_type', this.selectedImage.type);
-    this.http.post('/api/media', fd)
-      .subscribe((response: any) => {
-        this.profileFormGroup.controls.image.setValue(response.id);
-      });
-  }
-
   emailValidator(mail): any {
     if (mail.pristine) {
       return null;
@@ -140,8 +123,7 @@ export class UserFormComponent implements OnInit {
     };
   }
 
-
-  existtingUsernameValidator(): AsyncValidatorFn {
+  existingUsernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return this.userService.getUserList()
         .pipe(

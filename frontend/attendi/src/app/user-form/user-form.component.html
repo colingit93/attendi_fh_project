@@ -94,16 +94,11 @@
           <mat-option [value]="group.key"
                       *ngFor="let group of studentGroupService.studentGroups | keyvalue">{{group.value}}</mat-option>
         </mat-select>
-        <mat-error *ngIf="profileFormGroup.controls.student_group.hasError('required')">Studentgroup is required!
+        <mat-error *ngIf="profileFormGroup.controls.student_group.hasError('required')">Student group is required!
         </mat-error>
       </mat-form-field>
 
-
-      <input style="display: none" type="file" accept="image/jpeg, image/png" (change)="onFileSelected($event)"
-             #fileUpload/>
-      <button mat-button (click)="fileUpload.click()">Pick File</button>
-      <input *ngIf="selectedImage" matInput readonly value="Selected File: {{selectedImage.name}}">
-      <input *ngIf="!selectedImage" matInput readonly value="Current Image: {{currentImage}}">
+      <app-media formControlName="image" [acceptedInput]="'image/jpeg, image/png'" [currentImage]="currentImage"></app-media>
 
       <div>
         <button mat-raised-button (click)="updateProfile()">Update Profile</button>
