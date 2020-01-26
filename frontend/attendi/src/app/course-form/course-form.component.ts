@@ -78,7 +78,7 @@ export class CourseFormComponent implements OnInit {
             const currentId = this.courseFormGroup.controls.id.value;
             const currentName = this.courseFormGroup.controls.name.value;
             const courseWithSameName = courses.find((m) => {
-              return (currentId || m.id !== currentId) && m.name === currentName;
+              return (m.id !== currentId) && m.name === currentName;
             });
             if (courseWithSameName) {
               return {
