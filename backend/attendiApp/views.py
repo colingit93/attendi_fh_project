@@ -123,9 +123,10 @@ def update_statistic(pk):
             visited_course_sessions=visited_course_sessions)
 
         # UPDATE/CALC FIELD: ATTENDANCE PERCENTAGE
-        attendance_percentage = (visited_course_sessions / total_course_sessions_ammount) * 100
-        Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
-            attendance_percentage=attendance_percentage)
+        if total_course_sessions_ammount != 0:
+            attendance_percentage = (visited_course_sessions / total_course_sessions_ammount) * 100
+            Statistic.objects.filter(profile=pk, course_id=courses_foreign_keys[k]).update(
+                attendance_percentage=attendance_percentage)
 
         # UPDATE/CALC FIELD: COURSE SESSIONS MISSED
         course_sessions_missed = (total_course_sessions_ammount - visited_course_sessions)
