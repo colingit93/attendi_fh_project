@@ -32,7 +32,7 @@ Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
 
 ## Installation
 
-####Backend Installation
+###Backend Installation
 
 Switch into your virtual environment first which should have the necessary libraries installed! The required libraried are listen in the **Backend** section of this README.
 
