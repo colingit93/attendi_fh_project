@@ -11,6 +11,8 @@ Colin Jochum: [GitHub](https://github.com/colingit93/attendi_fh_project)
 Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
 ~~Tripolt Christoph:~~
 
+**ONE TEAM MEMBER DROPPED OUT!**
+
 **Note:** Commits in GitHub from Author Colin Jochum were actually from colingit93!
 
 # Project Proposal
