@@ -46,7 +46,7 @@ Install the necessary dependencies and modules with: ng install
 
 Necessary dependencies are listed in the: package-lock.json
 
-Run the backend with ng serve
+Run the frontend with ng serve
 
 **Login Credentials from fixtures:**
 Administrator: admin admin
@@ -68,7 +68,7 @@ Libraries: django==2.2.7; djangorestframework==3.10.3; drf-yasg==1.17.0; djangor
 
 **Media:** The administrator can set profile pictures for the students and lecturers.
 
-**Profile:** A new profile is created when a new user in the default Django *Users* model is created. This means that the *Profile* model is derived from the *Users* model and therefore share the same id/primary_key! It is important to create a new user in the *Users* model first because otherwise the primary key in the profile model would not match anymore which is important! Inside the created Profile it is possible to set the *Date of birth*, *Student Group*, *Image*. This task can only be done by the Administrator.
+**Profile:** A new profile is created when a new user in the default Django *Users* model is created. This means that the *Profile* model is derived from the *Users* model and therefore share the same id/primary_key! It is important to create a new user in the *Users* model first because otherwise the primary key in the profile model would not match anymore which is important! Inside the created Profile it is possible to set the *Date of birth*, *Student Group*, *Image*. This task can be done by the Administrator and Lecturers.
 *Date of birth*: When was the student born
 *Student Group:* Select the Group in which the student is put into. This plays a big role in the Course Sessions Model where a bunch of students is assigned to a Course Session.
 *Image:* Assign an Image to the Student/lecturer
