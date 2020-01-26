@@ -34,10 +34,11 @@ Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
 
 Switch into your virtual environment first which should have the necessary libraries installed! The required libraried are listen in the **Backend** section of this README.
 
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py loaddata xxxx.json
-python3 manage.py runserver
+if the media folder exists it needs to be deleted  
+python3 manage.py makemigrations  
+python3 manage.py migrate  
+python3 manage.py loaddata initial_data.json  
+python3 manage.py runserver  
 
 #### Frontend Intallation
 
