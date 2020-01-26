@@ -656,7 +656,7 @@
     "fields": {
       "location": "S1",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "08:00:00",
       "end_time": "08:45:00",
       "student_group": "G1",
@@ -670,7 +670,7 @@
     "fields": {
       "location": "L3",
       "mandatory": false,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "09:00:00",
       "end_time": "11:30:00",
       "student_group": "G1",
@@ -684,7 +684,7 @@
     "fields": {
       "location": "S1",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "09:00:00",
       "end_time": "09:45:00",
       "student_group": "G2",
@@ -698,7 +698,7 @@
     "fields": {
       "location": "L1",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "11:45:00",
       "end_time": "14:15:00",
       "student_group": "G1",
@@ -712,7 +712,7 @@
     "fields": {
       "location": "S2",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "10:45:00",
       "end_time": "11:30:00",
       "student_group": "G3",
@@ -726,7 +726,7 @@
     "fields": {
       "location": "L4",
       "mandatory": false,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "11:45:00",
       "end_time": "14:15:00",
       "student_group": "G2",
@@ -740,7 +740,7 @@
     "fields": {
       "location": "L1",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "14:30:00",
       "end_time": "17:00:00",
       "student_group": "G2",
@@ -754,7 +754,7 @@
     "fields": {
       "location": "L2",
       "mandatory": true,
-      "date": "2020-01-26",
+      "date": "2020-01-27",
       "start_time": "14:30:00",
       "end_time": "17:00:00",
       "student_group": "G3",
@@ -768,7 +768,7 @@
     "fields": {
       "location": "L2",
       "mandatory": true,
-      "date": "2020-01-27",
+      "date": "2020-01-28",
       "start_time": "14:30:00",
       "end_time": "17:00:00",
       "student_group": "G3",
