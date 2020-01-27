@@ -32,11 +32,11 @@ Tom Kleinhapl: [GitHub](https://github.com/colingit93/attendi_fh_project)
 
 ## Installation
 
-####Backend Intallation
+#### Backend Intallation
 
 Switch into your virtual environment first which should have the necessary libraries installed! The required libraried are listen in the **Backend** section of this README.
 
-if the media folder exists it needs to be deleted  
+the media folder should only contain the image with index 1  
 python3 manage.py makemigrations  
 python3 manage.py migrate  
 python3 manage.py loaddata initial_data.json  
